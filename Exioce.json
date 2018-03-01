@@ -1,0 +1,436 @@
+{
+   "pages" : 1,
+   "docs" : [
+      {
+         "eddb_id" : 4723,
+         "name_lower" : "exioce",
+         "allegiance" : "independent",
+         "_id" : "59e7aa44d22c775be0fe6227",
+         "population" : 16494916,
+         "__v" : 0,
+         "history" : [
+            {
+               "controlling_minor_faction" : "the order of mobius",
+               "security" : "$system_security_medium;",
+               "__v" : 0,
+               "updated_at" : "2018-02-22T18:19:33.000Z",
+               "state" : "outbreak",
+               "factions" : [
+                  {
+                     "name" : "NLTT 7789 Exchange",
+                     "name_lower" : "nltt 7789 exchange"
+                  },
+                  {
+                     "name_lower" : "exioce democrats",
+                     "name" : "Exioce Democrats"
+                  },
+                  {
+                     "name_lower" : "exioce crimson electronics corp.",
+                     "name" : "Exioce Crimson Electronics Corp."
+                  },
+                  {
+                     "name" : "Exioce Imperial Society",
+                     "name_lower" : "exioce imperial society"
+                  },
+                  {
+                     "name" : "Exioce Blue Camorra",
+                     "name_lower" : "exioce blue camorra"
+                  },
+                  {
+                     "name" : "Exioce Allied PLC",
+                     "name_lower" : "exioce allied plc"
+                  },
+                  {
+                     "name_lower" : "the order of mobius",
+                     "name" : "The Order of Mobius"
+                  }
+               ],
+               "population" : 16494916,
+               "updated_by" : "EDDN",
+               "_id" : "5a8f0adddad2d0391573ec6e",
+               "government" : "$government_democracy;",
+               "allegiance" : "independent"
+            },
+            {
+               "state" : "outbreak",
+               "updated_at" : "2018-02-22T19:29:34.000Z",
+               "__v" : 0,
+               "security" : "$system_security_medium;",
+               "controlling_minor_faction" : "the order of mobius",
+               "allegiance" : "independent",
+               "_id" : "5a8f1a24dad2d03915740979",
+               "government" : "$government_cooperative;",
+               "updated_by" : "EDDN",
+               "population" : 16494916,
+               "factions" : [
+                  {
+                     "name_lower" : "nltt 7789 exchange",
+                     "name" : "NLTT 7789 Exchange"
+                  },
+                  {
+                     "name" : "Exioce Democrats",
+                     "name_lower" : "exioce democrats"
+                  },
+                  {
+                     "name" : "Exioce Crimson Electronics Corp.",
+                     "name_lower" : "exioce crimson electronics corp."
+                  },
+                  {
+                     "name_lower" : "exioce imperial society",
+                     "name" : "Exioce Imperial Society"
+                  },
+                  {
+                     "name_lower" : "exioce blue camorra",
+                     "name" : "Exioce Blue Camorra"
+                  },
+                  {
+                     "name" : "Exioce Allied PLC",
+                     "name_lower" : "exioce allied plc"
+                  },
+                  {
+                     "name" : "The Order of Mobius",
+                     "name_lower" : "the order of mobius"
+                  }
+               ]
+            },
+            {
+               "updated_at" : "2018-02-23T12:52:23.000Z",
+               "state" : "none",
+               "__v" : 0,
+               "security" : "$system_security_medium;",
+               "controlling_minor_faction" : "the order of mobius",
+               "allegiance" : "independent",
+               "_id" : "5a900e86dad2d03915873480",
+               "government" : "$government_cooperative;",
+               "updated_by" : "EDDN",
+               "population" : 16494916,
+               "factions" : [
+                  {
+                     "name" : "NLTT 7789 Exchange",
+                     "name_lower" : "nltt 7789 exchange"
+                  },
+                  {
+                     "name" : "Exioce Democrats",
+                     "name_lower" : "exioce democrats"
+                  },
+                  {
+                     "name_lower" : "exioce crimson electronics corp.",
+                     "name" : "Exioce Crimson Electronics Corp."
+                  },
+                  {
+                     "name" : "Exioce Imperial Society",
+                     "name_lower" : "exioce imperial society"
+                  },
+                  {
+                     "name" : "Exioce Blue Camorra",
+                     "name_lower" : "exioce blue camorra"
+                  },
+                  {
+                     "name_lower" : "exioce allied plc",
+                     "name" : "Exioce Allied PLC"
+                  },
+                  {
+                     "name_lower" : "the order of mobius",
+                     "name" : "The Order of Mobius"
+                  }
+               ]
+            },
+            {
+               "controlling_minor_faction" : "the order of mobius",
+               "security" : "$system_security_medium;",
+               "state" : "boom",
+               "updated_at" : "2018-02-24T13:02:58.000Z",
+               "__v" : 0,
+               "factions" : [
+                  {
+                     "name" : "NLTT 7789 Exchange",
+                     "name_lower" : "nltt 7789 exchange"
+                  },
+                  {
+                     "name_lower" : "exioce democrats",
+                     "name" : "Exioce Democrats"
+                  },
+                  {
+                     "name_lower" : "exioce crimson electronics corp.",
+                     "name" : "Exioce Crimson Electronics Corp."
+                  },
+                  {
+                     "name_lower" : "exioce imperial society",
+                     "name" : "Exioce Imperial Society"
+                  },
+                  {
+                     "name_lower" : "exioce blue camorra",
+                     "name" : "Exioce Blue Camorra"
+                  },
+                  {
+                     "name" : "Exioce Allied PLC",
+                     "name_lower" : "exioce allied plc"
+                  },
+                  {
+                     "name" : "The Order of Mobius",
+                     "name_lower" : "the order of mobius"
+                  }
+               ],
+               "population" : 16494916,
+               "_id" : "5a916287dad2d039159b9488",
+               "government" : "$government_cooperative;",
+               "updated_by" : "EDDN",
+               "allegiance" : "independent"
+            },
+            {
+               "updated_by" : "EDDN",
+               "_id" : "5a9163c3dad2d039159b9b2c",
+               "government" : "$government_cooperative;",
+               "allegiance" : "independent",
+               "factions" : [
+                  {
+                     "name" : "NLTT 7789 Exchange",
+                     "name_lower" : "nltt 7789 exchange"
+                  },
+                  {
+                     "name_lower" : "exioce democrats",
+                     "name" : "Exioce Democrats"
+                  },
+                  {
+                     "name" : "Exioce Crimson Electronics Corp.",
+                     "name_lower" : "exioce crimson electronics corp."
+                  },
+                  {
+                     "name" : "Exioce Imperial Society",
+                     "name_lower" : "exioce imperial society"
+                  },
+                  {
+                     "name" : "Exioce Blue Camorra",
+                     "name_lower" : "exioce blue camorra"
+                  },
+                  {
+                     "name_lower" : "exioce allied plc",
+                     "name" : "Exioce Allied PLC"
+                  },
+                  {
+                     "name" : "The Order of Mobius",
+                     "name_lower" : "the order of mobius"
+                  }
+               ],
+               "population" : 16494916,
+               "security" : "$system_security_medium;",
+               "__v" : 0,
+               "state" : "none",
+               "updated_at" : "2018-02-24T13:05:01.000Z",
+               "controlling_minor_faction" : "the order of mobius"
+            },
+            {
+               "_id" : "5a9179bedad2d039159bf0db",
+               "government" : "$government_cooperative;",
+               "updated_by" : "EDDN",
+               "allegiance" : "independent",
+               "factions" : [
+                  {
+                     "name" : "NLTT 7789 Exchange",
+                     "name_lower" : "nltt 7789 exchange"
+                  },
+                  {
+                     "name" : "Exioce Democrats",
+                     "name_lower" : "exioce democrats"
+                  },
+                  {
+                     "name" : "Exioce Crimson Electronics Corp.",
+                     "name_lower" : "exioce crimson electronics corp."
+                  },
+                  {
+                     "name_lower" : "exioce imperial society",
+                     "name" : "Exioce Imperial Society"
+                  },
+                  {
+                     "name_lower" : "exioce blue camorra",
+                     "name" : "Exioce Blue Camorra"
+                  },
+                  {
+                     "name" : "Exioce Allied PLC",
+                     "name_lower" : "exioce allied plc"
+                  },
+                  {
+                     "name_lower" : "the order of mobius",
+                     "name" : "The Order of Mobius"
+                  }
+               ],
+               "population" : 16494916,
+               "security" : "$system_security_medium;",
+               "state" : "boom",
+               "updated_at" : "2018-02-24T14:42:14.000Z",
+               "__v" : 0,
+               "controlling_minor_faction" : "the order of mobius"
+            },
+            {
+               "allegiance" : "independent",
+               "updated_by" : "EDDN",
+               "_id" : "5a97ef613494096d4afdbfe6",
+               "government" : "$government_cooperative;",
+               "population" : 16494916,
+               "factions" : [
+                  {
+                     "name_lower" : "nltt 7789 exchange",
+                     "name" : "NLTT 7789 Exchange"
+                  },
+                  {
+                     "name_lower" : "exioce democrats",
+                     "name" : "Exioce Democrats"
+                  },
+                  {
+                     "name" : "Exioce Crimson Electronics Corp.",
+                     "name_lower" : "exioce crimson electronics corp."
+                  },
+                  {
+                     "name" : "Exioce Imperial Society",
+                     "name_lower" : "exioce imperial society"
+                  },
+                  {
+                     "name" : "Exioce Blue Camorra",
+                     "name_lower" : "exioce blue camorra"
+                  },
+                  {
+                     "name_lower" : "exioce allied plc",
+                     "name" : "Exioce Allied PLC"
+                  },
+                  {
+                     "name" : "The Order of Mobius",
+                     "name_lower" : "the order of mobius"
+                  }
+               ],
+               "__v" : 0,
+               "updated_at" : "2018-03-01T12:17:37.000Z",
+               "state" : "none",
+               "security" : "$system_security_medium;",
+               "controlling_minor_faction" : "the order of mobius"
+            },
+            {
+               "security" : "$system_security_medium;",
+               "__v" : 0,
+               "state" : "boom",
+               "updated_at" : "2018-03-01T14:47:18.000Z",
+               "controlling_minor_faction" : "the order of mobius",
+               "updated_by" : "EDDN",
+               "_id" : "5a9812773494096d4afe53c4",
+               "government" : "$government_cooperative;",
+               "allegiance" : "independent",
+               "factions" : [
+                  {
+                     "name_lower" : "nltt 7789 exchange",
+                     "name" : "NLTT 7789 Exchange"
+                  },
+                  {
+                     "name" : "Exioce Democrats",
+                     "name_lower" : "exioce democrats"
+                  },
+                  {
+                     "name_lower" : "exioce crimson electronics corp.",
+                     "name" : "Exioce Crimson Electronics Corp."
+                  },
+                  {
+                     "name" : "Exioce Imperial Society",
+                     "name_lower" : "exioce imperial society"
+                  },
+                  {
+                     "name" : "Exioce Blue Camorra",
+                     "name_lower" : "exioce blue camorra"
+                  },
+                  {
+                     "name_lower" : "exioce allied plc",
+                     "name" : "Exioce Allied PLC"
+                  },
+                  {
+                     "name_lower" : "the order of mobius",
+                     "name" : "The Order of Mobius"
+                  }
+               ],
+               "population" : 16494916
+            },
+            {
+               "controlling_minor_faction" : "the order of mobius",
+               "security" : "$system_security_medium;",
+               "__v" : 0,
+               "state" : "none",
+               "updated_at" : "2018-03-01T14:50:31.000Z",
+               "factions" : [
+                  {
+                     "name" : "NLTT 7789 Exchange",
+                     "name_lower" : "nltt 7789 exchange"
+                  },
+                  {
+                     "name_lower" : "exioce democrats",
+                     "name" : "Exioce Democrats"
+                  },
+                  {
+                     "name" : "Exioce Crimson Electronics Corp.",
+                     "name_lower" : "exioce crimson electronics corp."
+                  },
+                  {
+                     "name_lower" : "exioce imperial society",
+                     "name" : "Exioce Imperial Society"
+                  },
+                  {
+                     "name_lower" : "exioce blue camorra",
+                     "name" : "Exioce Blue Camorra"
+                  },
+                  {
+                     "name" : "Exioce Allied PLC",
+                     "name_lower" : "exioce allied plc"
+                  },
+                  {
+                     "name" : "The Order of Mobius",
+                     "name_lower" : "the order of mobius"
+                  }
+               ],
+               "population" : 16494916,
+               "updated_by" : "EDDN",
+               "_id" : "5a98132e3494096d4afe55eb",
+               "government" : "$government_cooperative;",
+               "allegiance" : "independent"
+            }
+         ],
+         "x" : 78.5,
+         "updated_at" : "2018-03-01T16:47:53.000Z",
+         "state" : "none",
+         "security" : "$system_security_medium;",
+         "controlling_minor_faction" : "the order of mobius",
+         "primary_economy" : "$economy_tourism;",
+         "name" : "Exioce",
+         "government" : "$government_cooperative;",
+         "z" : 16.78125,
+         "y" : -100.25,
+         "factions" : [
+            {
+               "name" : "NLTT 7789 Exchange",
+               "name_lower" : "nltt 7789 exchange"
+            },
+            {
+               "name_lower" : "exioce democrats",
+               "name" : "Exioce Democrats"
+            },
+            {
+               "name" : "Exioce Crimson Electronics Corp.",
+               "name_lower" : "exioce crimson electronics corp."
+            },
+            {
+               "name" : "Exioce Imperial Society",
+               "name_lower" : "exioce imperial society"
+            },
+            {
+               "name_lower" : "exioce blue camorra",
+               "name" : "Exioce Blue Camorra"
+            },
+            {
+               "name" : "Exioce Allied PLC",
+               "name_lower" : "exioce allied plc"
+            },
+            {
+               "name_lower" : "the order of mobius",
+               "name" : "The Order of Mobius"
+            }
+         ]
+      }
+   ],
+   "limit" : 10,
+   "page" : 1,
+   "total" : 1
+}

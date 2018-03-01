@@ -1,0 +1,680 @@
+{
+   "responses" : {},
+   "paths" : {
+      "/systems" : {
+         "get" : {
+            "responses" : {
+               "200" : {
+                  "description" : "An array of systems with historical data",
+                  "schema" : {
+                     "type" : "array",
+                     "items" : {
+                        "$ref" : "#/definitions/EBGSSystemsPageV4"
+                     }
+                  }
+               }
+            },
+            "parameters" : [
+               {
+                  "description" : "ID of the document.",
+                  "type" : "string",
+                  "in" : "query",
+                  "name" : "id"
+               },
+               {
+                  "type" : "string",
+                  "name" : "name",
+                  "in" : "query",
+                  "description" : "System name."
+               },
+               {
+                  "description" : "Name of the allegiance.",
+                  "name" : "allegiance",
+                  "in" : "query",
+                  "type" : "string"
+               },
+               {
+                  "description" : "Name of the government type.",
+                  "name" : "government",
+                  "in" : "query",
+                  "type" : "string"
+               },
+               {
+                  "in" : "query",
+                  "name" : "state",
+                  "type" : "string",
+                  "description" : "State the system is in."
+               },
+               {
+                  "description" : "The primary economy of the system.",
+                  "in" : "query",
+                  "name" : "primaryeconomy",
+                  "type" : "string"
+               },
+               {
+                  "in" : "query",
+                  "name" : "security",
+                  "type" : "string",
+                  "description" : "The name of the security status in the system."
+               },
+               {
+                  "type" : "string",
+                  "in" : "query",
+                  "name" : "beginswith",
+                  "description" : "Starting characters of the system."
+               },
+               {
+                  "type" : "string",
+                  "name" : "timemin",
+                  "in" : "query",
+                  "description" : "Minimum time for the system history in miliseconds."
+               },
+               {
+                  "description" : "Maximum time for the system history in miliseconds.",
+                  "type" : "string",
+                  "in" : "query",
+                  "name" : "timemax"
+               },
+               {
+                  "description" : "Page no of response.",
+                  "in" : "query",
+                  "name" : "page",
+                  "type" : "integer"
+               }
+            ],
+            "produces" : [
+               "application/json"
+            ],
+            "description" : "Get the Systems"
+         }
+      },
+      "/factions" : {
+         "get" : {
+            "produces" : [
+               "application/json"
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : "An array of factions with historical data",
+                  "schema" : {
+                     "items" : {
+                        "$ref" : "#/definitions/EBGSFactionsPageV4"
+                     },
+                     "type" : "array"
+                  }
+               }
+            },
+            "parameters" : [
+               {
+                  "description" : "ID of the document.",
+                  "type" : "string",
+                  "in" : "query",
+                  "name" : "id"
+               },
+               {
+                  "name" : "name",
+                  "in" : "query",
+                  "type" : "string",
+                  "description" : "Faction name."
+               },
+               {
+                  "in" : "query",
+                  "name" : "allegiance",
+                  "type" : "string",
+                  "description" : "Name of the allegiance."
+               },
+               {
+                  "type" : "string",
+                  "name" : "government",
+                  "in" : "query",
+                  "description" : "Name of the government type."
+               },
+               {
+                  "description" : "Starting characters of the faction.",
+                  "type" : "string",
+                  "name" : "beginswith",
+                  "in" : "query"
+               },
+               {
+                  "description" : "Minimum time for the faction history in miliseconds.",
+                  "in" : "query",
+                  "name" : "timemin",
+                  "type" : "string"
+               },
+               {
+                  "description" : "Maximum time for the faction history in miliseconds.",
+                  "type" : "string",
+                  "name" : "timemax",
+                  "in" : "query"
+               },
+               {
+                  "type" : "integer",
+                  "name" : "page",
+                  "in" : "query",
+                  "description" : "Page no of response."
+               }
+            ],
+            "description" : "Get the Factions"
+         }
+      },
+      "/stations" : {
+         "get" : {
+            "produces" : [
+               "application/json"
+            ],
+            "responses" : {
+               "200" : {
+                  "description" : "An array of stations with historical data",
+                  "schema" : {
+                     "type" : "array",
+                     "items" : {
+                        "$ref" : "#/definitions/EBGSStationsPageV4"
+                     }
+                  }
+               }
+            },
+            "parameters" : [
+               {
+                  "name" : "id",
+                  "in" : "query",
+                  "type" : "string",
+                  "description" : "ID of the document."
+               },
+               {
+                  "description" : "Station name.",
+                  "in" : "query",
+                  "name" : "name",
+                  "type" : "string"
+               },
+               {
+                  "description" : "Station type.",
+                  "in" : "query",
+                  "name" : "type",
+                  "type" : "string"
+               },
+               {
+                  "type" : "string",
+                  "in" : "query",
+                  "name" : "system",
+                  "description" : "System name the station is in."
+               },
+               {
+                  "description" : "Station economy.",
+                  "type" : "string",
+                  "name" : "economy",
+                  "in" : "query"
+               },
+               {
+                  "description" : "Name of the allegiance.",
+                  "name" : "allegiance",
+                  "in" : "query",
+                  "type" : "string"
+               },
+               {
+                  "type" : "string",
+                  "in" : "query",
+                  "name" : "government",
+                  "description" : "Name of the government type."
+               },
+               {
+                  "in" : "query",
+                  "name" : "state",
+                  "type" : "string",
+                  "description" : "State the station is in."
+               },
+               {
+                  "type" : "string",
+                  "in" : "query",
+                  "name" : "beginswith",
+                  "description" : "Starting characters of the station."
+               },
+               {
+                  "type" : "string",
+                  "name" : "timemin",
+                  "in" : "query",
+                  "description" : "Minimum time for the station history in miliseconds."
+               },
+               {
+                  "type" : "string",
+                  "name" : "timemax",
+                  "in" : "query",
+                  "description" : "Maximum time for the station history in miliseconds."
+               },
+               {
+                  "description" : "Page no of response.",
+                  "type" : "integer",
+                  "name" : "page",
+                  "in" : "query"
+               }
+            ],
+            "description" : "Get the Stations"
+         }
+      }
+   },
+   "definitions" : {
+      "EBGSFactionHistoryV4" : {
+         "properties" : {
+            "system" : {
+               "type" : "string"
+            },
+            "state" : {
+               "type" : "string"
+            },
+            "updated_at" : {
+               "type" : "string"
+            },
+            "system_lower" : {
+               "type" : "string"
+            },
+            "updated_by" : {
+               "type" : "string"
+            },
+            "pending_states" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSStateV4"
+               },
+               "type" : "array"
+            },
+            "_id" : {
+               "type" : "string"
+            },
+            "influence" : {
+               "type" : "integer"
+            },
+            "recovering_states" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSStateV4"
+               },
+               "type" : "array"
+            },
+            "systems" : {
+               "type" : "array",
+               "items" : {
+                  "$ref" : "#/definitions/EBGSSystemPresenceV4"
+               }
+            }
+         }
+      },
+      "EBGSStationHistoryV4" : {
+         "properties" : {
+            "allegiance" : {
+               "type" : "string"
+            },
+            "updated_by" : {
+               "type" : "string"
+            },
+            "updated_at" : {
+               "type" : "string"
+            },
+            "state" : {
+               "type" : "string"
+            },
+            "services" : {
+               "type" : "array",
+               "items" : {
+                  "$ref" : "#/definitions/EBGSStationServicesV4"
+               }
+            },
+            "_id" : {
+               "type" : "string"
+            },
+            "government" : {
+               "type" : "string"
+            },
+            "controlling_minor_faction" : {
+               "type" : "string"
+            }
+         }
+      },
+      "EBGSStationsV4" : {
+         "properties" : {
+            "system" : {
+               "type" : "string"
+            },
+            "name" : {
+               "type" : "string"
+            },
+            "allegiance" : {
+               "type" : "string"
+            },
+            "system_lower" : {
+               "type" : "string"
+            },
+            "distance_from_star" : {
+               "type" : "integer"
+            },
+            "eddb_id" : {
+               "type" : "integer"
+            },
+            "government" : {
+               "type" : "string"
+            },
+            "__v" : {
+               "type" : "integer"
+            },
+            "name_lower" : {
+               "type" : "string"
+            },
+            "state" : {
+               "type" : "string"
+            },
+            "type" : {
+               "type" : "string"
+            },
+            "updated_at" : {
+               "type" : "string"
+            },
+            "economy" : {
+               "type" : "string"
+            },
+            "history" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSStationHistoryV4"
+               },
+               "type" : "array"
+            },
+            "controlling_minor_faction" : {
+               "type" : "string"
+            },
+            "_id" : {
+               "type" : "string"
+            },
+            "services" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSStationServicesV4"
+               },
+               "type" : "array"
+            }
+         }
+      },
+      "EBGSSystemHistoryV4" : {
+         "properties" : {
+            "government" : {
+               "type" : "string"
+            },
+            "controlling_minor_faction" : {
+               "type" : "string"
+            },
+            "_id" : {
+               "type" : "string"
+            },
+            "factions" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSSystemPresenceV4"
+               },
+               "type" : "array"
+            },
+            "security" : {
+               "type" : "string"
+            },
+            "population" : {
+               "type" : "integer"
+            },
+            "state" : {
+               "type" : "string"
+            },
+            "updated_by" : {
+               "type" : "string"
+            },
+            "allegiance" : {
+               "type" : "string"
+            },
+            "updated_at" : {
+               "type" : "string"
+            }
+         }
+      },
+      "EBGSFactionsPageV4" : {
+         "properties" : {
+            "docs" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSFactionsV4"
+               },
+               "type" : "array"
+            },
+            "page" : {
+               "type" : "integer"
+            },
+            "pages" : {
+               "type" : "integer"
+            },
+            "total" : {
+               "type" : "integer"
+            },
+            "limit" : {
+               "type" : "integer"
+            }
+         }
+      },
+      "EBGSFactionPresenceV4" : {
+         "properties" : {
+            "system_name" : {
+               "type" : "string"
+            },
+            "state" : {
+               "type" : "string"
+            },
+            "pending_states" : {
+               "type" : "array",
+               "items" : {
+                  "$ref" : "#/definitions/EBGSStateV4"
+               }
+            },
+            "recovering_states" : {
+               "type" : "array",
+               "items" : {
+                  "$ref" : "#/definitions/EBGSStateV4"
+               }
+            },
+            "influence" : {
+               "type" : "integer"
+            },
+            "system_name_lower" : {
+               "type" : "string"
+            }
+         }
+      },
+      "EBGSSystemsPageV4" : {
+         "properties" : {
+            "total" : {
+               "type" : "integer"
+            },
+            "pages" : {
+               "type" : "integer"
+            },
+            "limit" : {
+               "type" : "integer"
+            },
+            "docs" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSSystemsV4"
+               },
+               "type" : "array"
+            },
+            "page" : {
+               "type" : "integer"
+            }
+         }
+      },
+      "EBGSStationsPageV4" : {
+         "properties" : {
+            "limit" : {
+               "type" : "integer"
+            },
+            "pages" : {
+               "type" : "integer"
+            },
+            "total" : {
+               "type" : "integer"
+            },
+            "page" : {
+               "type" : "integer"
+            },
+            "docs" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSStationsV4"
+               },
+               "type" : "array"
+            }
+         }
+      },
+      "EBGSSystemsV4" : {
+         "properties" : {
+            "allegiance" : {
+               "type" : "string"
+            },
+            "population" : {
+               "type" : "integer"
+            },
+            "z" : {
+               "type" : "integer"
+            },
+            "factions" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSSystemPresenceV4"
+               },
+               "type" : "array"
+            },
+            "name" : {
+               "type" : "string"
+            },
+            "__v" : {
+               "type" : "integer"
+            },
+            "name_lower" : {
+               "type" : "string"
+            },
+            "primary_economy" : {
+               "type" : "string"
+            },
+            "eddb_id" : {
+               "type" : "integer"
+            },
+            "government" : {
+               "type" : "string"
+            },
+            "updated_at" : {
+               "type" : "string"
+            },
+            "reserve_type" : {
+               "type" : "string"
+            },
+            "x" : {
+               "type" : "integer"
+            },
+            "y" : {
+               "type" : "integer"
+            },
+            "state" : {
+               "type" : "string"
+            },
+            "security" : {
+               "type" : "string"
+            },
+            "_id" : {
+               "type" : "string"
+            },
+            "history" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSSystemHistoryV4"
+               },
+               "type" : "array"
+            },
+            "needs_permit" : {
+               "type" : "boolean"
+            },
+            "controlling_minor_faction" : {
+               "type" : "string"
+            }
+         }
+      },
+      "EBGSSystemPresenceV4" : {
+         "properties" : {
+            "name_lower" : {
+               "type" : "string"
+            },
+            "name" : {
+               "type" : "string"
+            }
+         }
+      },
+      "EBGSFactionsV4" : {
+         "properties" : {
+            "allegiance" : {
+               "type" : "string"
+            },
+            "is_player_faction" : {
+               "type" : "boolean"
+            },
+            "updated_at" : {
+               "type" : "string"
+            },
+            "name" : {
+               "type" : "string"
+            },
+            "faction_presence" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSFactionPresenceV4"
+               },
+               "type" : "array"
+            },
+            "home_system_name" : {
+               "type" : "string"
+            },
+            "__v" : {
+               "type" : "integer"
+            },
+            "_id" : {
+               "type" : "string"
+            },
+            "name_lower" : {
+               "type" : "string"
+            },
+            "government" : {
+               "type" : "string"
+            },
+            "history" : {
+               "items" : {
+                  "$ref" : "#/definitions/EBGSFactionHistoryV4"
+               },
+               "type" : "array"
+            },
+            "eddb_id" : {
+               "type" : "integer"
+            }
+         }
+      },
+      "EBGSStateV4" : {
+         "properties" : {
+            "state" : {
+               "type" : "string"
+            },
+            "trend" : {
+               "type" : "integer"
+            }
+         }
+      },
+      "EBGSStationServicesV4" : {
+         "properties" : {
+            "name" : {
+               "type" : "string"
+            },
+            "name_lower" : {
+               "type" : "string"
+            }
+         }
+      }
+   },
+   "basePath" : "/api/ebgs/v4",
+   "info" : {
+      "version" : "4.0.0",
+      "description" : "An API for Elite BGS",
+      "title" : "Elite BGS API"
+   },
+   "parameters" : {},
+   "tags" : [],
+   "securityDefinitions" : {},
+   "swagger" : "2.0",
+   "host" : "elitebgs.kodeblox.com",
+   "schemes" : "https"
+}

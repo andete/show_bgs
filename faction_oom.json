@@ -1,0 +1,3638 @@
+{
+   "docs" : [
+      {
+         "__v" : 0,
+         "faction_presence" : [
+            {
+               "system_name_lower" : "azrael",
+               "state" : "none",
+               "influence" : 0.807385,
+               "recovering_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 0
+                  },
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "pending_states" : [],
+               "system_name" : "Azrael"
+            },
+            {
+               "state" : "none",
+               "system_name_lower" : "ling deti",
+               "influence" : 0.743842,
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "boom"
+                  },
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "pending_states" : [],
+               "system_name" : "Ling Deti"
+            },
+            {
+               "system_name_lower" : "exioce",
+               "state" : "none",
+               "influence" : 0.599401,
+               "recovering_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 0
+                  },
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "pending_states" : [],
+               "system_name" : "Exioce"
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "boom"
+                  },
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "influence" : 0.585,
+               "state" : "none",
+               "system_name_lower" : "cardea",
+               "pending_states" : [],
+               "system_name" : "Cardea"
+            },
+            {
+               "system_name" : "Njiri",
+               "pending_states" : [],
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "boom"
+                  },
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "influence" : 0.492,
+               "state" : "none",
+               "system_name_lower" : "njiri"
+            },
+            {
+               "influence" : 0.713433,
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "boom"
+                  },
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "system_name_lower" : "apathaam",
+               "state" : "none",
+               "system_name" : "Apathaam",
+               "pending_states" : []
+            },
+            {
+               "system_name" : "Maausk",
+               "pending_states" : [],
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "boom"
+                  },
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "influence" : 0.636,
+               "system_name_lower" : "maausk",
+               "state" : "war"
+            }
+         ],
+         "name" : "The Order of Mobius",
+         "government" : "cooperative",
+         "_id" : "59e7a814d22c775be0fe3e14",
+         "allegiance" : "independent",
+         "updated_at" : "2018-03-01T14:41:25.000Z",
+         "name_lower" : "the order of mobius",
+         "eddb_id" : 18979,
+         "history" : [
+            {
+               "influence" : 0.731732,
+               "state" : "none",
+               "_id" : "5a900ab2dad2d0391587275e",
+               "updated_at" : "2018-02-23T12:36:03.000Z",
+               "system" : "Azrael",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "boom"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "azrael"
+            },
+            {
+               "system_lower" : "ling deti",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 1
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "system" : "Ling Deti",
+               "updated_at" : "2018-02-23T12:39:21.000Z",
+               "_id" : "5a900b79dad2d03915872903",
+               "state" : "none",
+               "influence" : 0.531
+            },
+            {
+               "state" : "none",
+               "influence" : 0.491,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "updated_at" : "2018-02-23T12:41:46.000Z",
+               "system" : "Maausk",
+               "_id" : "5a900c0adad2d03915872ace",
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "maausk",
+               "pending_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 1
+                  }
+               ],
+               "__v" : 0
+            },
+            {
+               "influence" : 0.548,
+               "state" : "none",
+               "_id" : "5a900c8bdad2d03915872c92",
+               "updated_at" : "2018-02-23T12:43:56.000Z",
+               "system" : "Njiri",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "boom"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "njiri"
+            },
+            {
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "boom"
+                  }
+               ],
+               "system_lower" : "cardea",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a900e49dad2d039158733a0",
+               "updated_at" : "2018-02-23T12:51:22.000Z",
+               "system" : "Cardea",
+               "state" : "none",
+               "influence" : 0.578
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "boom"
+                  }
+               ],
+               "system_lower" : "exioce",
+               "influence" : 0.526,
+               "state" : "none",
+               "_id" : "5a900e86dad2d03915873487",
+               "updated_at" : "2018-02-23T12:52:23.000Z",
+               "system" : "Exioce",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ]
+            },
+            {
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "system_lower" : "apathaam",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 1
+                  }
+               ],
+               "state" : "none",
+               "influence" : 0.523762,
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "system" : "Apathaam",
+               "updated_at" : "2018-02-23T12:53:25.000Z",
+               "_id" : "5a900ec4dad2d0391587356c"
+            },
+            {
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "azrael",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "_id" : "5a915b81dad2d039159b7424",
+               "updated_at" : "2018-02-24T12:32:42.000Z",
+               "system" : "Azrael",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.7801,
+               "state" : "boom"
+            },
+            {
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a915c5fdad2d039159b757b",
+               "system" : "Njiri",
+               "updated_at" : "2018-02-24T12:36:42.000Z",
+               "state" : "boom",
+               "influence" : 0.515,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "njiri",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "_id" : "5a915cd8dad2d039159b7636",
+               "updated_at" : "2018-02-24T12:38:43.000Z",
+               "system" : "Ling Deti",
+               "state" : "boom",
+               "influence" : 0.466466,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "ling deti",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a915d24dad2d039159b76c4",
+               "system" : "Maausk",
+               "updated_at" : "2018-02-24T12:39:55.000Z",
+               "state" : "boom",
+               "influence" : 0.52,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "maausk",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "influence" : 0.537849,
+               "state" : "boom",
+               "_id" : "5a9161badad2d039159b8fd5",
+               "updated_at" : "2018-02-24T12:59:31.000Z",
+               "system" : "Apathaam",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "apathaam"
+            },
+            {
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "_id" : "5a916237dad2d039159b9288",
+               "updated_at" : "2018-02-24T13:01:42.000Z",
+               "system" : "Azrael",
+               "state" : "none",
+               "influence" : 0.731732,
+               "pending_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 1
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "azrael",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "influence" : 0.561562,
+               "state" : "boom",
+               "_id" : "5a916254dad2d039159b933d",
+               "system" : "Cardea",
+               "updated_at" : "2018-02-24T13:02:02.000Z",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "cardea"
+            },
+            {
+               "state" : "boom",
+               "influence" : 0.614615,
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "system" : "Exioce",
+               "updated_at" : "2018-02-24T13:02:58.000Z",
+               "_id" : "5a916287dad2d039159b948a",
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "exioce",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "system_lower" : "azrael",
+               "influence" : 0.7801,
+               "state" : "boom",
+               "_id" : "5a9163b0dad2d039159b9ac5",
+               "system" : "Azrael",
+               "updated_at" : "2018-02-24T13:07:54.000Z",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ]
+            },
+            {
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "exioce",
+               "pending_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 1
+                  }
+               ],
+               "__v" : 0,
+               "state" : "none",
+               "influence" : 0.526,
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "system" : "Exioce",
+               "updated_at" : "2018-02-24T13:20:09.000Z",
+               "_id" : "5a916690dad2d039159ba91a"
+            },
+            {
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a9179bedad2d039159bf0e2",
+               "updated_at" : "2018-02-24T14:42:14.000Z",
+               "system" : "Exioce",
+               "state" : "boom",
+               "influence" : 0.614615,
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "exioce",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "system_lower" : "cardea",
+               "state" : "boom",
+               "influence" : 0.593,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a92ad0bdad2d03915b03060",
+               "system" : "Cardea",
+               "updated_at" : "2018-02-25T12:33:19.000Z"
+            },
+            {
+               "influence" : 0.612388,
+               "state" : "boom",
+               "_id" : "5a92ad44dad2d03915b030f1",
+               "system" : "Exioce",
+               "updated_at" : "2018-02-25T12:34:17.000Z",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "exioce"
+            },
+            {
+               "state" : "boom",
+               "influence" : 0.604,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a92ad8adad2d03915b03186",
+               "updated_at" : "2018-02-25T12:35:18.000Z",
+               "system" : "Ling Deti",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "ling deti"
+            },
+            {
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "njiri",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "_id" : "5a92adcbdad2d03915b03285",
+               "updated_at" : "2018-02-25T12:36:30.000Z",
+               "system" : "Njiri",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.486513,
+               "state" : "boom"
+            },
+            {
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "system" : "Maausk",
+               "updated_at" : "2018-02-25T12:37:30.000Z",
+               "_id" : "5a92ae07dad2d03915b0338b",
+               "state" : "boom",
+               "influence" : 0.563872,
+               "system_lower" : "maausk",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ]
+            },
+            {
+               "system" : "Azrael",
+               "updated_at" : "2018-02-25T12:40:45.000Z",
+               "_id" : "5a92aeccdad2d03915b03730",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.820359,
+               "state" : "boom",
+               "system_lower" : "azrael",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ]
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "system_lower" : "apathaam",
+               "state" : "boom",
+               "influence" : 0.555,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a92b04edad2d03915b03f4e",
+               "updated_at" : "2018-02-25T12:47:12.000Z",
+               "system" : "Apathaam"
+            },
+            {
+               "_id" : "5a92b1e8dad2d03915b04782",
+               "updated_at" : "2018-02-25T12:54:25.000Z",
+               "system" : "Exioce",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.614615,
+               "state" : "boom",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "exioce",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "state" : "boom",
+               "influence" : 0.612388,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "updated_at" : "2018-02-25T12:54:50.000Z",
+               "system" : "Exioce",
+               "_id" : "5a92b211dad2d03915b04829",
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "exioce",
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "system_lower" : "exioce",
+               "influence" : 0.614615,
+               "state" : "boom",
+               "_id" : "5a92b39cdad2d03915b0506f",
+               "updated_at" : "2018-02-25T13:01:13.000Z",
+               "system" : "Exioce",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ]
+            },
+            {
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "azrael",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "_id" : "5a92b4dedad2d03915b05665",
+               "system" : "Azrael",
+               "updated_at" : "2018-02-25T13:07:03.000Z",
+               "state" : "boom",
+               "influence" : 0.7801
+            },
+            {
+               "state" : "boom",
+               "influence" : 0.820359,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a92b538dad2d03915b057cc",
+               "system" : "Azrael",
+               "updated_at" : "2018-02-25T13:08:03.000Z",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "azrael"
+            },
+            {
+               "influence" : 0.52,
+               "state" : "boom",
+               "_id" : "5a92b7b4dad2d03915b064ab",
+               "system" : "Maausk",
+               "updated_at" : "2018-02-25T13:18:42.000Z",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "system_lower" : "maausk"
+            },
+            {
+               "influence" : 0.612388,
+               "state" : "boom",
+               "system" : "Exioce",
+               "updated_at" : "2018-02-25T13:27:54.000Z",
+               "_id" : "5a92b9c2dad2d03915b06f42",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "exioce",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0
+            },
+            {
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "system_lower" : "maausk",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "_id" : "5a92d489dad2d03915b0d415",
+               "updated_at" : "2018-02-25T15:21:47.000Z",
+               "system" : "Maausk",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "influence" : 0.563872,
+               "state" : "boom"
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "trend" : -1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  },
+                  {
+                     "state" : "war",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "maausk",
+               "influence" : 0.632,
+               "state" : "boom",
+               "_id" : "5a93ff3cdad2d03915c5c50b",
+               "system" : "Maausk",
+               "updated_at" : "2018-02-26T12:36:18.000Z",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ]
+            },
+            {
+               "state" : "boom",
+               "influence" : 0.575425,
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "_id" : "5a93ffa4dad2d03915c5c590",
+               "system" : "Cardea",
+               "updated_at" : "2018-02-26T12:38:01.000Z",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : -1
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "system_lower" : "cardea"
+            },
+            {
+               "system_lower" : "njiri",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : -1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_at" : "2018-02-26T12:39:01.000Z",
+               "system" : "Njiri",
+               "_id" : "5a93ffe0dad2d03915c5c5e6",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.585586,
+               "state" : "boom"
+            },
+            {
+               "state" : "boom",
+               "influence" : 0.554555,
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a940027dad2d03915c5c64c",
+               "system" : "Apathaam",
+               "updated_at" : "2018-02-26T12:40:12.000Z",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : -1
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "system_lower" : "apathaam"
+            },
+            {
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "updated_at" : "2018-02-26T12:41:42.000Z",
+               "system" : "Azrael",
+               "_id" : "5a940080dad2d03915c5c6c6",
+               "state" : "boom",
+               "influence" : 0.815582,
+               "system_lower" : "azrael",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : -1
+                  }
+               ]
+            },
+            {
+               "state" : "boom",
+               "influence" : 0.579,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "system" : "Exioce",
+               "updated_at" : "2018-02-26T12:42:56.000Z",
+               "_id" : "5a9400cbdad2d03915c5c72b",
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : -1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "system_lower" : "exioce",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0
+            },
+            {
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "ling deti",
+               "recovering_states" : [
+                  {
+                     "trend" : -1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "_id" : "5a940117dad2d03915c5c7cc",
+               "updated_at" : "2018-02-26T12:44:12.000Z",
+               "system" : "Ling Deti",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.684,
+               "state" : "boom"
+            },
+            {
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "njiri",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "_id" : "5a95a55fdad2d03915dc543e",
+               "updated_at" : "2018-02-27T18:37:15.000Z",
+               "system" : "Njiri",
+               "state" : "boom",
+               "influence" : 0.566
+            },
+            {
+               "system_lower" : "exioce",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_at" : "2018-02-27T18:55:42.000Z",
+               "system" : "Exioce",
+               "_id" : "5a95a9e1dad2d03915dc60c6",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.581,
+               "state" : "boom"
+            },
+            {
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "system_lower" : "azrael",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "influence" : 0.779195,
+               "state" : "boom",
+               "updated_at" : "2018-02-27T19:29:29.000Z",
+               "system" : "Azrael",
+               "_id" : "5a95b19cdad2d03915dc7ad0",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ]
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "ling deti",
+               "influence" : 0.752248,
+               "state" : "boom",
+               "_id" : "5a95b738dad2d03915dc9630",
+               "updated_at" : "2018-02-27T19:53:27.000Z",
+               "system" : "Ling Deti",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ]
+            },
+            {
+               "state" : "boom",
+               "influence" : 0.626,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "system" : "Apathaam",
+               "updated_at" : "2018-02-27T20:35:26.000Z",
+               "_id" : "5a95c10fdad2d03915dcc958",
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "system_lower" : "apathaam",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0
+            },
+            {
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  },
+                  {
+                     "trend" : 0,
+                     "state" : "war"
+                  }
+               ],
+               "system_lower" : "maausk",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 0
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "_id" : "5a95ca00dad2d03915dcf472",
+               "system" : "Maausk",
+               "updated_at" : "2018-02-27T21:13:33.000Z",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.648649,
+               "state" : "boom"
+            },
+            {
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "cardea",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "_id" : "5a95e6dddad2d03915dd4d73",
+               "updated_at" : "2018-02-27T23:16:44.000Z",
+               "system" : "Cardea",
+               "state" : "boom",
+               "influence" : 0.555
+            },
+            {
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "exioce",
+               "recovering_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "_id" : "5a969f1bdad2d03915f2223c",
+               "updated_at" : "2018-02-28T12:04:14.000Z",
+               "system" : "Exioce",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.581,
+               "state" : "boom"
+            },
+            {
+               "system_lower" : "njiri",
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "system" : "Njiri",
+               "updated_at" : "2018-02-28T12:22:40.000Z",
+               "_id" : "5a969f4adad2d03915f22314",
+               "state" : "boom",
+               "influence" : 0.543
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "azrael",
+               "influence" : 0.797809,
+               "state" : "boom",
+               "_id" : "5a96a199dad2d03915f22c54",
+               "updated_at" : "2018-02-28T12:33:27.000Z",
+               "system" : "Azrael",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ]
+            },
+            {
+               "state" : "boom",
+               "influence" : 0.603,
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a96a22cdad2d03915f22f17",
+               "updated_at" : "2018-02-28T12:36:09.000Z",
+               "system" : "Exioce",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "exioce"
+            },
+            {
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "system_lower" : "cardea",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "state" : "boom",
+               "influence" : 0.501499,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "system" : "Cardea",
+               "updated_at" : "2018-02-28T12:50:51.000Z",
+               "_id" : "5a96a5b3dad2d03915f240e2"
+            },
+            {
+               "influence" : 0.757,
+               "state" : "boom",
+               "_id" : "5a96b7b3dad2d03915f28b91",
+               "system" : "Ling Deti",
+               "updated_at" : "2018-02-28T14:08:43.000Z",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "ling deti"
+            },
+            {
+               "system_lower" : "azrael",
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "__v" : 0,
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "system" : "Azrael",
+               "updated_at" : "2018-02-28T14:15:44.000Z",
+               "_id" : "5a96b957dad2d03915f290c6",
+               "state" : "boom",
+               "influence" : 0.779195
+            },
+            {
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "_id" : "5a96c088dad2d03915f2a810",
+               "system" : "Azrael",
+               "updated_at" : "2018-02-28T14:45:20.000Z",
+               "state" : "boom",
+               "influence" : 0.797809,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "system_lower" : "azrael",
+               "recovering_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "system_lower" : "apathaam",
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  }
+               ],
+               "__v" : 0,
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "updated_at" : "2018-02-28T15:08:35.000Z",
+               "system" : "Apathaam",
+               "_id" : "5a96c5fadad2d03915f2b902",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "influence" : 0.686,
+               "state" : "boom"
+            },
+            {
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "updated_at" : "2018-02-28T16:34:12.000Z",
+               "system" : "Maausk",
+               "_id" : "5a96da12dad2d03915f2f95c",
+               "state" : "boom",
+               "influence" : 0.632,
+               "system_lower" : "maausk",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  },
+                  {
+                     "trend" : 0,
+                     "state" : "war"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ]
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  },
+                  {
+                     "state" : "war",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "maausk",
+               "state" : "boom",
+               "influence" : 0.648649,
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a96db59dad2d03915f2fce9",
+               "system" : "Maausk",
+               "updated_at" : "2018-02-28T16:39:54.000Z"
+            },
+            {
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "state" : "expansion",
+                     "trend" : 0
+                  },
+                  {
+                     "state" : "war",
+                     "trend" : 0
+                  }
+               ],
+               "system_lower" : "maausk",
+               "recovering_states" : [
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "_id" : "5a96fae13494096d4aeb2f3e",
+               "system" : "Maausk",
+               "updated_at" : "2018-02-28T18:54:23.000Z",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "influence" : 0.632,
+               "state" : "boom"
+            },
+            {
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a97ecb63494096d4afdb4fa",
+               "system" : "Maausk",
+               "updated_at" : "2018-03-01T12:06:13.000Z",
+               "state" : "war",
+               "influence" : 0.636,
+               "pending_states" : [],
+               "__v" : 0,
+               "system_lower" : "maausk",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "boom"
+                  },
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "_id" : "5a97ee873494096d4afdbc29",
+               "updated_at" : "2018-03-01T12:13:57.000Z",
+               "system" : "Cardea",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "influence" : 0.585,
+               "state" : "none",
+               "pending_states" : [],
+               "__v" : 0,
+               "system_lower" : "cardea",
+               "recovering_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 0
+                  },
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "__v" : 0,
+               "pending_states" : [],
+               "system_lower" : "azrael",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "boom"
+                  },
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ],
+               "_id" : "5a97eebc3494096d4afdbd34",
+               "system" : "Azrael",
+               "updated_at" : "2018-03-01T12:14:51.000Z",
+               "state" : "none",
+               "influence" : 0.807385
+            },
+            {
+               "updated_by" : "EDDN",
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "boom"
+                  },
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "system_lower" : "apathaam",
+               "pending_states" : [],
+               "__v" : 0,
+               "influence" : 0.713433,
+               "state" : "none",
+               "updated_at" : "2018-03-01T12:15:42.000Z",
+               "system" : "Apathaam",
+               "_id" : "5a97eef03494096d4afdbe06",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ]
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "boom"
+                  },
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [],
+               "system_lower" : "njiri",
+               "influence" : 0.492,
+               "state" : "none",
+               "_id" : "5a97ef233494096d4afdbee2",
+               "system" : "Njiri",
+               "updated_at" : "2018-03-01T12:16:33.000Z",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name_lower" : "ling deti",
+                     "name" : "Ling Deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ]
+            },
+            {
+               "recovering_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 0
+                  },
+                  {
+                     "trend" : 1,
+                     "state" : "outbreak"
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [],
+               "system_lower" : "exioce",
+               "influence" : 0.599401,
+               "state" : "none",
+               "_id" : "5a97ef613494096d4afdbfeb",
+               "updated_at" : "2018-03-01T12:17:37.000Z",
+               "system" : "Exioce",
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name_lower" : "exioce",
+                     "name" : "Exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name" : "Njiri",
+                     "name_lower" : "njiri"
+                  },
+                  {
+                     "name_lower" : "apathaam",
+                     "name" : "Apathaam"
+                  },
+                  {
+                     "name" : "Maausk",
+                     "name_lower" : "maausk"
+                  }
+               ]
+            },
+            {
+               "systems" : [
+                  {
+                     "name" : "Azrael",
+                     "name_lower" : "azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name_lower" : "cardea",
+                     "name" : "Cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "_id" : "5a97ef993494096d4afdc0e9",
+               "system" : "Ling Deti",
+               "updated_at" : "2018-03-01T12:18:30.000Z",
+               "state" : "none",
+               "influence" : 0.743842,
+               "__v" : 0,
+               "pending_states" : [],
+               "system_lower" : "ling deti",
+               "recovering_states" : [
+                  {
+                     "state" : "boom",
+                     "trend" : 0
+                  },
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "updated_by" : "EDDN"
+            },
+            {
+               "influence" : 0.501499,
+               "state" : "boom",
+               "_id" : "5a97ff253494096d4afe0e90",
+               "updated_at" : "2018-03-01T13:20:16.000Z",
+               "system" : "Cardea",
+               "systems" : [
+                  {
+                     "name_lower" : "azrael",
+                     "name" : "Azrael"
+                  },
+                  {
+                     "name" : "Ling Deti",
+                     "name_lower" : "ling deti"
+                  },
+                  {
+                     "name" : "Exioce",
+                     "name_lower" : "exioce"
+                  },
+                  {
+                     "name" : "Cardea",
+                     "name_lower" : "cardea"
+                  },
+                  {
+                     "name_lower" : "njiri",
+                     "name" : "Njiri"
+                  },
+                  {
+                     "name" : "Apathaam",
+                     "name_lower" : "apathaam"
+                  },
+                  {
+                     "name_lower" : "maausk",
+                     "name" : "Maausk"
+                  }
+               ],
+               "recovering_states" : [
+                  {
+                     "state" : "outbreak",
+                     "trend" : 1
+                  }
+               ],
+               "updated_by" : "EDDN",
+               "__v" : 0,
+               "pending_states" : [
+                  {
+                     "trend" : 0,
+                     "state" : "expansion"
+                  }
+               ],
+               "system_lower" : "cardea"
+            }
+         ]
+      }
+   ],
+   "pages" : 1,
+   "total" : 1,
+   "page" : 1,
+   "limit" : 10
+}
