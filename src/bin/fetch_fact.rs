@@ -10,7 +10,6 @@ use chrono::Utc;
 
 use std::collections::BTreeSet;
 use std::fs::File;
-use std::io::Write;
 
 fn main() {
     badlog::minimal(Some("INFO"));

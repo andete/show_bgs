@@ -1,6 +1,8 @@
 use chrono::{DateTime,Utc};
 use ebgsv4;
 
+use std::collections::HashMap;
+
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
 pub enum Allegiance {
@@ -94,7 +96,7 @@ pub struct System {
     pub eddb_id:i64,
     pub name:String,
     pub population: i64,
-    pub factions:Vec<Faction>,
+    pub factions:HashMap<String, Faction>,
 }
 
 #[derive(Debug,Deserialize, Serialize)]
@@ -120,13 +122,13 @@ pub struct FactionState {
     pub trend:i64,
 }
 
-impl<'a> From<&'a ebgsv4::EBGSSystemsV4> for System {
-    fn from(s:&'a ebgsv4::EBGSSystemsV4) -> System {
+impl From<ebgsv4::EBGSSystemsV4> for System {
+    fn from(s:ebgsv4::EBGSSystemsV4) -> System {
         System {
             eddb_id:s.eddb_id,
             name:s.name.clone(),
             population:s.population,
-            factions:vec![],
+            factions:HashMap::new(),
         }
     }
 }

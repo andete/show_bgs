@@ -6,23 +6,39 @@ extern crate log;
 extern crate chrono;
 extern crate serde_json;
 
-use chrono::Utc;
+//use chrono::Utc;
 
-use std::collections::BTreeSet;
+use std::collections::{BTreeSet,HashMap};
 use std::fs::File;
-use std::io::Write;
+// use std::io::Write;
 use show_bgs::ebgsv4;
 use show_bgs::data::*;
 
 fn main() {
     badlog::minimal(Some("INFO"));
     info!("Calculating data");
-    let systems = show_bgs::read_config();
-    info!("systems: {:?}", systems);
+    let system_names = show_bgs::read_config();
+    info!("systems to handle: {:?}", system_names);
     let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
-    for system in &systems {
-        let n = format!("{}/systems/{}.json", datadir, system);
+    let mut systems = HashMap::new();
+    for system_name in &system_names {
+        info!("Looking at {}...", system_name);
+        let n = format!("{}/systems/{}.json", datadir, system_name);
         let f = File::open(&n).unwrap();
         let s:ebgsv4::EBGSSystemsV4 = serde_json::from_reader(&f).unwrap();
+        let system:System = s.into();
+        systems.insert(system_name.clone(), system);
+    }
+    info!("systems: {:?}", systems);
+
+    let n = format!("{}/minor_factions.json", datadir);
+    let f = File::open(&n).unwrap();
+    let minor_faction_names:BTreeSet<String> = serde_json::from_reader(&f).unwrap();
+    for minor_faction_name in minor_faction_names {
+        info!("Looking at {}...", minor_faction_name);
+        let n = format!("{}/factions/{}.json", datadir, minor_faction_name);
+        let f = File::open(&n).unwrap();
+        let factionv4:ebgsv4::EBGSFactionsV4 = serde_json::from_reader(&f).unwrap();
+        let faction:Faction = (&factionv4).into();
     }
 }
