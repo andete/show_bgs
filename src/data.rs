@@ -99,7 +99,7 @@ pub struct System {
     pub factions:HashMap<String, Faction>,
 }
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug,Deserialize, Serialize, Clone)]
 pub struct Faction {
     pub name:String,
     pub government:GovernmentFaction,
@@ -108,7 +108,7 @@ pub struct Faction {
 }
 
 // faction data (for in a specific system)
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug,Deserialize, Serialize, Clone)]
 pub struct FactionData {
     pub date:DateTime<Utc>,
     pub influence:f64,
@@ -116,7 +116,7 @@ pub struct FactionData {
     pub recovering_states:Vec<FactionState>,
 }
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug,Deserialize, Serialize, Clone)]
 pub struct FactionState {
     pub state:State,
     pub trend:i64,
@@ -140,6 +140,26 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
             government:s.government,
             allegiance:s.allegiance,
             evolution:vec![],
+        }
+    }
+}
+
+impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
+    fn from(h:ebgsv4::EBGSFactionHistoryV4) -> FactionData {
+        FactionData {
+            date:h.updated_at,
+            influence:h.influence,
+            pending_states:h.pending_states.into_iter().map(|s| s.into()).collect(),
+            recovering_states:h.recovering_states.into_iter().map(|s| s.into()).collect(),
+        }
+    }
+}
+
+impl From <ebgsv4::EBGSStateV4> for FactionState {
+    fn from(s:ebgsv4::EBGSStateV4) -> FactionState {
+        FactionState {
+            state:s.state,
+            trend:s.trend,
         }
     }
 }

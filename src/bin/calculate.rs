@@ -39,6 +39,12 @@ fn main() {
         let n = format!("{}/factions/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
         let factionv4:ebgsv4::EBGSFactionsV4 = serde_json::from_reader(&f).unwrap();
-        let faction:Faction = (&factionv4).into();
+        let faction_template:Faction = (&factionv4).into();
+        for history in factionv4.history {
+            let system = systems.get_mut(&history.system).unwrap();
+            let faction = system.factions.entry(faction_template.name.clone()).or_insert(faction_template.clone());
+            let data = history.into();
+            faction.evolution.push(data);
+        }
     }
 }
