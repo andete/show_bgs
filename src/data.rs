@@ -112,6 +112,7 @@ pub struct Faction {
 pub struct FactionData {
     pub date:DateTime<Utc>,
     pub influence:f64,
+    pub state:State,
     pub pending_states:Vec<FactionState>,
     pub recovering_states:Vec<FactionState>,
 }
@@ -149,6 +150,7 @@ impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
         FactionData {
             date:h.updated_at,
             influence:h.influence,
+            state:h.state,
             pending_states:h.pending_states.into_iter().map(|s| s.into()).collect(),
             recovering_states:h.recovering_states.into_iter().map(|s| s.into()).collect(),
         }
@@ -161,5 +163,21 @@ impl From <ebgsv4::EBGSStateV4> for FactionState {
             state:s.state,
             trend:s.trend,
         }
+    }
+}
+
+impl Faction {
+    pub fn cleanup_evolution(&mut self) {
+        let mut prev_date = None;
+        let mut v = vec![];
+        for e in &self.evolution {
+            let date = e.date.date();
+            if Some(date) != prev_date {
+                v.push(e.clone());
+                prev_date = Some(date);
+            }
+            
+        }
+        self.evolution = v;
     }
 }

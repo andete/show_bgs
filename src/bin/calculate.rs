@@ -6,8 +6,6 @@ extern crate log;
 extern crate chrono;
 extern crate serde_json;
 
-//use chrono::Utc;
-
 use std::collections::{BTreeSet,HashMap};
 use std::fs::File;
 // use std::io::Write;
@@ -41,10 +39,19 @@ fn main() {
         let factionv4:ebgsv4::EBGSFactionsV4 = serde_json::from_reader(&f).unwrap();
         let faction_template:Faction = (&factionv4).into();
         for history in factionv4.history {
-            let system = systems.get_mut(&history.system).unwrap();
-            let faction = system.factions.entry(faction_template.name.clone()).or_insert(faction_template.clone());
-            let data = history.into();
-            faction.evolution.push(data);
+            // could be that the system is not in our system list...
+            if let Some(system) = systems.get_mut(&history.system) {
+                let faction = system.factions.entry(faction_template.name.clone()).or_insert(faction_template.clone());
+                let data:FactionData = history.into();
+                faction.evolution.push(data);
+            }
         }
     }
+    for system in &mut systems.values_mut() {
+        for faction in &mut system.factions.values_mut() {
+            faction.cleanup_evolution();
+        }
+    }
+    
+    info!("Exioce: {}", serde_json::to_string_pretty(systems.get("Exioce").unwrap()).unwrap());
 }
