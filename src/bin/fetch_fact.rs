@@ -28,8 +28,9 @@ fn main() {
         info!("Faction: {}", faction);
         let url = format!("{}factions?name={}&timemax={}", show_bgs::BASE_URL, faction, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
+        let json:show_bgs::ebgsv4::EBGSFactionsPageV4 = serde_json::from_str(&res).unwrap();
         let n = format!("{}/factions/{}.json", datadir, faction);
         let mut f = File::create(&n).unwrap();
-        f.write_all(res.as_bytes()).unwrap();
+        serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
     }
 }
