@@ -6,7 +6,7 @@ extern crate log;
 extern crate chrono;
 extern crate serde_json;
 
-use chrono::{DateTime,Utc};
+use chrono::Utc;
 
 use std::collections::BTreeSet;
 use std::fs::File;
@@ -44,6 +44,6 @@ fn main() {
     }
     info!("Minor factions involved: {:?}", minor_factions);  
     let n = format!("{}/minor_factions.json", datadir);
-    let mut f = File::create(&n).unwrap();
+    let f = File::create(&n).unwrap();
     serde_json::to_writer_pretty(&f, &minor_factions).unwrap();
 }
