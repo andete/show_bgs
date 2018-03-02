@@ -1,6 +1,7 @@
 use chrono::{DateTime,Utc};
+use ebgsv4;
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
 pub enum Allegiance {
     Independent,
@@ -9,7 +10,7 @@ pub enum Allegiance {
     Empire,
 }
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
 pub enum State {
     None,
@@ -27,7 +28,7 @@ pub enum State {
 }
 
 // for systems
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 pub enum Government {
     #[serde(rename = "$government_corporate;")]
     Corporate,
@@ -39,7 +40,7 @@ pub enum Government {
 }
 
 // for factions
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
 pub enum GovernmentFaction {
     Anarchy,
@@ -58,7 +59,7 @@ pub enum GovernmentFaction {
     None,
 }
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 pub enum Security {
     #[serde(rename = "$system_security_medium;")]
     Medium,
@@ -72,7 +73,7 @@ pub enum Security {
     Lawless,
 }
     
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 pub enum Economy {
     #[serde(rename = "$economy_industrial;")]
     Industrial,
@@ -117,4 +118,26 @@ pub struct FactionData {
 pub struct FactionState {
     pub state:State,
     pub trend:i64,
+}
+
+impl<'a> From<&'a ebgsv4::EBGSSystemsV4> for System {
+    fn from(s:&'a ebgsv4::EBGSSystemsV4) -> System {
+        System {
+            eddb_id:s.eddb_id,
+            name:s.name.clone(),
+            population:s.population,
+            factions:vec![],
+        }
+    }
+}
+
+impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
+    fn from(s:&'a ebgsv4::EBGSFactionsV4) -> Faction {
+        Faction {
+            name:s.name.clone(),
+            government:s.government,
+            allegiance:s.allegiance,
+            evolution:vec![],
+        }
+    }
 }

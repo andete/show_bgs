@@ -12,6 +12,7 @@ use std::collections::BTreeSet;
 use std::fs::File;
 use std::io::Write;
 use show_bgs::ebgsv4;
+use show_bgs::data::*;
 
 fn main() {
     badlog::minimal(Some("INFO"));
