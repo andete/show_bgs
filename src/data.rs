@@ -1,3 +1,4 @@
+use chrono::{DateTime,Utc};
 
 #[derive(Debug,Deserialize, Serialize)]
 #[serde(rename_all = "lowercase")]
@@ -89,5 +90,31 @@ pub enum Economy {
 
 #[derive(Debug,Deserialize, Serialize)]
 pub struct System {
-    
+    pub eddb_id:i64,
+    pub name:String,
+    pub population: i64,
+    pub factions:Vec<Faction>,
+}
+
+#[derive(Debug,Deserialize, Serialize)]
+pub struct Faction {
+    pub name:String,
+    pub government:GovernmentFaction,
+    pub allegiance:Allegiance,
+    pub evolution:Vec<FactionData>,
+}
+
+// faction data (for in a specific system)
+#[derive(Debug,Deserialize, Serialize)]
+pub struct FactionData {
+    pub date:DateTime<Utc>,
+    pub influence:f64,
+    pub pending_states:Vec<FactionState>,
+    pub recovering_states:Vec<FactionState>,
+}
+
+#[derive(Debug,Deserialize, Serialize)]
+pub struct FactionState {
+    pub state:State,
+    pub trend:i64,
 }
