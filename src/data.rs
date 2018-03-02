@@ -1,42 +1,90 @@
 
 #[derive(Debug,Deserialize, Serialize)]
+#[serde(rename_all = "lowercase")]
 pub enum Allegiance {
-    #[serde(rename = "independent")]
     Independent,
-    #[serde(rename = "federation")]
     Federation,
-    #[serde(rename = "alliance")]
     Alliance,
-    #[serde(rename = "empire")]
     Empire,
 }
 
 #[derive(Debug,Deserialize, Serialize)]
+#[serde(rename_all = "lowercase")]
 pub enum State {
-    #[serde(rename = "none")]
     None,
-    #[serde(rename = "expansion")]
     Expansion,
-    #[serde(rename = "war")]
     War,
-    #[serde(rename = "civilwar")]
     CivilWar,
-    #[serde(rename = "election")]
     Election,
-    #[serde(rename = "boom")]
     Boom,
-    #[serde(rename = "civilunrest")]
     CivilUnrest,
-    #[serde(rename = "famine")]
     Famine,
-    #[serde(rename = "outbreak")]
     Outbreak,
-    #[serde(rename = "lockdown")]
     Lockdown,
-    #[serde(rename = "investment")]
     Investment,
-    #[serde(rename = "retreat")]
     Retreat,
+}
+
+// for systems
+#[derive(Debug,Deserialize, Serialize)]
+pub enum Government {
+    #[serde(rename = "$government_corporate;")]
+    Corporate,
+    #[serde(rename = "$government_cooperative;")]
+    Cooperative,
+    #[serde(rename = "$government_patronage;")]
+    Patronage,
+    // TODO: add more as needed
+}
+
+// for factions
+#[derive(Debug,Deserialize, Serialize)]
+#[serde(rename_all = "lowercase")]
+pub enum GovernmentFaction {
+    Anarchy,
+    Corporate,
+    Patronage,
+    Communism,
+    Confederacy,
+    Cooperative,
+    Democracy,
+    Dictatorship,
+    Feudal,
+    Imperial,
+    PrisonColony,
+    Theocracy,
+    Workshop,
+    None,
+}
+
+#[derive(Debug,Deserialize, Serialize)]
+pub enum Security {
+    #[serde(rename = "$system_security_medium;")]
+    Medium,
+    #[serde(rename = "$system_security_low;")]
+    Low,
+    #[serde(rename = "$system_security_high;")]
+    High,
+    #[serde(rename = "$system_security_anarchy;")]
+    Anarchy,
+    #[serde(rename = "$system_security_lawless;")]
+    Lawless,
+}
+    
+#[derive(Debug,Deserialize, Serialize)]
+pub enum Economy {
+    #[serde(rename = "$economy_industrial;")]
+    Industrial,
+    #[serde(rename = "$economy_extraction;")]
+    Extraction,
+    #[serde(rename = "$economy_colony;")]
+    Colony,
+    #[serde(rename = "$economy_agri;")]
+    Agriculture,
+    #[serde(rename = "$economy_tourism;")]
+    Tourism,
+    #[serde(rename = "$economy_hightech;")]
+    HighTech,
 }
 
 #[derive(Debug,Deserialize, Serialize)]

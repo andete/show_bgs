@@ -22,6 +22,6 @@ fn main() {
     for system in &systems {
         let n = format!("{}/systems/{}.json", datadir, system);
         let f = File::open(&n).unwrap();
-        let s:ebgsv4::EBGSSystemsPageV4 = serde_json::from_reader(&f).unwrap();
+        let s:ebgsv4::EBGSSystemsV4 = serde_json::from_reader(&f).unwrap();
     }
 }

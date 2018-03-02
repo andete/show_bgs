@@ -16,13 +16,13 @@ pub type EBGSSystemsPageV4 = EBGSPageV4<EBGSSystemsV4>;
 #[derive(Debug,Deserialize, Serialize)]
 pub struct EBGSFactionsV4 {
     pub eddb_id:i64,
-    pub government:String,
+    pub government:GovernmentFaction,
     pub name:String,
     pub _id:String,
     pub name_lower:String,
     pub updated_at:DateTime<Utc>,
     pub faction_presence:Vec<EBGSFactionPresenceV4>,
-    pub allegiance:String,
+    pub allegiance:Allegiance,
     pub history:Vec<EBGSFactionHistoryV4>,
 }
 
@@ -67,11 +67,11 @@ pub struct EBGSSystemsV4 {
     pub z: f64,
     pub updated_at: DateTime<Utc>,
     pub state: State,
-    pub security: String, // TODO: enum
+    pub security: Security,
     pub controlling_minor_faction: String,
-    pub primary_economy: String, // TODO: enum
+    pub primary_economy: Economy,
     pub name: String,
-    pub government: String, // TODO: enum
+    pub government: Government,
     pub factions: Vec<EBGSSystemPresenceV4>,
     pub history: Vec<EBGSSystemHistoryV4>,
 }
@@ -85,12 +85,12 @@ pub struct EBGSSystemPresenceV4 {
 #[derive(Debug,Deserialize, Serialize)]
 pub struct EBGSSystemHistoryV4 {
     pub controlling_minor_faction: String,
-    pub security: String, // TODO: enum
+    pub security: Security,
     pub updated_at: DateTime<Utc>,
     pub state: State,
-    pub government: String, // TODO: enum
+    pub government: Government,
     pub population: i64,
     pub updated_by: String,
-    pub allegiance: String, // TODO: enum
+    pub allegiance: Allegiance,
     pub factions: Vec<EBGSSystemPresenceV4>,
 }
