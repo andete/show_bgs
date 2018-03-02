@@ -28,11 +28,11 @@ fn main() {
     for system in &systems {
         let url = format!("{}systems?name={}&timemax={}", show_bgs::BASE_URL, system, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
-        let n = format!("{}/{}.json", datadir, system);
+        let n = format!("{}/systems/{}.json", datadir, system);
         let mut f = File::create(&n).unwrap();
-        f.write_all(res.as_bytes()).unwrap();
         let json:show_bgs::ebgsv4::EBGSSystemsPageV4 = serde_json::from_str(&res).unwrap();
         info!("{:?}", json);
+        serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
         for faction in &json.docs[0].factions {
             minor_factions.insert(faction.name.clone());
         }

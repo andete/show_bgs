@@ -24,4 +24,5 @@ pub fn read_config() -> Vec<String> {
 }
 
 pub mod ebgsv4;
+pub mod data;
 
