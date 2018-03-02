@@ -9,6 +9,9 @@ pub struct EBGSPageV4<T> {
     pub limit:i64,
 }
 
+pub type EBGSFactionsPageV4 = EBGSPageV4<EBGSFactionsV4>;
+pub type EBGSSystemsPageV4 = EBGSPageV4<EBGSSystemsV4>;
+
 #[derive(Debug,Deserialize)]
 pub struct EBGSFactionsV4 {
     pub eddb_id:i64,
