@@ -1,7 +1,7 @@
 use chrono::{DateTime,Utc};
 use ebgsv4;
 
-use std::collections::HashMap;
+use std::collections::{HashMap,HashSet};
 
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
@@ -12,7 +12,7 @@ pub enum Allegiance {
     Empire,
 }
 
-#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
+#[derive(Debug,Deserialize, Serialize, Clone, Copy, PartialEq, Eq, Hash)]
 #[serde(rename_all = "lowercase")]
 pub enum State {
     None,
@@ -113,6 +113,7 @@ pub struct FactionData {
     pub date:DateTime<Utc>,
     pub influence:f64,
     pub state:State,
+    pub state_day:u8,
     pub pending_states:Vec<FactionState>,
     pub recovering_states:Vec<FactionState>,
 }
@@ -121,6 +122,7 @@ pub struct FactionData {
 pub struct FactionState {
     pub state:State,
     pub trend:i64,
+    pub state_day:u8,
 }
 
 impl From<ebgsv4::EBGSSystemsV4> for System {
@@ -151,6 +153,7 @@ impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
             date:h.updated_at,
             influence:h.influence,
             state:h.state,
+            state_day:0,
             pending_states:h.pending_states.into_iter().map(|s| s.into()).collect(),
             recovering_states:h.recovering_states.into_iter().map(|s| s.into()).collect(),
         }
@@ -162,6 +165,7 @@ impl From <ebgsv4::EBGSStateV4> for FactionState {
         FactionState {
             state:s.state,
             trend:s.trend,
+            state_day:0,
         }
     }
 }
@@ -179,5 +183,58 @@ impl Faction {
             
         }
         self.evolution = v;
+    }
+
+    pub fn fill_in_state_days(&mut self) {
+        let mut prev_state = State::None;
+        let mut recovery_states = HashMap::new();
+        let mut pending_states = HashMap::new();
+        let mut c:u8 = 1;
+        for e in &mut self.evolution {
+            if e.state != prev_state {
+                prev_state = e.state;
+                c = 1;
+                e.state_day = c;
+            } else {
+                c += 1;
+                e.state_day = c;
+            }
+            let mut pending_seen = HashSet::new();
+            for state in &mut e.pending_states {
+                pending_seen.insert(state.state);
+                if !pending_states.contains_key(&state.state) {
+                    pending_states.insert(state.state, 1);
+                    state.state_day = 1;
+                } else {
+                    let n = pending_states.get(&state.state).unwrap() + 1;
+                    pending_states.insert(state.state, n);
+                    state.state_day = n;
+                }
+            }
+            let keys:Vec<State> = pending_states.keys().cloned().collect();
+            for k in keys {
+                if !pending_seen.contains(&k) {
+                    pending_states.remove(&k);
+                }
+            }
+            let mut recovery_seen = HashSet::new();
+            for state in &mut e.recovering_states {
+                recovery_seen.insert(state.state);
+                if !recovery_states.contains_key(&state.state) {
+                    recovery_states.insert(state.state, 1);
+                    state.state_day = 1;
+                } else {
+                    let n = recovery_states.get(&state.state).unwrap() + 1;
+                    recovery_states.insert(state.state, n);
+                    state.state_day = n;
+                }
+            }
+            let keys:Vec<State> = recovery_states.keys().cloned().collect();
+            for k in keys {
+                if !recovery_seen.contains(&k) {
+                    recovery_states.remove(&k);
+                }
+            }
+        }
     }
 }

@@ -50,6 +50,7 @@ fn main() {
     for system in &mut systems.values_mut() {
         for faction in &mut system.factions.values_mut() {
             faction.cleanup_evolution();
+            faction.fill_in_state_days();
         }
     }
     
