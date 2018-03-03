@@ -97,6 +97,7 @@ pub enum Economy {
 pub struct Systems {
     pub systems: Vec<System>,
     pub dates: Vec<String>,
+    pub dates10: Vec<String>,
 }
 
 #[derive(Debug,Deserialize, Serialize)]
@@ -113,6 +114,7 @@ pub struct Faction {
     pub government:GovernmentFaction,
     pub allegiance:Allegiance,
     pub evolution:Vec<FactionData>,
+    pub evolution10:Vec<FactionData>,
     pub color:String,
 }
 
@@ -128,10 +130,11 @@ pub struct FactionData {
     pub recovering_states:Vec<FactionState>,
 }
 
-#[derive(Debug,Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct FactionState {
     pub state:State,
     pub trend:i64,
+    pub trend_display:String,
     pub state_day:u8,
 }
 
@@ -153,6 +156,7 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
             government:s.government,
             allegiance:s.allegiance,
             evolution:vec![],
+            evolution10:vec![],
             color:"".into(),
         }
     }
@@ -174,9 +178,17 @@ impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
 
 impl From <ebgsv4::EBGSStateV4> for FactionState {
     fn from(s:ebgsv4::EBGSStateV4) -> FactionState {
+        let d = if s.trend == 1 {
+            "&uarr;"
+        } else if s.trend == -1 {
+            "&darr;"
+        } else {
+            "&harr;"
+        }.into();
         FactionState {
             state:s.state,
             trend:s.trend,
+            trend_display:d,
             state_day:0,
         }
     }
@@ -256,5 +268,9 @@ impl Faction {
             update_states(&mut e.pending_states, &mut pending_states);
             update_states(&mut e.recovering_states, &mut recovery_states);
         }
+    }
+
+    pub fn fill_in_evolution10(&mut self) {
+        self.evolution10 = self.evolution.as_slice().windows(10).last().unwrap().to_vec();
     }
 }

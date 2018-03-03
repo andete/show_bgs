@@ -143,6 +143,46 @@ borderColor: '{{ faction.color }}',
       <h3>{{faction.name}}</h3>
       {% endfor %}
       -->
+      <table style="font-size: 70%;">
+        <tr>
+          <th>Faction</th>
+          <th></th>
+          {% for date in dates10 %}
+          <th>{{date}}</th>
+          {% endfor %}
+        </tr>
+        {% for name, faction in system.factions %}
+        <tr>
+          <td nowrap><i>{{ name }}</i></td>
+          <td>state:</td>
+          {% for data in faction.evolution10 %}
+          <td nowrap>{{ data.state }}/{{ data.state_day }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <td></td>
+          <td>pending:</td>
+          {% for data in faction.evolution10 %}
+          <td nowrap>
+            {% for p in data.pending_states %}
+            {{ p.state }}/{{ p.state_day }} {{ p.trend_display }}<br/>
+            {% endfor %}
+          </td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <td></td>
+          <td>recovery:</td>
+          {% for data in faction.evolution10 %}
+          <td nowrap>
+            {% for r in data.recovering_states %}
+            {{ r.state }}/{{ r.state_day }} {{ r.trend_display }}<br/>
+            {% endfor %}
+          </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </table>
       
       {% endfor %}
     </article>

@@ -66,6 +66,7 @@ fn main() {
         for faction in &mut system.factions.values_mut() {
             faction.cleanup_evolution(&dates_vec);
             faction.fill_in_state_days();
+            faction.fill_in_evolution10();
         }
         let mut colors:BTreeSet<String> = vec!["red", "blue", "green", "cyan", "orange", "pink", "grey", "black"].into_iter().map(|x| x.into()).collect();
         // first fill in using registered colors:
@@ -89,10 +90,14 @@ fn main() {
     let mut s2:Vec<System> = systems.into_iter().map(|(_,v)| v).collect();
     s2.sort_by(|a,b| a.name.cmp(&b.name));
 
-    let dates = dates.iter().map(|e| format!("{}", e.format("%d/%m"))).collect();
+    let dates:Vec<String> = dates.iter().map(|e| format!("{}", e.format("%d/%m"))).collect();
+    let dates2 = dates.clone();
+    let dates10 = dates.as_slice();
+    let dates10 = dates10.windows(10).last().unwrap().to_vec();
     let systems = Systems {
         systems: s2,
-        dates:dates,
+        dates:dates2,
+        dates10:dates10,
     };
     serde_json::to_writer_pretty(&f, &systems).unwrap();
 }
