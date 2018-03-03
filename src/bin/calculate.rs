@@ -56,5 +56,10 @@ fn main() {
 
     let n = format!("{}/report.json", datadir);
     let f = File::create(&n).unwrap();
+    let mut s2:Vec<System> = systems.into_iter().map(|(_,v)| v).collect();
+    s2.sort_by(|a,b| a.name.cmp(&b.name));
+    let systems = Systems {
+        systems: s2,
+    };
     serde_json::to_writer_pretty(&f, &systems).unwrap();
 }

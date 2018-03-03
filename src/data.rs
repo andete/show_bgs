@@ -90,6 +90,10 @@ pub enum Economy {
     #[serde(rename = "$economy_hightech;")]
     HighTech,
 }
+#[derive(Debug,Deserialize, Serialize)]
+pub struct Systems {
+    pub systems: Vec<System>,
+}
 
 #[derive(Debug,Deserialize, Serialize)]
 pub struct System {
