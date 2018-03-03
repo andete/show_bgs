@@ -21,6 +21,7 @@ pub enum State {
     CivilWar,
     Election,
     Boom,
+    Bust,
     CivilUnrest,
     Famine,
     Outbreak,
@@ -38,6 +39,8 @@ pub enum Government {
     Cooperative,
     #[serde(rename = "$government_patronage;")]
     Patronage,
+    #[serde(rename = "$government_democracy;")]
+    Democracy,
     // TODO: add more as needed
 }
 
