@@ -6,6 +6,8 @@ extern crate log;
 extern crate chrono;
 extern crate serde_json;
 
+use chrono::{Date,Utc};
+
 use std::collections::{BTreeSet,HashMap};
 use std::fs::File;
 // use std::io::Write;
@@ -50,9 +52,19 @@ fn main() {
     let mut faction_colors:HashMap<String,String> = HashMap::new();
     faction_colors.insert("The Order of Mobius".into(), "black".into());
     
+    let mut dates = BTreeSet::new();
+    for system in systems.values() {
+        for faction in system.factions.values() {
+            for e in &faction.evolution {
+                dates.insert(e.date.date());
+            }
+        }
+    }
+    let dates_vec:Vec<Date<Utc>> = dates.iter().cloned().collect();
+
     for system in &mut systems.values_mut() {
         for faction in &mut system.factions.values_mut() {
-            faction.cleanup_evolution();
+            faction.cleanup_evolution(&dates_vec);
             faction.fill_in_state_days();
         }
         let mut colors:BTreeSet<String> = vec!["red", "blue", "green", "cyan", "orange", "pink", "grey", "black"].into_iter().map(|x| x.into()).collect();
@@ -77,15 +89,6 @@ fn main() {
     let mut s2:Vec<System> = systems.into_iter().map(|(_,v)| v).collect();
     s2.sort_by(|a,b| a.name.cmp(&b.name));
 
-    let mut dates = BTreeSet::new();
-    for system in &s2 {
-        for faction in system.factions.values() {
-            for e in &faction.evolution {
-                dates.insert(e.date.date());
-            }
-        }
-    }
-    
     let dates = dates.iter().map(|e| format!("{}", e.format("%d/%m"))).collect();
     let systems = Systems {
         systems: s2,

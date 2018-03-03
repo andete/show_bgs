@@ -1,4 +1,4 @@
-use chrono::{DateTime,Utc};
+use chrono::{Date,DateTime,Utc};
 use ebgsv4;
 
 use std::collections::{HashMap,HashSet};
@@ -201,7 +201,7 @@ fn update_states(states:&mut Vec<FactionState>, h:&mut HashMap<State,u8>) {
 }
 
 impl Faction {
-    pub fn cleanup_evolution(&mut self) {
+    pub fn cleanup_evolution(&mut self, dates:&Vec<Date<Utc>>) {
         let mut prev_date = None;
         let mut v = vec![];
         for e in &self.evolution {
@@ -212,7 +212,28 @@ impl Faction {
             }
             
         }
-        self.evolution = v;
+        // also _insert_ in between days
+        let mut di = dates.iter();
+        let mut prev:Option<FactionData> = None;
+        let mut v2 = vec![];
+        for e in v {
+            let mut date = di.next().unwrap();
+            while *date != e.date.date() {
+                if let Some(e2) = prev {
+                    let mut e3 = e2.clone();
+                    e3.date = date.and_hms(12,30,0);
+                    e3.label_date = format!("{}", date.format("%d/%m"));
+                    v2.push(e3.clone());
+                    prev = Some(e3);
+                } else {
+                    // nothing... :(
+                }
+                date = di.next().unwrap();
+            }
+            v2.push(e.clone());
+            prev = Some(e.clone());
+        }
+        self.evolution = v2;
     }
 
     pub fn fill_in_state_days(&mut self) {
