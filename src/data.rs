@@ -149,7 +149,7 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
             government:s.government,
             allegiance:s.allegiance,
             evolution:vec![],
-            color:"rgba(255, 99, 132, 0.2)".into(),
+            color:"".into(),
         }
     }
 }

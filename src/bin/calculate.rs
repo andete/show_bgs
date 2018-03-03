@@ -47,13 +47,27 @@ fn main() {
             }
         }
     }
+    let mut faction_colors = HashMap::new();
+    faction_colors.insert("The Order of Mobius", "black");
+    // TODO: try and keep colors for the same factions
     for system in &mut systems.values_mut() {
-        let colors = vec!["red", "blue", "green", "black", "cyan", "orange", "pink", "grey"];
-        let mut it = colors.into_iter();
         for faction in &mut system.factions.values_mut() {
             faction.cleanup_evolution();
             faction.fill_in_state_days();
-            faction.color = it.next().unwrap().into();
+        }
+        let mut colors:BTreeSet<&str> = vec!["red", "blue", "green", "cyan", "orange", "pink", "grey", "black"].into_iter().collect();
+        // first fill in using registered colors:
+        for faction in &mut system.factions.values_mut() {
+            if let Some(color) = faction_colors.get(faction.name.as_str()) {
+                faction.color = (*color).into();
+                colors.remove(color);
+            }
+        }
+        let mut it = colors.into_iter();
+        for faction in &mut system.factions.values_mut() {
+            if faction.color.is_empty() {
+                faction.color = it.next().unwrap().into();
+            }
         }
     }
 

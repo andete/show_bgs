@@ -83,8 +83,15 @@
           <h1 class="post-title">Joost Yervante Damad</h1>
           </header>
           -->
+      <p>
+      jump to: 
       {% for system in systems %}
-      <h2>{{system.name}}</h2>
+      <a href="#{{system.name}}">{{system.name}}</a>
+      {% endfor %}
+      </p>
+      
+      {% for system in systems %}
+      <h2 id="#{{system.name}}">{{system.name}}</h2>
       <p>population: {{system.population}}</p>
 
       <canvas id="{{system.name}}" width="640" height="400"></canvas>
