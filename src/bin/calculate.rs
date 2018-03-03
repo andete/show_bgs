@@ -47,19 +47,19 @@ fn main() {
             }
         }
     }
-    let mut faction_colors = HashMap::new();
-    faction_colors.insert("The Order of Mobius", "black");
-    // TODO: try and keep colors for the same factions
+    let mut faction_colors:HashMap<String,String> = HashMap::new();
+    faction_colors.insert("The Order of Mobius".into(), "black".into());
+    
     for system in &mut systems.values_mut() {
         for faction in &mut system.factions.values_mut() {
             faction.cleanup_evolution();
             faction.fill_in_state_days();
         }
-        let mut colors:BTreeSet<&str> = vec!["red", "blue", "green", "cyan", "orange", "pink", "grey", "black"].into_iter().collect();
+        let mut colors:BTreeSet<String> = vec!["red", "blue", "green", "cyan", "orange", "pink", "grey", "black"].into_iter().map(|x| x.into()).collect();
         // first fill in using registered colors:
         for faction in &mut system.factions.values_mut() {
-            if let Some(color) = faction_colors.get(faction.name.as_str()) {
-                faction.color = (*color).into();
+            if let Some(color) = faction_colors.get(&faction.name) {
+                faction.color = color.clone();
                 colors.remove(color);
             }
         }
@@ -67,6 +67,7 @@ fn main() {
         for faction in &mut system.factions.values_mut() {
             if faction.color.is_empty() {
                 faction.color = it.next().unwrap().into();
+                faction_colors.insert(faction.name.clone(), faction.color.clone());
             }
         }
     }
@@ -75,6 +76,8 @@ fn main() {
     let f = File::create(&n).unwrap();
     let mut s2:Vec<System> = systems.into_iter().map(|(_,v)| v).collect();
     s2.sort_by(|a,b| a.name.cmp(&b.name));
+    
+    // this assumes the first faction in the list has all dates... :(
     let dates = s2[0].factions.iter().next().unwrap().1.evolution.iter().map(|e| format!("{}", e.date.format("%d/%m"))).collect();
     let systems = Systems {
         systems: s2,
