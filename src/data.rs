@@ -170,6 +170,27 @@ impl From <ebgsv4::EBGSStateV4> for FactionState {
     }
 }
 
+fn update_states(states:&mut Vec<FactionState>, h:&mut HashMap<State,u8>) {
+    let mut seen = HashSet::new();
+    for state in states {
+        seen.insert(state.state);
+        if !h.contains_key(&state.state) {
+            h.insert(state.state, 1);
+            state.state_day = 1;
+        } else {
+            let n = h.get(&state.state).unwrap() + 1;
+            h.insert(state.state, n);
+            state.state_day = n;
+        }
+    }
+    let keys:Vec<State> = h.keys().cloned().collect();
+    for k in keys {
+        if !seen.contains(&k) {
+            h.remove(&k);
+        }
+    }
+}
+
 impl Faction {
     pub fn cleanup_evolution(&mut self) {
         let mut prev_date = None;
@@ -199,43 +220,8 @@ impl Faction {
                 c += 1;
                 e.state_day = c;
             }
-            // TODO: get rid of code duplication for pending and recovery
-            let mut pending_seen = HashSet::new();
-            for state in &mut e.pending_states {
-                pending_seen.insert(state.state);
-                if !pending_states.contains_key(&state.state) {
-                    pending_states.insert(state.state, 1);
-                    state.state_day = 1;
-                } else {
-                    let n = pending_states.get(&state.state).unwrap() + 1;
-                    pending_states.insert(state.state, n);
-                    state.state_day = n;
-                }
-            }
-            let keys:Vec<State> = pending_states.keys().cloned().collect();
-            for k in keys {
-                if !pending_seen.contains(&k) {
-                    pending_states.remove(&k);
-                }
-            }
-            let mut recovery_seen = HashSet::new();
-            for state in &mut e.recovering_states {
-                recovery_seen.insert(state.state);
-                if !recovery_states.contains_key(&state.state) {
-                    recovery_states.insert(state.state, 1);
-                    state.state_day = 1;
-                } else {
-                    let n = recovery_states.get(&state.state).unwrap() + 1;
-                    recovery_states.insert(state.state, n);
-                    state.state_day = n;
-                }
-            }
-            let keys:Vec<State> = recovery_states.keys().cloned().collect();
-            for k in keys {
-                if !recovery_seen.contains(&k) {
-                    recovery_states.remove(&k);
-                }
-            }
+            update_states(&mut e.pending_states, &mut pending_states);
+            update_states(&mut e.recovering_states, &mut recovery_states);
         }
     }
 }
