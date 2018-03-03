@@ -117,6 +117,7 @@ pub struct Faction {
 #[derive(Debug,Deserialize, Serialize, Clone)]
 pub struct FactionData {
     pub date:DateTime<Utc>,
+    pub label_date:String,
     pub influence:f64,
     pub state:State,
     pub state_day:u8,
@@ -158,6 +159,7 @@ impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
     fn from(h:ebgsv4::EBGSFactionHistoryV4) -> FactionData {
         FactionData {
             date:h.updated_at,
+            label_date:format!("{}", h.updated_at.format("%d/%m")),
             influence:h.influence,
             state:h.state,
             state_day:0,

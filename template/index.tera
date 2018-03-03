@@ -108,11 +108,15 @@ var myChart = new Chart(ctx, {
 datasets: [
 {% for name, faction in system.factions %}
 {
+            spanGaps: true,
             fill: false,
             label: '{{name | addslashes}}',
 data: [
 {% for data in faction.evolution %}
-{{ data.influence * 100 }},
+{
+x: '{{data.label_date }}',
+y: {{ data.influence * 100 }}
+},
 {% endfor %}
 ],
 backgroundColor: '{{ faction.color }}',

@@ -76,9 +76,17 @@ fn main() {
     let f = File::create(&n).unwrap();
     let mut s2:Vec<System> = systems.into_iter().map(|(_,v)| v).collect();
     s2.sort_by(|a,b| a.name.cmp(&b.name));
+
+    let mut dates = BTreeSet::new();
+    for system in &s2 {
+        for faction in system.factions.values() {
+            for e in &faction.evolution {
+                dates.insert(e.date.date());
+            }
+        }
+    }
     
-    // this assumes the first faction in the list has all dates... :(
-    let dates = s2[0].factions.iter().next().unwrap().1.evolution.iter().map(|e| format!("{}", e.date.format("%d/%m"))).collect();
+    let dates = dates.iter().map(|e| format!("{}", e.format("%d/%m"))).collect();
     let systems = Systems {
         systems: s2,
         dates:dates,
