@@ -53,6 +53,8 @@ fn main() {
             faction.fill_in_state_days();
         }
     }
-    
-    info!("Exioce: {}", serde_json::to_string_pretty(systems.get("Exioce").unwrap()).unwrap());
+
+    let n = format!("{}/report.json", datadir);
+    let f = File::create(&n).unwrap();
+    serde_json::to_writer_pretty(&f, &systems).unwrap();
 }
