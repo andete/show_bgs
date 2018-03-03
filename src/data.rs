@@ -199,6 +199,7 @@ impl Faction {
                 c += 1;
                 e.state_day = c;
             }
+            // TODO: get rid of code duplication for pending and recovery
             let mut pending_seen = HashSet::new();
             for state in &mut e.pending_states {
                 pending_seen.insert(state.state);
