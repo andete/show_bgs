@@ -48,9 +48,12 @@ fn main() {
         }
     }
     for system in &mut systems.values_mut() {
+        let colors = vec!["red", "blue", "green", "black", "cyan", "orange", "pink", "grey"];
+        let mut it = colors.into_iter();
         for faction in &mut system.factions.values_mut() {
             faction.cleanup_evolution();
             faction.fill_in_state_days();
+            faction.color = it.next().unwrap().into();
         }
     }
 
@@ -58,8 +61,10 @@ fn main() {
     let f = File::create(&n).unwrap();
     let mut s2:Vec<System> = systems.into_iter().map(|(_,v)| v).collect();
     s2.sort_by(|a,b| a.name.cmp(&b.name));
+    let dates = s2[0].factions.iter().next().unwrap().1.evolution.iter().map(|e| format!("{}", e.date.format("%d/%m"))).collect();
     let systems = Systems {
         systems: s2,
+        dates:dates,
     };
     serde_json::to_writer_pretty(&f, &systems).unwrap();
 }

@@ -8,7 +8,6 @@ extern crate serde_json;
 #[macro_use]
 extern crate tera;
 
-use std::collections::HashMap;
 use std::fs::File;
 use std::io::Write;
 use show_bgs::data::*;

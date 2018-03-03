@@ -93,6 +93,7 @@ pub enum Economy {
 #[derive(Debug,Deserialize, Serialize)]
 pub struct Systems {
     pub systems: Vec<System>,
+    pub dates: Vec<String>,
 }
 
 #[derive(Debug,Deserialize, Serialize)]
@@ -109,6 +110,7 @@ pub struct Faction {
     pub government:GovernmentFaction,
     pub allegiance:Allegiance,
     pub evolution:Vec<FactionData>,
+    pub color:String,
 }
 
 // faction data (for in a specific system)
@@ -147,6 +149,7 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
             government:s.government,
             allegiance:s.allegiance,
             evolution:vec![],
+            color:"rgba(255, 99, 132, 0.2)".into(),
         }
     }
 }
