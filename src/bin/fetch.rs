@@ -23,7 +23,9 @@ fn main() {
 
     let now = Utc::now().timestamp()*1000;
     info!("now: {}", now);
-    
+
+    let mut dates = BTreeSet::new();
+    let mut system_dates = Vec::new();
     for system in &systems {
         let url = format!("{}systems?name={}&timemax={}", show_bgs::BASE_URL, system, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
@@ -32,6 +34,8 @@ fn main() {
         let json:show_bgs::ebgsv4::EBGSSystemsPageV4 = serde_json::from_str(&res).unwrap();
         info!("{:?}", json);
         serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
+        dates.insert(json.docs[0].updated_at.date());
+        system_dates.push((system, json.docs[0].updated_at.date()));
         for faction in &json.docs[0].factions {
             minor_factions.insert(faction.name.clone());
         }
@@ -41,6 +45,16 @@ fn main() {
             }
         }
     }
+
+    let day = dates.iter().max().unwrap();
+    info!("Current BGS day: {}", day);
+    for &(system,date) in &system_dates {
+        if *day != date {
+            warn!("System is not up to date: {}", system);
+        }
+    }
+    // TODO report systems with missing data for today
+    
     info!("Minor factions involved: {:?}", minor_factions);  
     let n = format!("{}/minor_factions.json", datadir);
     let f = File::create(&n).unwrap();
