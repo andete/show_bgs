@@ -30,6 +30,44 @@ pub enum State {
     Retreat,
 }
 
+impl State {
+    fn max_length(&self) -> u8 {
+        match *self {
+            State::None => 0,
+            State::Expansion => 6,
+            State::War => 21,
+            State::CivilWar => 21,
+            State::Election => 5,
+            State::Boom => 28,
+            State::Bust => 28,
+            State::CivilUnrest => 7,
+            State::Famine => 28,
+            State::Outbreak => 28,
+            State::Lockdown => 14,
+            State::Investment => 5,
+            State::Retreat => 5,
+        }
+    }
+
+    fn recovery(&self) -> u8 {
+        match *self {
+            State::None => 0,
+            State::Expansion => 2,
+            State::War => 1,
+            State::CivilWar => 1,
+            State::Election => 2,
+            State::Boom => 3,
+            State::Bust => 3,
+            State::CivilUnrest => 3,
+            State::Famine => 7,
+            State::Outbreak => 8,
+            State::Lockdown => 1,
+            State::Investment => 1,
+            State::Retreat => 1,
+        }
+    }
+}
+
 // for systems
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 pub enum Government {
@@ -98,6 +136,8 @@ pub struct Systems {
     pub systems: Vec<System>,
     pub dates: Vec<String>,
     pub dates10: Vec<String>,
+    pub warnings: Vec<String>,
+    pub bgs_day: String,
 }
 
 #[derive(Debug,Deserialize, Serialize)]
@@ -126,6 +166,7 @@ pub struct FactionData {
     pub influence:f64,
     pub state:State,
     pub state_day:u8,
+    pub state_max_length:u8,
     pub pending_states:Vec<FactionState>,
     pub recovering_states:Vec<FactionState>,
 }
@@ -133,6 +174,7 @@ pub struct FactionData {
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct FactionState {
     pub state:State,
+    pub state_recovery_length:u8,
     pub trend:i64,
     pub trend_display:String,
     pub state_day:u8,
@@ -170,6 +212,7 @@ impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
             influence:h.influence,
             state:h.state,
             state_day:0,
+            state_max_length:h.state.max_length(),
             pending_states:h.pending_states.into_iter().map(|s| s.into()).collect(),
             recovering_states:h.recovering_states.into_iter().map(|s| s.into()).collect(),
         }
@@ -190,6 +233,7 @@ impl From <ebgsv4::EBGSStateV4> for FactionState {
             trend:s.trend,
             trend_display:d,
             state_day:0,
+            state_recovery_length:s.state.recovery(),
         }
     }
 }

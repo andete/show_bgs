@@ -17,19 +17,33 @@ use show_bgs::data::*;
 fn main() {
     badlog::minimal(Some("INFO"));
     info!("Calculating data");
+    let mut warnings = vec![];
     let system_names = show_bgs::read_config();
     info!("systems to handle: {:?}", system_names);
     let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
     let mut systems = HashMap::new();
+    let mut dates = BTreeSet::new();
+    let mut system_dates = Vec::new();
     for system_name in &system_names {
         info!("Looking at {}...", system_name);
         let n = format!("{}/systems/{}.json", datadir, system_name);
         let f = File::open(&n).unwrap();
         let s:ebgsv4::EBGSSystemsV4 = serde_json::from_reader(&f).unwrap();
+        dates.insert(s.bgs_day());
+        system_dates.push((system_name, s.bgs_day()));
         let system:System = s.into();
         systems.insert(system_name.clone(), system);
     }
-    info!("systems: {:?}", systems);
+    // info!("systems: {:?}", systems);
+
+    let bgs_day = dates.iter().max().unwrap().clone();
+    info!("Current BGS day: {}", bgs_day);
+    for &(system,date) in &system_dates {
+        if bgs_day != date {
+            warn!("System is not up to date: {}: {} {}", system, bgs_day, date);
+            //warnings.push(format!("System is not up to date: {}", system));
+        }
+    }
 
     let n = format!("{}/minor_factions.json", datadir);
     let f = File::open(&n).unwrap();
@@ -39,6 +53,15 @@ fn main() {
         let n = format!("{}/factions/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
         let factionv4:ebgsv4::EBGSFactionsV4 = serde_json::from_reader(&f).unwrap();
+        for system in factionv4.systems() {
+            if !system_names.contains(&system) {
+                continue;
+            }
+            if factionv4.bgs_day(&system) != bgs_day {
+                warn!("Faction {} is not up to date in {}: {} {}", minor_faction_name, system, bgs_day, factionv4.bgs_day(&system));
+                warnings.push(format!("Faction {} is not up to date in {}", minor_faction_name, system));
+            }
+        }
         let faction_template:Faction = (&factionv4).into();
         for history in factionv4.history {
             // could be that the system is not in our system list...
@@ -98,6 +121,8 @@ fn main() {
         systems: s2,
         dates:dates2,
         dates10:dates10,
+        warnings:warnings,
+        bgs_day:format!("{}", bgs_day.format("%d/%m")),
     };
     serde_json::to_writer_pretty(&f, &systems).unwrap();
 }

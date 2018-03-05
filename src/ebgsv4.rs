@@ -1,5 +1,7 @@
-use chrono::{DateTime,Utc};
+use chrono::{Date,DateTime,Utc};
 use data::*;
+
+use std::collections::BTreeSet;
 
 #[derive(Debug,Deserialize)]
 pub struct EBGSPageV4<T> {
@@ -24,6 +26,22 @@ pub struct EBGSFactionsV4 {
     pub faction_presence:Vec<EBGSFactionPresenceV4>,
     pub allegiance:Allegiance,
     pub history:Vec<EBGSFactionHistoryV4>,
+}
+
+impl EBGSFactionsV4 {
+    pub fn bgs_day(&self, system:&str) -> Date<Utc> {
+        let mut dates = BTreeSet::new();
+        for h in &self.history {
+            if &h.system == system {
+                dates.insert(h.updated_at.date());
+            }
+        }
+        dates.iter().max().unwrap().clone()
+    }
+
+    pub fn systems(&self) -> Vec<String> {
+        self.faction_presence.iter().map(|x| x.system_name.clone()).collect()
+    }
 }
 
 #[derive(Debug,Deserialize, Serialize)]
@@ -75,6 +93,17 @@ pub struct EBGSSystemsV4 {
     pub factions: Vec<EBGSSystemPresenceV4>,
     pub history: Vec<EBGSSystemHistoryV4>,
 }
+
+impl EBGSSystemsV4 {
+    pub fn bgs_day(&self) -> Date<Utc> {
+        let mut dates = BTreeSet::new();
+        for h in &self.history {
+            dates.insert(h.updated_at.date());
+        }
+        dates.iter().max().unwrap().clone()
+    }
+}
+
 
 #[derive(Debug,Deserialize, Serialize)]
 pub struct EBGSSystemPresenceV4 {

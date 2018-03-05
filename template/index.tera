@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>The Order of Mobius - BGS</title>
+    <title>The Order of Mobius - BGS - {{bgs_day}}</title>
     <meta name="viewport" content="width=device-width">
 <meta charset="utf-8">
 <!-- Bootstrap -->
@@ -41,7 +41,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
-    <a class="navbar-brand" href=".">The Order of Mobius - BGS</a>
+    <a class="navbar-brand" href=".">The Order of Mobius - BGS - {{bgs_day}}</a>
 
     <button class="navbar-toggler"
             type="button"
@@ -83,6 +83,11 @@
           <h1 class="post-title">Joost Yervante Damad</h1>
           </header>
           -->
+      <p style="color: red;"><b>
+        {% for warning in warnings %}
+        Warning: {{warning}}<br/>
+        {% endfor %}
+      </b></p>
       <p>
       jump to: 
       {% for system in systems %}
@@ -115,7 +120,7 @@ data: [
 {% for data in faction.evolution %}
 {
 x: '{{data.label_date }}',
-y: {{ data.influence * 100 }}
+y: {{ data.influence * 100 | round(method="ceil", precision=2) }}
 },
 {% endfor %}
 ],
@@ -138,29 +143,42 @@ borderColor: '{{ faction.color }}',
 });
       </script>
 
-      <!--
       {% for name, faction in system.factions %}
-      <h3>{{faction.name}}</h3>
-      {% endfor %}
-      -->
+      <h3>{{ name }}</h3>
       <table style="font-size: 70%;">
         <tr>
-          <th>Faction</th>
           <th></th>
           {% for date in dates10 %}
           <th>{{date}}</th>
           {% endfor %}
         </tr>
-        {% for name, faction in system.factions %}
         <tr>
-          <td nowrap><i>{{ name }}</i></td>
-          <td>state:</td>
+          <td>inf:</td>
           {% for data in faction.evolution10 %}
-          <td nowrap>{{ data.state }}/{{ data.state_day }}</td>
+          <td nowrap>{{ data.influence * 100 | round(method="ceil", precision=2) }}</td>
           {% endfor %}
         </tr>
         <tr>
-          <td></td>
+          <td>recovery:</td>
+          {% for data in faction.evolution10 %}
+          <td nowrap>
+            {% for r in data.recovering_states %}
+            {{ r.state }} ({{ r.state_day }}/{{ r.state_recovery_length }}) {{ r.trend_display }}<br/>
+            {% endfor %}
+          </td>
+          {% endfor %}
+        </tr> 
+        <tr>
+          <td>state:</td>
+          {% for data in faction.evolution10 %}
+          {% if data.state == "none" %}
+          <td nowrap>{{ data.state }} ({{ data.state_day }})</td>
+          {% else %}
+          <td nowrap>{{ data.state }} ({{ data.state_day }}/{{ data.state_max_length }})</td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+        <tr>
           <td>pending:</td>
           {% for data in faction.evolution10 %}
           <td nowrap>
@@ -170,21 +188,10 @@ borderColor: '{{ faction.color }}',
           </td>
           {% endfor %}
         </tr>
-        <tr>
-          <td></td>
-          <td>recovery:</td>
-          {% for data in faction.evolution10 %}
-          <td nowrap>
-            {% for r in data.recovering_states %}
-            {{ r.state }}/{{ r.state_day }} {{ r.trend_display }}<br/>
-            {% endfor %}
-          </td>
-          {% endfor %}
-        </tr>
-        {% endfor %}
       </table>
+      {% endfor %}<!-- factions -->
       
-      {% endfor %}
+      {% endfor %}<!-- systems -->
     </article>
     
     <footer class="container text-center my-2">
