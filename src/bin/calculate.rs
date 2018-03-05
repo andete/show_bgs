@@ -18,7 +18,7 @@ fn main() {
     badlog::minimal(Some("INFO"));
     info!("Calculating data");
     let mut warnings = vec![];
-    let system_names = show_bgs::read_config();
+    let system_names = show_bgs::read_config().systems();
     info!("systems to handle: {:?}", system_names);
     let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
     let mut systems = HashMap::new();
@@ -29,8 +29,10 @@ fn main() {
         let n = format!("{}/systems/{}.json", datadir, system_name);
         let f = File::open(&n).unwrap();
         let s:ebgsv4::EBGSSystemsV4 = serde_json::from_reader(&f).unwrap();
-        dates.insert(s.bgs_day());
-        system_dates.push((system_name, s.bgs_day()));
+        if let Some(d) = s.bgs_day() {
+            dates.insert(d);
+            system_dates.push((system_name, d));
+        }
         let system:System = s.into();
         systems.insert(system_name.clone(), system);
     }
@@ -45,6 +47,7 @@ fn main() {
         }
     }
 
+    let mut global_factions = HashMap::new();
     let n = format!("{}/minor_factions.json", datadir);
     let f = File::open(&n).unwrap();
     let minor_faction_names:BTreeSet<String> = serde_json::from_reader(&f).unwrap();
@@ -53,6 +56,8 @@ fn main() {
         let n = format!("{}/factions/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
         let factionv4:ebgsv4::EBGSFactionsV4 = serde_json::from_reader(&f).unwrap();
+        let fgs:FactionGlobalState = (&factionv4).into();
+        global_factions.insert(minor_faction_name.clone(), fgs);
         for system in factionv4.systems() {
             if !system_names.contains(&system) {
                 continue;
@@ -90,6 +95,19 @@ fn main() {
             faction.cleanup_evolution(&dates_vec);
             faction.fill_in_state_days();
             faction.fill_in_evolution10();
+            faction.global = global_factions.get(&faction.name).map(|x| x.clone());
+            // remove systemname from global if it is the local system
+            if let Some(ref mut gl) = faction.global {
+                let mut go = false;
+                if let Some(ref mut s2) = gl.state_system {
+                    if s2 == &system.name {
+                        go = true;
+                    }
+                }
+                if go {
+                    gl.state_system = None;
+                }
+            }
         }
         let mut colors:BTreeSet<String> = vec!["red", "blue", "green", "cyan", "orange", "pink", "grey", "black"].into_iter().map(|x| x.into()).collect();
         // first fill in using registered colors:
@@ -110,8 +128,12 @@ fn main() {
 
     let n = format!("{}/report.json", datadir);
     let f = File::create(&n).unwrap();
-    let mut s2:Vec<System> = systems.into_iter().map(|(_,v)| v).collect();
-    s2.sort_by(|a,b| a.name.cmp(&b.name));
+
+    // order by order in Config
+    let mut s2:Vec<System> = vec![];
+    for name in &system_names {
+        s2.push(systems.remove(name).unwrap())
+    }
 
     let dates:Vec<String> = dates.iter().map(|e| format!("{}", e.format("%d/%m"))).collect();
     let dates2 = dates.clone();
@@ -123,6 +145,7 @@ fn main() {
         dates10:dates10,
         warnings:warnings,
         bgs_day:format!("{}", bgs_day.format("%d/%m")),
+        factions:global_factions,
     };
     serde_json::to_writer_pretty(&f, &systems).unwrap();
 }

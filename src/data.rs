@@ -66,6 +66,55 @@ impl State {
             State::Retreat => 1,
         }
     }
+    
+    fn pending(&self) -> u8 {
+        match *self {
+            State::None => 0,
+            State::Expansion => 5,
+            State::War => 3,
+            State::CivilWar => 3,
+            State::Election => 3,
+            State::Boom => 1,
+            State::Bust => 2,
+            State::CivilUnrest => 1,
+            State::Famine => 2,
+            State::Outbreak => 1,
+            State::Lockdown => 1,
+            State::Investment => 0,
+            State::Retreat => 1,
+        }
+    }
+
+    fn danger(&self) -> bool {
+        match *self {
+            State::Expansion => true,
+            State::Investment => true,
+            State::Retreat => true,
+            _ => false,
+        }
+    }
+
+    fn pending_danger(&self) -> bool {
+        match *self {
+            State::Expansion => true,
+            State::Investment => true,
+            State::Retreat => true,
+            _ => false,
+        }
+    }
+
+    pub fn is_single_system_state(&self) -> bool {
+        match *self {
+            State::Boom => false,
+            State::Bust => false,
+            State::CivilUnrest => false,
+            State::Outbreak => false,
+            State::Famine => false,
+            State::Lockdown => false,
+            State::None => false,
+            _ => true,
+        }
+    }
 }
 
 // for systems
@@ -79,6 +128,8 @@ pub enum Government {
     Patronage,
     #[serde(rename = "$government_democracy;")]
     Democracy,
+    #[serde(rename = "$government_dictatorship;")]
+    Dictatorship,
     // TODO: add more as needed
 }
 
@@ -130,6 +181,8 @@ pub enum Economy {
     Tourism,
     #[serde(rename = "$economy_hightech;")]
     HighTech,
+    #[serde(rename = "$economy_terraforming;")]
+    Terraforming,
 }
 #[derive(Debug,Deserialize, Serialize)]
 pub struct Systems {
@@ -138,6 +191,7 @@ pub struct Systems {
     pub dates10: Vec<String>,
     pub warnings: Vec<String>,
     pub bgs_day: String,
+    pub factions: HashMap<String, FactionGlobalState>,
 }
 
 #[derive(Debug,Deserialize, Serialize)]
@@ -155,7 +209,20 @@ pub struct Faction {
     pub allegiance:Allegiance,
     pub evolution:Vec<FactionData>,
     pub evolution10:Vec<FactionData>,
+    pub global:Option<FactionGlobalState>,
     pub color:String,
+}
+
+#[derive(Debug,Deserialize, Serialize, Clone)]
+pub struct FactionGlobalState {
+    pub name:String,
+    pub government:GovernmentFaction,
+    pub allegiance:Allegiance,
+    pub state:State,
+    pub state_day:Option<u8>,
+    pub state_max_length:u8,
+    pub state_danger:bool,
+    pub state_system:Option<String>,
 }
 
 // faction data (for in a specific system)
@@ -167,6 +234,7 @@ pub struct FactionData {
     pub state:State,
     pub state_day:u8,
     pub state_max_length:u8,
+    pub state_danger:bool,
     pub pending_states:Vec<FactionState>,
     pub recovering_states:Vec<FactionState>,
 }
@@ -175,9 +243,11 @@ pub struct FactionData {
 pub struct FactionState {
     pub state:State,
     pub state_recovery_length:u8,
+    pub state_pending_length:u8,
     pub trend:i64,
     pub trend_display:String,
     pub state_day:u8,
+    pub state_pending_danger:bool,
 }
 
 impl From<ebgsv4::EBGSSystemsV4> for System {
@@ -200,6 +270,23 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
             evolution:vec![],
             evolution10:vec![],
             color:"".into(),
+            global:None,
+        }
+    }
+}
+
+impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for FactionGlobalState {
+    fn from(s:&'a ebgsv4::EBGSFactionsV4) -> FactionGlobalState {
+        let (state, system) = s.faction_state();
+        FactionGlobalState {
+            name:s.name.clone(),
+            government:s.government,
+            allegiance:s.allegiance,
+            state:state,
+            state_system:system,
+            state_day:None,
+            state_max_length:state.max_length(),
+            state_danger:state.danger(),
         }
     }
 }
@@ -215,6 +302,7 @@ impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
             state_max_length:h.state.max_length(),
             pending_states:h.pending_states.into_iter().map(|s| s.into()).collect(),
             recovering_states:h.recovering_states.into_iter().map(|s| s.into()).collect(),
+            state_danger:h.state.danger(),
         }
     }
 }
@@ -234,6 +322,8 @@ impl From <ebgsv4::EBGSStateV4> for FactionState {
             trend_display:d,
             state_day:0,
             state_recovery_length:s.state.recovery(),
+            state_pending_length:s.state.pending(),
+            state_pending_danger:s.state.pending_danger(),
         }
     }
 }

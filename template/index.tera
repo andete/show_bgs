@@ -144,7 +144,22 @@ borderColor: '{{ faction.color }}',
       </script>
 
       {% for name, faction in system.factions %}
-      <h3>{{ name }}</h3>
+      <h4>{{ name }}</h4>
+      <p>
+        {% if faction.global.state_day %}
+        Day {{ faction.global.state_day }} of {{ faction.global.state_max_length }} of
+        {% endif %}
+        {% if faction.global.state_danger %}
+        <span style="color:red;"><b>
+        {% endif %}
+        {{ faction.global.state }}
+        {% if faction.global.state_danger %}
+        </b></span>
+        {% endif %}
+        {% if faction.global.state_system %}
+        in {{ faction.global.state_system }}
+        {% endif %}
+      </p>
       <table style="font-size: 70%;">
         <tr>
           <th></th>
@@ -183,7 +198,7 @@ borderColor: '{{ faction.color }}',
           {% for data in faction.evolution10 %}
           <td nowrap>
             {% for p in data.pending_states %}
-            {{ p.state }}/{{ p.state_day }} {{ p.trend_display }}<br/>
+            {{ p.state }} ({{ p.state_day }}/{{p.state_pending_length}}) {{ p.trend_display }}<br/>
             {% endfor %}
           </td>
           {% endfor %}

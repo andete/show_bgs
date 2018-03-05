@@ -42,6 +42,34 @@ impl EBGSFactionsV4 {
     pub fn systems(&self) -> Vec<String> {
         self.faction_presence.iter().map(|x| x.system_name.clone()).collect()
     }
+
+    pub fn last_state_in_system(&self, system:&str) -> State {
+        let mut state = State::None;
+        let mut date = None;
+        for h in &self.history {
+            if &h.system == system {
+                if Some(h.updated_at) != date {
+                    state = h.state;
+                    date = Some(h.updated_at);
+                }
+            }
+        }
+        state
+    }
+
+    // TODO: this doesn't work correctly if some data is dated
+    pub fn faction_state(&self) -> (State,Option<String>) {
+        let mut p_state = State::None;
+        for system in self.systems() {
+            let state = self.last_state_in_system(&system);
+            info!("XXX {} {} {:?}", self.name, system, state);
+            if state.is_single_system_state() {
+                return (state, Some(system))
+            }
+            p_state = state;
+        }
+        (p_state, None)
+    }
 }
 
 #[derive(Debug,Deserialize, Serialize)]
@@ -95,12 +123,12 @@ pub struct EBGSSystemsV4 {
 }
 
 impl EBGSSystemsV4 {
-    pub fn bgs_day(&self) -> Date<Utc> {
+    pub fn bgs_day(&self) -> Option<Date<Utc>> {
         let mut dates = BTreeSet::new();
         for h in &self.history {
             dates.insert(h.updated_at.date());
         }
-        dates.iter().max().unwrap().clone()
+        dates.iter().max().map(|x| x.clone())
     }
 }
 

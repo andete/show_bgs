@@ -15,7 +15,7 @@ fn main() {
     badlog::minimal(Some("INFO"));
     info!("Fetching system info for last 7 days");
     info!("and discovering minor factions");
-    let systems = show_bgs::read_config();
+    let systems = show_bgs::read_config().systems();
     info!("systems: {:?}", systems);
     let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
     let client = reqwest::Client::new();
