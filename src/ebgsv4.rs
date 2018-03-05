@@ -22,6 +22,7 @@ pub struct EBGSFactionsV4 {
     pub name:String,
     pub _id:String,
     pub name_lower:String,
+    //pub is_player_faction:bool,
     pub updated_at:DateTime<Utc>,
     pub faction_presence:Vec<EBGSFactionPresenceV4>,
     pub allegiance:Allegiance,
