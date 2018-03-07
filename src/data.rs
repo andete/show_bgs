@@ -3,6 +3,8 @@ use ebgsv4;
 
 use std::collections::{BTreeMap,HashMap,HashSet};
 
+use serde::de::{Deserialize, Deserializer};
+
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
 pub enum Allegiance {
@@ -12,7 +14,7 @@ pub enum Allegiance {
     Empire,
 }
 
-#[derive(Debug,Deserialize, Serialize, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Serialize, Clone, Copy, PartialEq, Eq, Hash)]
 #[serde(rename_all = "lowercase")]
 pub enum State {
     None,
@@ -429,5 +431,29 @@ impl Faction {
 
     pub fn fill_in_evolution10(&mut self) {
         self.evolution10 = self.evolution.as_slice().windows(10).last().unwrap().to_vec();
+    }
+}
+
+impl<'de> Deserialize<'de> for State {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?.to_lowercase();
+        let state = match s.as_str() {
+            "expansion" => State::Expansion,
+            "war" => State::War,
+            "civil unrest" | "civilunrest" => State::CivilUnrest,
+            "civil war" | "civilwar" => State::CivilWar,
+            "election" => State::Election,
+            "boom" => State::Boom,
+            "bust" => State::Bust,
+            "famine" => State::Famine,
+            "lockdown" => State::Lockdown,
+            "investment" => State::Investment,
+            "retreat" => State::Retreat,
+            _ => State::None,
+        };
+        Ok(state)
     }
 }

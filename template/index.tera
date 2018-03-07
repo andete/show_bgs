@@ -189,7 +189,14 @@ borderColor: '{{ faction.color }}',
           {% if data.state == "none" %}
           <td nowrap>{{ data.state }} ({{ data.state_day }})</td>
           {% else %}
-          <td nowrap>{{ data.state }} ({{ data.state_day }}/{{ data.state_max_length }})</td>
+          <td nowrap>
+            {% if data.state_danger %}
+            <span style="color:red;"><b>
+            {% endif %}
+            {{ data.state }} ({{ data.state_day }}/{{ data.state_max_length }})</td>
+            {% if data.state_danger %}
+            </b></span>
+            {% endif %}
           {% endif %}
           {% endfor %}
         </tr>
@@ -198,7 +205,13 @@ borderColor: '{{ faction.color }}',
           {% for data in faction.evolution10 %}
           <td nowrap>
             {% for p in data.pending_states %}
+            {% if p.state_pending_danger %}
+            <span style="color:red;"><b>
+            {% endif %}
             {{ p.state }} ({{ p.state_day }}/{{p.state_pending_length}}) {{ p.trend_display }}<br/>
+            {% if p.state_pending_danger %}
+            </b></span>
+            {% endif %}
             {% endfor %}
           </td>
           {% endfor %}

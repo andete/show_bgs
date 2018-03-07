@@ -27,7 +27,7 @@ fn main() {
     let mut dates = BTreeSet::new();
     let mut system_dates = Vec::new();
     for system in &systems {
-        let url = format!("{}systems?name={}&timemax={}", show_bgs::BASE_URL, system, now);
+        let url = format!("{}systems?name={}&timemax={}", show_bgs::EBGSV4_URL, system, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
         let n = format!("{}/systems/{}.json", datadir, system);
         let mut f = File::create(&n).unwrap();

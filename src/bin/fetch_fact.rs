@@ -26,7 +26,16 @@ fn main() {
  
     for faction in &minor_factions {
         info!("Faction: {}", faction);
-        let url = format!("{}factions?name={}&timemin={}&timemax={}", show_bgs::BASE_URL, faction, then, now);
+        // first fetch eddb data
+        let url = format!("{}factions?name={}", show_bgs::EDDBV3_URL, faction);
+        let res = client.get(&url).send().unwrap().text().unwrap();
+        let json:show_bgs::eddbv3::FactionPage = serde_json::from_str(&res).unwrap();
+        let n = format!("{}/factions/eddb/{}.json", datadir, faction);
+        let mut f = File::create(&n).unwrap();
+        serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
+
+        // then fetch ebgs data
+        let url = format!("{}factions?name={}&timemin={}&timemax={}", show_bgs::EBGSV4_URL, faction, then, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
         let json:show_bgs::ebgsv4::EBGSFactionsPageV4 = serde_json::from_str(&res).unwrap();
         let n = format!("{}/factions/{}.json", datadir, faction);
