@@ -1,7 +1,7 @@
 use chrono::{Date,DateTime,Utc};
 use ebgsv4;
 
-use std::collections::{HashMap,HashSet};
+use std::collections::{BTreeMap,HashMap,HashSet};
 
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
@@ -183,6 +183,8 @@ pub enum Economy {
     HighTech,
     #[serde(rename = "$economy_terraforming;")]
     Terraforming,
+    #[serde(rename = "$economy_refinery;")]
+    Refinery,
 }
 #[derive(Debug,Deserialize, Serialize)]
 pub struct Systems {
@@ -353,16 +355,35 @@ fn update_states(states:&mut Vec<FactionState>, h:&mut HashMap<State,u8>) {
 
 impl Faction {
     pub fn cleanup_evolution(&mut self, dates:&Vec<Date<Utc>>) {
-        let mut prev_date = None;
-        let mut v = vec![];
+        
+        // only take first changed inf of a day
+        // or if all are the same it doesn't matter
+        
+        // build up a btreemap with a vec of datas per day
+        let mut b = BTreeMap::new();
         for e in &self.evolution {
             let date = e.date.date();
-            if Some(date) != prev_date {
-                v.push(e.clone());
-                prev_date = Some(date);
+            if !b.contains_key(&date) {
+                b.insert(date, vec![e.clone()]);
+            } else {
+                b.get_mut(&date).unwrap().push(e.clone())
             }
-            
         }
+
+        // then take the first inf found for each day
+        // that is not equal to the previous day
+        let mut v = vec![];
+        let mut prev_inf = 0.0;
+        for (_day, values) in b {
+            for val in values {
+                if val.influence != prev_inf {
+                    v.push(val.clone());
+                    prev_inf = val.influence;
+                    break;
+                }
+            }
+        }
+        
         // also _insert_ in between days
         let mut di = dates.iter();
         let mut prev:Option<FactionData> = None;
