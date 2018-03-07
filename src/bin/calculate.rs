@@ -112,7 +112,7 @@ fn main() {
         for faction in &mut system.factions.values_mut() {
             faction.cleanup_evolution(&dates_vec);
             faction.fill_in_state_days();
-            faction.fill_in_evolution10();
+            faction.fill_in_evolution10(&dates_vec);
             faction.global = global_factions.get(&faction.name).map(|x| x.clone());
             // remove systemname from global if it is the local system
             if let Some(ref mut gl) = faction.global {

@@ -438,8 +438,15 @@ impl Faction {
         }
     }
 
-    pub fn fill_in_evolution10(&mut self) {
-        self.evolution10 = self.evolution.as_slice().windows(10).last().unwrap().to_vec();
+    pub fn fill_in_evolution10(&mut self, dates: &Vec<Date<Utc>>) {
+        let dates10 = dates.as_slice().windows(10).last().unwrap().to_vec();
+        let mut ev = vec![];
+        for e in &self.evolution {
+            if dates10.contains(&e.date.date()) {
+                ev.push(e.clone())
+            }
+        }
+        self.evolution10 = ev;
     }
 }
 
