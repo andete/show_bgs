@@ -1,5 +1,6 @@
 use chrono::{Date,DateTime,Utc};
 use ebgsv4;
+use eddbv3;
 
 use std::collections::{BTreeMap,HashMap,HashSet};
 
@@ -215,7 +216,7 @@ pub struct Faction {
     pub evolution10:Vec<FactionData>,
     pub global:Option<FactionGlobalState>,
     pub color:String,
-    //pub is_player_faction:bool,
+    pub eddb:Option<eddbv3::Faction>,
 }
 
 #[derive(Debug,Deserialize, Serialize, Clone)]
@@ -276,7 +277,7 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
             evolution10:vec![],
             color:"".into(),
             global:None,
-            //is_player_faction:s.is_player_faction,
+            eddb:None,
         }
     }
 }

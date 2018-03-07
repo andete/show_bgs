@@ -12,6 +12,7 @@ use std::collections::{BTreeSet,HashMap};
 use std::fs::File;
 // use std::io::Write;
 use show_bgs::ebgsv4;
+use show_bgs::eddbv3;
 use show_bgs::data::*;
 
 fn main() {
@@ -55,7 +56,10 @@ fn main() {
         info!("Looking at {}...", minor_faction_name);
         let n = format!("{}/factions/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
-        let factionv4:ebgsv4::EBGSFactionsV4 = serde_json::from_reader(&f).unwrap();
+        let mut factionv4:ebgsv4::EBGSFactionsV4 = serde_json::from_reader(&f).unwrap();
+        let n = format!("{}/factions/eddb/{}.json", datadir, minor_faction_name);
+        let f = File::open(&n).unwrap();
+        let faction_eddb:eddbv3::Faction = serde_json::from_reader(&f).unwrap();
         let fgs:FactionGlobalState = (&factionv4).into();
         global_factions.insert(minor_faction_name.clone(), fgs);
         for system in factionv4.systems() {
@@ -72,6 +76,7 @@ fn main() {
             // could be that the system is not in our system list...
             if let Some(system) = systems.get_mut(&history.system) {
                 let faction = system.factions.entry(faction_template.name.clone()).or_insert(faction_template.clone());
+                faction.eddb = Some(faction_eddb.clone());
                 let data:FactionData = history.into();
                 faction.evolution.push(data);
             }
