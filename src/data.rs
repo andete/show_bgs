@@ -4,7 +4,7 @@ use eddbv3;
 
 use std::collections::{BTreeMap,HashMap,HashSet};
 
-use serde::de::{Deserialize, Deserializer};
+use serde::de::{self, Deserialize, Deserializer};
 
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
@@ -469,7 +469,7 @@ impl<'de> Deserialize<'de> for State {
             "investment" => State::Investment,
             "retreat" => State::Retreat,
             "outbreak" => State::Outbreak,
-            _ => State::None,
+            other => { return Err(de::Error::custom(format!("Invalid state '{}'", other))); },
         };
         Ok(state)
     }
