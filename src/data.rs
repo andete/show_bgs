@@ -205,6 +205,7 @@ pub struct System {
     pub name:String,
     pub population: i64,
     pub factions:HashMap<String, Faction>,
+    pub warnings:Vec<String>,
 }
 
 #[derive(Debug,Deserialize, Serialize, Clone)]
@@ -217,6 +218,8 @@ pub struct Faction {
     pub global:Option<FactionGlobalState>,
     pub color:String,
     pub eddb:Option<eddbv3::Faction>,
+    pub at_home:bool,
+    pub controlling:bool,
 }
 
 #[derive(Debug,Deserialize, Serialize, Clone)]
@@ -243,6 +246,7 @@ pub struct FactionData {
     pub state_danger:bool,
     pub pending_states:Vec<FactionState>,
     pub recovering_states:Vec<FactionState>,
+    pub influence_danger:bool,
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
@@ -263,6 +267,7 @@ impl From<ebgsv4::EBGSSystemsV4> for System {
             name:s.name.clone(),
             population:s.population,
             factions:HashMap::new(),
+            warnings:vec![],
         }
     }
 }
@@ -278,6 +283,8 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
             color:"".into(),
             global:None,
             eddb:None,
+            at_home:false,
+            controlling:false,
         }
     }
 }
@@ -310,6 +317,7 @@ impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
             pending_states:h.pending_states.into_iter().map(|s| s.into()).collect(),
             recovering_states:h.recovering_states.into_iter().map(|s| s.into()).collect(),
             state_danger:h.state.danger(),
+            influence_danger:false,
         }
     }
 }
@@ -453,6 +461,7 @@ impl<'de> Deserialize<'de> for State {
             "lockdown" => State::Lockdown,
             "investment" => State::Investment,
             "retreat" => State::Retreat,
+            "outbreak" => State::Outbreak,
             _ => State::None,
         };
         Ok(state)

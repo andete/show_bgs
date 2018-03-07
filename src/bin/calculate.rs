@@ -18,7 +18,8 @@ use show_bgs::data::*;
 fn main() {
     badlog::minimal(Some("INFO"));
     info!("Calculating data");
-    let mut warnings = vec![];
+    let warnings = vec![];
+    let mut system_warnings = HashMap::new();
     let system_names = show_bgs::read_config().systems();
     info!("systems to handle: {:?}", system_names);
     let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
@@ -68,16 +69,28 @@ fn main() {
             }
             if factionv4.bgs_day(&system) != bgs_day {
                 warn!("Faction {} is not up to date in {}: {} {}", minor_faction_name, system, bgs_day, factionv4.bgs_day(&system));
-                warnings.push(format!("Faction {} is not up to date in {}", minor_faction_name, system));
+                let v = system_warnings.entry(system.clone()).or_insert(vec![]);
+                v.push(format!("Faction {} is not up to date in {}", minor_faction_name, system));
             }
         }
         let faction_template:Faction = (&factionv4).into();
         for history in factionv4.history {
+            let mut at_home = false;
             // could be that the system is not in our system list...
             if let Some(system) = systems.get_mut(&history.system) {
                 let faction = system.factions.entry(faction_template.name.clone()).or_insert(faction_template.clone());
                 faction.eddb = Some(faction_eddb.clone());
-                let data:FactionData = history.into();
+                if let Some(home_id) = faction_eddb.home_system_id {
+                    if system.eddb_id == home_id {
+                        faction.at_home = true;
+                        at_home = true;
+                    }
+                }
+                let inf = history.influence*100.0;
+                let mut data:FactionData = history.into();
+                if !at_home && inf < 2.5 {
+                    data.influence_danger = true;
+                }
                 faction.evolution.push(data);
             }
         }
@@ -137,7 +150,9 @@ fn main() {
     // order by order in Config
     let mut s2:Vec<System> = vec![];
     for name in &system_names {
-        s2.push(systems.remove(name).unwrap())
+        let mut system = systems.remove(name).unwrap();
+        system.warnings = system_warnings.remove(name).unwrap_or(vec![]);
+        s2.push(system)
     }
 
     let dates:Vec<String> = dates.iter().map(|e| format!("{}", e.format("%d/%m"))).collect();

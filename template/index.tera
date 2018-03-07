@@ -12,6 +12,7 @@
 <script src="Chart.bundle.min.js"></script>
 <!-- Custom Styles -->
 <link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="font-awesome.min.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js" defer></script>
@@ -98,6 +99,11 @@
       {% for system in systems %}
       <h2 id="#{{system.name}}">{{system.name}}</h2>
       <p>population: {{system.population}}</p>
+      <p style="color: red;"><b>
+        {% for warning in system.warnings %}
+        Warning: {{warning}}<br/>
+        {% endfor %}
+      </b></p>
 
       <canvas id="{{system.name}}" width="640" height="400"></canvas>
       <script>
@@ -144,7 +150,17 @@ borderColor: '{{ faction.color }}',
       </script>
 
       {% for name, faction in system.factions %}
-      <h4>{{ name }}</h4>
+      <h4>{{ name }}
+        {% if faction.eddb.is_player_faction %}
+        <i class="fa fa-street-view" aria-hidden="true" title="Player Faction"></i>
+        {% endif %}
+        {% if faction.at_home %}
+        <i class="fa fa-home" aria-hidden="true" title="Home System"></i>
+        {% endif %}
+        {% if faction.controlling %}
+        <i class="fa fa-sort-amount-asc fa-rotate-180 fa-flip-vertical" aria-hidden="true" title="Controlling"></i>
+        {% endif %}
+      </h4>
       <p>
         {% if faction.global.state_day %}
         Day {{ faction.global.state_day }} of {{ faction.global.state_max_length }} of
@@ -170,7 +186,15 @@ borderColor: '{{ faction.color }}',
         <tr>
           <td>inf:</td>
           {% for data in faction.evolution10 %}
-          <td nowrap>{{ data.influence * 100 | round(method="ceil", precision=2) }}</td>
+          <td nowrap>
+            {% if data.influence_danger %}
+            <span style="color:red;"><b>
+            {% endif %}
+            {{ data.influence * 100 | round(method="ceil", precision=2) }}
+            {% if data.influence_danger %}
+            </b></span>
+            {% endif %}
+          </td>
           {% endfor %}
         </tr>
         <tr>
