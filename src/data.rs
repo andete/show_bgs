@@ -6,6 +6,7 @@ use std::collections::{BTreeMap,HashMap,HashSet};
 
 use serde::de::{self, Deserialize, Deserializer};
 
+/// `Allegiance` of a `Faction`
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
 pub enum Allegiance {
@@ -15,6 +16,7 @@ pub enum Allegiance {
     Empire,
 }
 
+/// `State` of a `Faction`
 #[derive(Debug, Serialize, Clone, Copy, PartialEq, Eq, Hash)]
 #[serde(rename_all = "lowercase")]
 pub enum State {
@@ -34,6 +36,8 @@ pub enum State {
 }
 
 impl State {
+
+    /// maximum length in days
     fn max_length(&self) -> u8 {
         match *self {
             State::None => 0,
@@ -52,6 +56,7 @@ impl State {
         }
     }
 
+    /// days recovery
     fn recovery(&self) -> u8 {
         match *self {
             State::None => 0,
@@ -69,7 +74,8 @@ impl State {
             State::Retreat => 1,
         }
     }
-    
+
+    /// days pending
     fn pending(&self) -> u8 {
         match *self {
             State::None => 0,
@@ -88,6 +94,7 @@ impl State {
         }
     }
 
+    /// if a state is a danger state
     fn danger(&self) -> bool {
         match *self {
             State::Expansion => true,
@@ -97,6 +104,7 @@ impl State {
         }
     }
 
+    /// if a pending state is a dangerous situation
     fn pending_danger(&self) -> bool {
         match *self {
             State::Expansion => true,
@@ -106,6 +114,7 @@ impl State {
         }
     }
 
+    /// is this a state that only gets active in a single system
     pub fn is_single_system_state(&self) -> bool {
         match *self {
             State::Boom => false,
@@ -450,6 +459,7 @@ impl Faction {
     }
 }
 
+// custom deserializer needed for state to deal with civil unrest vs civilunrest
 impl<'de> Deserialize<'de> for State {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
@@ -469,6 +479,7 @@ impl<'de> Deserialize<'de> for State {
             "investment" => State::Investment,
             "retreat" => State::Retreat,
             "outbreak" => State::Outbreak,
+            "none" => State::None,
             other => { return Err(de::Error::custom(format!("Invalid state '{}'", other))); },
         };
         Ok(state)

@@ -91,6 +91,9 @@ fn main() {
                 if !at_home && inf < 2.5 {
                     data.influence_danger = true;
                 }
+                if inf >= 75.0 {
+                    data.influence_danger = true;
+                }
                 faction.evolution.push(data);
             }
         }
