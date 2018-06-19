@@ -12,8 +12,9 @@ use std::collections::BTreeSet;
 use std::fs::File;
 
 fn main() {
+    let n = 7;
     badlog::minimal(Some("INFO"));
-    info!("Fetching system info for last 7 days");
+    info!("Fetching system info for last {} days", n);
     info!("and discovering minor factions");
     let systems = show_bgs::read_config().systems();
     info!("systems: {:?}", systems);
@@ -21,7 +22,7 @@ fn main() {
     let client = reqwest::Client::new();
     let mut minor_factions = BTreeSet::<String>::new();
 
-    let now = Utc::now().timestamp()*1000;
+    let now = (Utc::now().timestamp()+100)*1000;
     info!("now: {}", now);
 
     let mut dates = BTreeSet::new();
@@ -29,10 +30,10 @@ fn main() {
     for system in &systems {
         let url = format!("{}systems?name={}&timemax={}", show_bgs::EBGSV4_URL, system, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
+        //info!("{:?}", res);
         let n = format!("{}/systems/{}.json", datadir, system);
         let mut f = File::create(&n).unwrap();
         let json:show_bgs::ebgsv4::EBGSSystemsPageV4 = serde_json::from_str(&res).unwrap();
-        info!("{:?}", json);
         serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
         dates.insert(json.docs[0].updated_at.date());
         system_dates.push((system, json.docs[0].updated_at.date()));

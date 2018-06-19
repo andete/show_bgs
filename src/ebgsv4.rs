@@ -126,6 +126,7 @@ pub struct EBGSSystemsV4 {
 impl EBGSSystemsV4 {
     pub fn bgs_day(&self) -> Option<Date<Utc>> {
         let mut dates = BTreeSet::new();
+        dates.insert(self.updated_at.date());
         for h in &self.history {
             dates.insert(h.updated_at.date());
         }

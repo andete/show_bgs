@@ -40,6 +40,7 @@ fn main() {
     }
     // info!("systems: {:?}", systems);
 
+    info!("dates: {:?}", dates);
     let bgs_day = dates.iter().max().unwrap().clone();
     info!("Current BGS day: {}", bgs_day);
     for &(system,date) in &system_dates {
@@ -158,7 +159,7 @@ fn main() {
         s2.push(system)
     }
 
-    let dates:Vec<String> = dates.iter().map(|e| format!("{}", e.format("%d/%m"))).collect();
+    let dates:Vec<String> = dates_vec.iter().skip(1).map(|e| format!("{}", e.format("%d/%m"))).collect();
     let dates2 = dates.clone();
     let dates10 = dates.as_slice();
     let dates10 = dates10.windows(10).last().unwrap().to_vec();

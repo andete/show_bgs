@@ -52,7 +52,7 @@ impl State {
             State::Outbreak => 28,
             State::Lockdown => 14,
             State::Investment => 5,
-            State::Retreat => 5,
+            State::Retreat => 6,
         }
     }
 
@@ -142,6 +142,8 @@ pub enum Government {
     Democracy,
     #[serde(rename = "$government_dictatorship;")]
     Dictatorship,
+    #[serde(rename = "$government_anarchy;")]
+    Anarchy,
     // TODO: add more as needed
 }
 
@@ -175,6 +177,8 @@ pub enum Security {
     High,
     #[serde(rename = "$system_security_anarchy;")]
     Anarchy,
+    #[serde(rename = "$galaxy_map_info_state_anarchy;")]
+    Anarchy2,
     #[serde(rename = "$system_security_lawless;")]
     Lawless,
 }
@@ -197,6 +201,8 @@ pub enum Economy {
     Terraforming,
     #[serde(rename = "$economy_refinery;")]
     Refinery,
+    #[serde(rename = "$economy_military;")]
+    Military,
 }
 #[derive(Debug,Deserialize, Serialize)]
 pub struct Systems {
@@ -395,12 +401,19 @@ impl Faction {
         let mut v = vec![];
         let mut prev_inf = 0.0;
         for (_day, values) in b {
-            for val in values {
+            let mut found = false;
+            for val in &values {
                 if val.influence != prev_inf {
                     v.push(val.clone());
                     prev_inf = val.influence;
+                    found = true;
                     break;
                 }
+            }
+            // if all were same, just take the first
+            if !found {
+                info!("{} INF stayed equal", self.name);
+                v.push(values[0].clone())
             }
         }
         

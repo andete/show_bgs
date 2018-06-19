@@ -7,6 +7,7 @@ extern crate chrono;
 extern crate serde_json;
 
 use chrono::Utc;
+use std::time::Duration;
 
 use std::collections::BTreeSet;
 use std::fs::File;
@@ -16,12 +17,13 @@ fn main() {
     info!("Fetching Minor Faction data for last 32 days");
     let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
     let client = reqwest::Client::new();
+    let client = reqwest::Client::builder().gzip(true).timeout(Duration::from_secs(20)).build().unwrap();
     let n = format!("{}/minor_factions.json", datadir);
     let f = File::open(&n).unwrap();
     let minor_factions:BTreeSet<String> = serde_json::from_reader(&f).unwrap();
 
     let now = Utc::now().timestamp()*1000;
-    let then = now - (32*24*60*60*1000);
+    let then = now - ((32+1)*24*60*60*1000);
     info!("now: {}", now);
  
     for faction in &minor_factions {

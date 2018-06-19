@@ -22,3 +22,19 @@
     line-height: 100%;
     top: 0;
 }
+
+table.faction {
+    font-size: 70%;
+}
+
+table.faction tr {
+    border-bottom: 1px solid black;
+}​
+
+table.faction tr:last-child {
+  border-bottom: none;
+}
+
+.faction>tbody>tr:last-child {
+    border-bottom: none;
+}

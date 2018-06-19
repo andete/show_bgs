@@ -12,7 +12,7 @@
 <script src="Chart.bundle.min.js"></script>
 <!-- Custom Styles -->
 <link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js" defer></script>
@@ -28,13 +28,13 @@
 <link rel="apple-touch-icon" href="favicon.ico">
 <link rel="shortcut icon" href="favicon.ico">
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-93042012-3"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-93042012-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-93042012-3');
+  gtag('config', 'UA-93042012-1');
 </script>
 
 
@@ -160,7 +160,10 @@ borderColor: '{{ faction.color }}',
         {% if faction.controlling %}
         <i class="fa fa-sort-amount-asc fa-rotate-180 fa-flip-vertical" aria-hidden="true" title="Controlling"></i>
         {% endif %}
+        <font size="3">{{faction.government}} {{faction.allegiance}}</font>
       </h4>
+      <p>
+      </p>
       <p>
         {% if faction.global.state_day %}
         Day {{ faction.global.state_day }} of {{ faction.global.state_max_length }} of
@@ -176,13 +179,16 @@ borderColor: '{{ faction.color }}',
         in {{ faction.global.state_system }}
         {% endif %}
       </p>
-      <table style="font-size: 70%;">
+      <table class="faction">
+        <thead>
         <tr>
           <th></th>
           {% for date in dates10 %}
           <th>{{date}}</th>
           {% endfor %}
         </tr>
+        </thead>
+        <tbody>
         <tr>
           <td>inf:</td>
           {% for data in faction.evolution10 %}
@@ -240,6 +246,7 @@ borderColor: '{{ faction.color }}',
           </td>
           {% endfor %}
         </tr>
+      </tbody>
       </table>
       {% endfor %}<!-- factions -->
       
