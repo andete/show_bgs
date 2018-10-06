@@ -34,6 +34,7 @@ fn main() {
         let n = format!("{}/systems/{}.json", datadir, system);
         let mut f = File::create(&n).unwrap();
         let json:show_bgs::ebgsv4::EBGSSystemsPageV4 = serde_json::from_str(&res).unwrap();
+        println!("json: {:?}", json);
         serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
         dates.insert(json.docs[0].updated_at.date());
         system_dates.push((system, json.docs[0].updated_at.date()));

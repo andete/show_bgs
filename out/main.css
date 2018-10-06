@@ -25,6 +25,8 @@
 
 table.faction {
     font-size: 70%;
+    table-layout: fixed;
+    width: 125%;
 }
 
 table.faction tr {
