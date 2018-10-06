@@ -7,7 +7,8 @@
 <!-- Bootstrap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js" defer></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="bootstrap-dark.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js" defer></script>
 <script src="Chart.bundle.min.js"></script>
 <!-- Custom Styles -->
@@ -117,11 +118,11 @@ var myChart = new Chart(ctx, {
         {% endfor %}
         ],
 datasets: [
-{% for name, faction in system.factions %}
+{% for faction in system.factions_by_inf %}
 {
             spanGaps: true,
             fill: false,
-            label: '{{name | addslashes}}',
+            label: '{{faction.name | addslashes}}',
 data: [
 {% for data in faction.evolution %}
 {
@@ -149,8 +150,8 @@ borderColor: '{{ faction.color }}',
 });
       </script>
 
-      {% for name, faction in system.factions %}
-      <h4>{{ name }}
+      {% for faction in system.factions_by_inf %}
+      <h4>{{ faction.name }}
         {% if faction.eddb.is_player_faction %}
         <i class="fa fa-street-view" aria-hidden="true" title="Player Faction"></i>
         {% endif %}

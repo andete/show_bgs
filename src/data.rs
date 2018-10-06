@@ -222,6 +222,7 @@ pub struct System {
     pub name:String,
     pub population: i64,
     pub factions:HashMap<String, Faction>,
+    pub factions_by_inf:Vec<Faction>,
     pub warnings:Vec<String>,
 }
 
@@ -284,6 +285,7 @@ impl From<ebgsv4::EBGSSystemsV4> for System {
             name:s.name.clone(),
             population:s.population,
             factions:HashMap::new(),
+            factions_by_inf:vec![],
             warnings:vec![],
         }
     }
@@ -471,6 +473,10 @@ impl Faction {
             }
         }
         self.evolution10 = ev;
+    }
+
+    pub fn latest_inf(&self) -> i64 {
+        (self.evolution.last().unwrap().influence * 1000.0) as i64
     }
 }
 

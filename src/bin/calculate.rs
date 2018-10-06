@@ -131,12 +131,19 @@ fn main() {
                 }
             }
         }
-        let mut colors:BTreeSet<String> = vec!["red", "blue", "green", "cyan", "orange", "pink", "grey", "black"].into_iter().map(|x| x.into()).collect();
-        // first fill in using registered colors:
+        let mut colors:BTreeSet<String> = vec!["blue", "green", "cyan", "orange",
+                                               "pink", "grey", "magenta", "yellow", "red", "black"].into_iter().map(|x| x.into()).collect();
+        // first fill in using registered colors, but only if no duplicates
         for faction in &mut system.factions.values_mut() {
             if let Some(color) = faction_colors.get(&faction.name) {
-                faction.color = color.clone();
-                colors.remove(color);
+                //println!("Found existing color: {} for {}", color, faction.name);
+                if colors.contains(color) {
+                    //println!("Using existing");
+                    faction.color = color.clone();
+                    colors.remove(color);
+                } else {
+                    //println!("Skipping existing");
+                }
             }
         }
         let mut it = colors.into_iter();
@@ -146,6 +153,12 @@ fn main() {
                 faction_colors.insert(faction.name.clone(), faction.color.clone());
             }
         }
+        for faction in system.factions.values() {
+            system.factions_by_inf.push(faction.clone())
+        }
+        system.factions_by_inf.sort_by(
+            |a,b| b.latest_inf().cmp(&a.latest_inf())
+        );
     }
 
     let n = format!("{}/report.json", datadir);

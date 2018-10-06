@@ -27,11 +27,12 @@ table.faction {
     font-size: 70%;
     table-layout: fixed;
     width: 125%;
+    background-color: #484b52;
 }
 
 table.faction tr {
     border-bottom: 1px solid black;
-}​
+}
 
 table.faction tr:last-child {
   border-bottom: none;
@@ -39,4 +40,8 @@ table.faction tr:last-child {
 
 .faction>tbody>tr:last-child {
     border-bottom: none;
+}
+
+canvas {
+    /* background-color: #e0e4e8; */
 }
