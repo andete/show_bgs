@@ -146,6 +146,8 @@ pub enum Government {
     Anarchy,
     #[serde(rename = "$government_communism;")]
     Communism,
+    #[serde(rename = "$government_confederacy;")]
+    Confederacy,
     // TODO: add more as needed
 }
 
