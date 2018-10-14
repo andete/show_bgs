@@ -38,8 +38,8 @@ fn main() {
         let url = format!("{}systems?name={}&timemax={}", show_bgs::EBGSV4_URL, system, now);
         let ebgs_system_data = client.get(&url).send().unwrap().text().unwrap();
         let json:show_bgs::ebgsv4::EBGSSystemsPageV4 = serde_json::from_str(&ebgs_system_data).unwrap();
-        val system_data = json.docs[0];
-        val update_date = doc.updated_at.date();
+        let system_data = &json.docs[0];
+        let update_date = system_data.updated_at.date();
 
         // store to file
         let n = format!("{}/systems/{}.json", datadir, system);

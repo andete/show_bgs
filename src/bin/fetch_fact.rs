@@ -16,7 +16,6 @@ fn main() {
     badlog::minimal(Some("INFO"));
     info!("Fetching Minor Faction data for last 32 days");
     let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
-    let client = reqwest::Client::new();
     let client = reqwest::Client::builder().gzip(true).timeout(Duration::from_secs(20)).build().unwrap();
     let n = format!("{}/minor_factions.json", datadir);
     let f = File::open(&n).unwrap();

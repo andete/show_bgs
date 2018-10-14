@@ -10,7 +10,6 @@ use chrono::{Date,Utc};
 
 use std::collections::{BTreeSet,HashMap};
 use std::fs::File;
-// use std::io::Write;
 use show_bgs::ebgsv4;
 use show_bgs::eddbv3;
 use show_bgs::data::*;
@@ -18,7 +17,6 @@ use show_bgs::data::*;
 fn main() {
     badlog::minimal(Some("INFO"));
     info!("Calculating data");
-    let warnings = vec![];
     let mut system_warnings = HashMap::new();
     let system_names = show_bgs::read_config().systems();
     info!("systems to handle: {:?}", system_names);
@@ -41,7 +39,7 @@ fn main() {
     // info!("systems: {:?}", systems);
 
     info!("dates: {:?}", dates);
-    let bgs_day = dates.iter().max().unwrap().clone().pred(); // make "pred" optional
+    let bgs_day = dates.iter().max().unwrap().clone(); // make "pred" optional
     info!("Current BGS day: {}", bgs_day);
     for &(system,date) in &system_dates {
         if bgs_day != date {
@@ -86,6 +84,9 @@ fn main() {
                         faction.at_home = true;
                         at_home = true;
                     }
+                }
+                if system.controlling.to_lowercase() == faction_template.name.to_lowercase() {
+                    faction.controlling = true;
                 }
                 let inf = history.influence*100.0;
                 let mut data:FactionData = history.into();
@@ -184,7 +185,6 @@ fn main() {
         systems: s2,
         dates:dates2,
         dates10:dates10,
-        warnings:warnings,
         bgs_day:format!("{}", bgs_day.format("%d/%m")),
         factions:global_factions,
     };

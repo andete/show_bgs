@@ -213,7 +213,6 @@ pub struct Systems {
     pub systems: Vec<System>,
     pub dates: Vec<String>,
     pub dates10: Vec<String>,
-    pub warnings: Vec<String>,
     pub bgs_day: String,
     pub factions: HashMap<String, FactionGlobalState>,
 }
@@ -226,6 +225,7 @@ pub struct System {
     pub factions:HashMap<String, Faction>,
     pub factions_by_inf:Vec<Faction>,
     pub warnings:Vec<String>,
+    pub controlling:String,
 }
 
 #[derive(Debug,Deserialize, Serialize, Clone)]
@@ -289,6 +289,7 @@ impl From<ebgsv4::EBGSSystemsV4> for System {
             factions:HashMap::new(),
             factions_by_inf:vec![],
             warnings:vec![],
+            controlling:s.controlling_minor_faction,
         }
     }
 }

@@ -1,36 +1,36 @@
-use chrono::{Date,DateTime,Utc};
+use chrono::{Date, DateTime, Utc};
 use data::*;
 
 use std::collections::BTreeSet;
 
-#[derive(Debug,Deserialize)]
+#[derive(Debug, Deserialize)]
 pub struct EBGSPageV4<T> {
-    pub docs:Vec<T>,
-    pub page:i64,
-    pub pages:i64,
-    pub total:i64,
-    pub limit:i64,
+    pub docs: Vec<T>,
+    pub page: i64,
+    pub pages: i64,
+    pub total: i64,
+    pub limit: i64,
 }
 
 pub type EBGSFactionsPageV4 = EBGSPageV4<EBGSFactionsV4>;
 pub type EBGSSystemsPageV4 = EBGSPageV4<EBGSSystemsV4>;
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct EBGSFactionsV4 {
-    pub eddb_id:i64,
-    pub government:GovernmentFaction,
-    pub name:String,
-    pub _id:String,
-    pub name_lower:String,
+    pub eddb_id: i64,
+    pub government: GovernmentFaction,
+    pub name: String,
+    pub _id: String,
+    pub name_lower: String,
     //pub is_player_faction:bool,
-    pub updated_at:DateTime<Utc>,
-    pub faction_presence:Vec<EBGSFactionPresenceV4>,
-    pub allegiance:Allegiance,
-    pub history:Vec<EBGSFactionHistoryV4>,
+    pub updated_at: DateTime<Utc>,
+    pub faction_presence: Vec<EBGSFactionPresenceV4>,
+    pub allegiance: Allegiance,
+    pub history: Vec<EBGSFactionHistoryV4>,
 }
 
 impl EBGSFactionsV4 {
-    pub fn bgs_day(&self, system:&str) -> Date<Utc> {
+    pub fn bgs_day(&self, system: &str) -> Date<Utc> {
         let mut dates = BTreeSet::new();
         for h in &self.history {
             if &h.system == system {
@@ -44,7 +44,7 @@ impl EBGSFactionsV4 {
         self.faction_presence.iter().map(|x| x.system_name.clone()).collect()
     }
 
-    pub fn last_state_in_system(&self, system:&str) -> State {
+    pub fn last_state_in_system(&self, system: &str) -> State {
         let mut state = State::None;
         let mut date = None;
         for h in &self.history {
@@ -59,13 +59,13 @@ impl EBGSFactionsV4 {
     }
 
     // TODO: this doesn't work correctly if some data is dated
-    pub fn faction_state(&self) -> (State,Option<String>) {
+    pub fn faction_state(&self) -> (State, Option<String>) {
         let mut p_state = State::None;
         for system in self.systems() {
             let state = self.last_state_in_system(&system);
             info!("XXX {} {} {:?}", self.name, system, state);
             if state.is_single_system_state() {
-                return (state, Some(system))
+                return (state, Some(system));
             }
             p_state = state;
         }
@@ -73,36 +73,36 @@ impl EBGSFactionsV4 {
     }
 }
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct EBGSFactionPresenceV4 {
-    pub system_name:String,
-    pub state:State,
-    pub pending_states:Vec<EBGSStateV4>,
-    pub recovering_states:Vec<EBGSStateV4>,
+    pub system_name: String,
+    pub state: State,
+    pub pending_states: Vec<EBGSStateV4>,
+    pub recovering_states: Vec<EBGSStateV4>,
     pub influence: f64,
-    pub system_name_lower:String,
+    pub system_name_lower: String,
 }
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct EBGSStateV4 {
-    pub state:State,
-    pub trend:i64,
+    pub state: State,
+    pub trend: i64,
 }
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct EBGSFactionHistoryV4 {
-    pub system:String,
-    pub state:State,
-    pub updated_at:DateTime<Utc>,
-    pub system_lower:String,
-    pub updated_by:String,
-    pub pending_states:Vec<EBGSStateV4>,
-    pub recovering_states:Vec<EBGSStateV4>,
-    pub _id:String,
-    pub influence:f64,
+    pub system: String,
+    pub state: State,
+    pub updated_at: DateTime<Utc>,
+    pub system_lower: String,
+    pub updated_by: String,
+    pub pending_states: Vec<EBGSStateV4>,
+    pub recovering_states: Vec<EBGSStateV4>,
+    pub _id: String,
+    pub influence: f64,
 }
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct EBGSSystemsV4 {
     pub eddb_id: i64,
     pub name_lower: String,
@@ -125,23 +125,20 @@ pub struct EBGSSystemsV4 {
 
 impl EBGSSystemsV4 {
     pub fn bgs_day(&self) -> Option<Date<Utc>> {
-        let mut dates = BTreeSet::new();
-        dates.insert(self.updated_at.date());
-        for h in &self.history {
-            dates.insert(h.updated_at.date());
-        }
-        dates.iter().max().map(|x| x.clone())
+        use std::iter;
+        iter::once(self.updated_at).chain(
+            self.history.iter().map(|x| x.updated_at)).map(|x| x.date()).max()
     }
 }
 
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct EBGSSystemPresenceV4 {
     pub name: String,
     pub name_lower: String,
 }
 
-#[derive(Debug,Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct EBGSSystemHistoryV4 {
     pub controlling_minor_faction: String,
     pub security: Security,
