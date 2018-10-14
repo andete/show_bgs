@@ -91,8 +91,8 @@ impl EBGSFactionsV4 {
         let mut p_state = State::None;
         for system in self.systems() {
             let state = self.last_state_in_system(&system);
-            info!("XXX {} {} {:?}", self.name, system, state);
             if state.is_single_system_state() {
+                info!("XXX {} {} {:?}", self.name, system, state);
                 return (state, Some(system));
             }
             p_state = state;

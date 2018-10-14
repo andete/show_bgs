@@ -124,6 +124,7 @@ impl State {
             State::Famine => false,
             State::Lockdown => false,
             State::None => false,
+            State::Retreat => false,
             _ => true,
         }
     }
