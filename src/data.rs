@@ -247,12 +247,16 @@ pub struct FactionGlobalState {
     pub name:String,
     pub government:GovernmentFaction,
     pub allegiance:Allegiance,
-    pub state:State,
     pub state_date:DateTime<Utc>,
     pub state_day:Option<u8>,
     pub state_max_length:u8,
     pub state_danger:bool,
+    pub state:State,
     pub state_system:Option<String>,
+    pub pending_state:Option<State>,
+    pub pending_state_system:Option<String>,
+    pub recovery_state:Option<State>,
+    pub recovery_state_system:Option<String>,
 }
 
 // faction data (for in a specific system)
@@ -279,7 +283,6 @@ pub struct FactionState {
     pub trend_display:String,
     pub state_day:u8,
     pub state_pending_danger:bool,
-    // pub system:Option<String>, ???
 }
 
 impl From<ebgsv4::EBGSSystemsV4> for System {
@@ -316,6 +319,8 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
 impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for FactionGlobalState {
     fn from(s:&'a ebgsv4::EBGSFactionsV4) -> FactionGlobalState {
         let (state, system) = s.faction_state();
+        let (pending_state, pending_system) = s.faction_pending_state();
+        let (recovery_state, recovery_system) = s.faction_recovering_state();
         FactionGlobalState {
             name:s.name.clone(),
             government:s.government,
@@ -326,6 +331,10 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for FactionGlobalState {
             state_day:None,
             state_max_length:state.max_length(),
             state_danger:state.danger(),
+            pending_state:pending_state,
+            pending_state_system:pending_system,
+            recovery_state:recovery_state,
+            recovery_state_system:recovery_system,
         }
     }
 }
@@ -483,6 +492,10 @@ impl Faction {
 
     pub fn latest_inf(&self) -> i64 {
         (self.evolution.last().unwrap().influence * 1000.0) as i64
+    }
+
+    pub fn fill_in_state_other_system(&mut self) {
+        // TODO
     }
 }
 

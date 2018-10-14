@@ -172,7 +172,13 @@ borderColor: '{{ faction.color }}',
         </b></span>
         {% endif %}
         {% if faction.global.state_system %}
-        in {{ faction.global.state_system }}
+            in {{ faction.global.state_system }}
+        {% endif %}
+        {% if faction.global.pending_state %}
+            with pending {{ faction.global.pending_state }} in {{ faction.global.pending_state_system }}
+        {% endif %}
+        {% if faction.global.recovering_state %}
+            recovering from {{ faction.global.recovering_state }} in {{ faction.global.recovering_state_system }}
         {% endif %}
       </p>
       <table class="faction">

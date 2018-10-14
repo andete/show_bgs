@@ -118,8 +118,10 @@ fn main() {
             faction.cleanup_evolution(&dates_vec);
             faction.fill_in_state_days();
             faction.fill_in_evolution10(&dates_vec);
+            faction.fill_in_state_other_system();
             faction.global = global_factions.get(&faction.name).map(|x| x.clone());
             // remove systemname from global if it is the local system
+            /* TODO: don't special case...
             if let Some(ref mut gl) = faction.global {
                 let mut go = false;
                 if let Some(ref mut s2) = gl.state_system {
@@ -131,6 +133,7 @@ fn main() {
                     gl.state_system = None;
                 }
             }
+            */
         }
         let mut colors:BTreeSet<String> = vec!["blue", "green", "cyan", "orange",
                                                "pink", "grey", "magenta", "yellow", "red"].into_iter().map(|x| x.into()).collect();

@@ -58,6 +58,34 @@ impl EBGSFactionsV4 {
         state
     }
 
+    pub fn last_pending_state_in_system(&self, system: &str) -> Option<State> {
+        let mut state = None;
+        let mut date = None;
+        for h in &self.history {
+            if &h.system == system {
+                if Some(h.updated_at) != date {
+                    state = h.pending_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
+                    date = Some(h.updated_at);
+                }
+            }
+        }
+        state
+    }
+
+    pub fn last_recovering_state_in_system(&self, system: &str) -> Option<State> {
+        let mut state = None;
+        let mut date = None;
+        for h in &self.history {
+            if &h.system == system {
+                if Some(h.updated_at) != date {
+                    state = h.recovering_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
+                    date = Some(h.updated_at);
+                }
+            }
+        }
+        state
+    }
+
     // TODO: this doesn't work correctly if some data is dated
     pub fn faction_state(&self) -> (State, Option<String>) {
         let mut p_state = State::None;
@@ -70,6 +98,32 @@ impl EBGSFactionsV4 {
             p_state = state;
         }
         (p_state, None)
+    }
+
+    // TODO: this doesn't work correctly if some data is dated
+    pub fn faction_pending_state(&self) -> (Option<State>, Option<String>) {
+        for system in self.systems() {
+            if let Some(state) = self.last_pending_state_in_system(&system) {
+                info!("XXX {} {} {:?}", self.name, system, state);
+                if state.is_single_system_state() {
+                    return (Some(state), Some(system))
+                }
+            }
+        }
+        (None, None)
+    }
+
+    // TODO: this doesn't work correctly if some data is dated
+    pub fn faction_recovering_state(&self) -> (Option<State>, Option<String>) {
+        for system in self.systems() {
+            if let Some(state) = self.last_recovering_state_in_system(&system) {
+                info!("XXX {} {} {:?}", self.name, system, state);
+                if state.is_single_system_state() {
+                    return (Some(state), Some(system))
+                }
+            }
+        }
+        (None, None)
     }
 }
 
