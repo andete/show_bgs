@@ -248,6 +248,7 @@ pub struct FactionGlobalState {
     pub government:GovernmentFaction,
     pub allegiance:Allegiance,
     pub state:State,
+    pub state_date:DateTime<Utc>,
     pub state_day:Option<u8>,
     pub state_max_length:u8,
     pub state_danger:bool,
@@ -278,6 +279,7 @@ pub struct FactionState {
     pub trend_display:String,
     pub state_day:u8,
     pub state_pending_danger:bool,
+    // pub system:Option<String>, ???
 }
 
 impl From<ebgsv4::EBGSSystemsV4> for System {
@@ -320,6 +322,7 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for FactionGlobalState {
             allegiance:s.allegiance,
             state:state,
             state_system:system,
+            state_date:s.updated_at,
             state_day:None,
             state_max_length:state.max_length(),
             state_danger:state.danger(),
