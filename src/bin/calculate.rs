@@ -41,7 +41,7 @@ fn main() {
     // info!("systems: {:?}", systems);
 
     info!("dates: {:?}", dates);
-    let bgs_day = dates.iter().max().unwrap().clone();
+    let bgs_day = dates.iter().max().unwrap().clone().pred(); // make "pred" optional
     info!("Current BGS day: {}", bgs_day);
     for &(system,date) in &system_dates {
         if bgs_day != date {
@@ -132,9 +132,13 @@ fn main() {
             }
         }
         let mut colors:BTreeSet<String> = vec!["blue", "green", "cyan", "orange",
-                                               "pink", "grey", "magenta", "yellow", "red", "black"].into_iter().map(|x| x.into()).collect();
+                                               "pink", "grey", "magenta", "yellow", "red"].into_iter().map(|x| x.into()).collect();
         // first fill in using registered colors, but only if no duplicates
         for faction in &mut system.factions.values_mut() {
+            if faction.name == "The Order of Mobius" {
+                faction.color = "black".into();
+                continue
+            }
             if let Some(color) = faction_colors.get(&faction.name) {
                 //println!("Found existing color: {} for {}", color, faction.name);
                 if colors.contains(color) {
