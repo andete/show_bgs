@@ -1,6 +1,5 @@
 // (c) 2018 Joost Yervante Damad <joost@damad.be>
 
-use reqwest;
 use chrono::{Date,Utc};
 use serde_json;
 
@@ -10,13 +9,14 @@ use std::fs::File;
 use ebgsv4;
 use eddbv3;
 use data::*;
+use Config;
 
-pub fn calculate() {
+pub fn calculate(config:&Config) {
     info!("Calculating data");
     let mut system_warnings = HashMap::new();
-    let system_names = ::read_config("systems.json").systems();
+    let system_names = config.systems();
     info!("systems to handle: {:?}", system_names);
-    let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
+    let datadir = config.datadir();
     let mut systems = HashMap::new();
     let mut dates = BTreeSet::new();
     let mut system_dates = Vec::new();

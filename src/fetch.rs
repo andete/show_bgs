@@ -3,19 +3,22 @@
 use chrono::Utc;
 use reqwest;
 use std::collections::BTreeSet;
-use std::fs::File;
+use std::fs::{create_dir_all, File};
 
 use ebgsv4;
 use serde_json;
+use Config;
 
-pub fn fetch(filename:&str, n:i32) {
+pub fn fetch(config: &Config, n:i32) {
     info!("Fetching system info for last {} days", n);
     info!("and discovering minor factions");
 
-    let systems = ::read_config(filename).systems();
+    let systems = config.systems();
     info!("systems: {:?}", systems);
 
-    let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
+    let datadir = config.datadir();
+    create_dir_all(&datadir).unwrap();
+
     let client = reqwest::Client::new();
 
     let mut minor_factions = BTreeSet::<String>::new();

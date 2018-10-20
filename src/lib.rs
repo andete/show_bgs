@@ -1,3 +1,5 @@
+// (c) 2018 Joost Yervante Damad <joost@damad.be>
+
 extern crate chrono;
 extern crate serde;
 #[macro_use]
@@ -9,11 +11,12 @@ extern crate reqwest;
 
 use std::fs::File;
 
-#[derive(Debug,Deserialize)]
+#[derive(Debug, Deserialize)]
 pub struct Config {
-    pub report_name:String,
-    pub main_systems:Vec<String>,
-    pub other_systems:Vec<String>
+    pub short_name: String,
+    pub report_name: String,
+    pub main_systems: Vec<String>,
+    pub other_systems: Vec<String>,
 }
 
 impl Config {
@@ -22,13 +25,16 @@ impl Config {
         for s in &self.other_systems { v.push(s.clone()) }
         v
     }
+    pub fn datadir(&self) -> String {
+        format!("{}/data/{}", env!("CARGO_MANIFEST_DIR"), self.short_name)
+    }
 }
 
-pub fn read_config(filename:&str) -> Config {
+pub fn read_config(filename: &str) -> Config {
     let n = format!("{}/{}", env!("CARGO_MANIFEST_DIR"), filename);
     debug!("config file: {}", n);
     let f = File::open(&n).unwrap();
-    let mut c:Config = serde_json::from_reader(f).unwrap();
+    let mut c: Config = serde_json::from_reader(f).unwrap();
     c.main_systems.sort();
     c.other_systems.sort();
     c

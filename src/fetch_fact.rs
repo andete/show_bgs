@@ -12,12 +12,12 @@ use std::fs::File;
 
 use eddbv3;
 use ebgsv4;
+use Config;
 
-
-pub fn fetch_fact(n_days:i64) {
+pub fn fetch_fact(config:&Config, n_days:i64) {
 
     info!("Fetching Minor Faction data for last {} days", n_days);
-    let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
+    let datadir = config.datadir();
     let client = reqwest::Client::builder().gzip(true).timeout(Duration::from_secs(20)).build().unwrap();
     let n = format!("{}/minor_factions.json", datadir);
     let f = File::open(&n).unwrap();

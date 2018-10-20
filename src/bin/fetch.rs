@@ -21,6 +21,7 @@ fn main() {
 
     let filename = m.value_of("FILE").unwrap();
     badlog::minimal(Some("INFO"));
-    show_bgs::fetch::fetch(filename,  7);
-    show_bgs::fetch_fact::fetch_fact(32);
+    let config = show_bgs::read_config(filename);
+    show_bgs::fetch::fetch(&config,  7);
+    show_bgs::fetch_fact::fetch_fact(&config, 32);
 }

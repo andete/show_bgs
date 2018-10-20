@@ -1,20 +1,24 @@
-extern crate reqwest;
+// (c) 2018 Joost Yervante Damad <joost@damad.be>
+
 extern crate show_bgs;
 extern crate badlog;
-#[macro_use]
-extern crate log;
-extern crate chrono;
-extern crate serde_json;
+extern crate clap;
 
-use chrono::{Date,Utc};
-
-use std::collections::{BTreeSet,HashMap};
-use std::fs::File;
-use show_bgs::ebgsv4;
-use show_bgs::eddbv3;
-use show_bgs::data::*;
+use clap::{Arg, App};
 
 fn main() {
+    let m = App::new("fetch")
+        .version(env!("CARGO_PKG_VERSION"))
+        .author("Joost Yervante Damad <joost@damad.be>")
+        .about("calculate")
+        .arg(Arg::with_name("FILE")
+            .required(true)
+            .index(1)
+            .help("filename of the systems.json file"))
+        .get_matches();
+
+    let filename = m.value_of("FILE").unwrap();
     badlog::minimal(Some("INFO"));
-    show_bgs::calculate::calculate();
+    let config = show_bgs::read_config(filename);
+    show_bgs::calculate::calculate(&config);
 }
