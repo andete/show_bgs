@@ -8,11 +8,11 @@ use std::fs::File;
 use ebgsv4;
 use serde_json;
 
-pub fn fetch(n:i32) {
+pub fn fetch(filename:&str, n:i32) {
     info!("Fetching system info for last {} days", n);
     info!("and discovering minor factions");
 
-    let systems = ::read_config().systems();
+    let systems = ::read_config(filename).systems();
     info!("systems: {:?}", systems);
 
     let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));

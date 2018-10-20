@@ -18,7 +18,7 @@ fn main() {
     badlog::minimal(Some("INFO"));
     info!("Calculating data");
     let mut system_warnings = HashMap::new();
-    let system_names = show_bgs::read_config().systems();
+    let system_names = show_bgs::read_config("systems.json").systems();
     info!("systems to handle: {:?}", system_names);
     let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
     let mut systems = HashMap::new();

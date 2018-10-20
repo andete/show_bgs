@@ -3,9 +3,24 @@
 
 extern crate show_bgs;
 extern crate badlog;
+extern crate clap;
+
+use clap::{Arg, App};
+
 
 fn main() {
+    let m = App::new("fetch")
+        .version(env!("CARGO_PKG_VERSION"))
+        .author("Joost Yervante Damad <joost@damad.be>")
+        .about("fetch the information about systems and factions")
+        .arg(Arg::with_name("FILE")
+            .required(true)
+            .index(1)
+            .help("filename of the systems.json file"))
+        .get_matches();
+
+    let filename = m.value_of("FILE").unwrap();
     badlog::minimal(Some("INFO"));
-    show_bgs::fetch::fetch(7);
+    show_bgs::fetch::fetch(filename,  7);
     show_bgs::fetch_fact::fetch_fact(32);
 }

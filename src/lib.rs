@@ -24,8 +24,8 @@ impl Config {
     }
 }
 
-pub fn read_config() -> Config {
-    let n = format!("{}/systems.json", env!("CARGO_MANIFEST_DIR"));
+pub fn read_config(filename:&str) -> Config {
+    let n = format!("{}/{}", env!("CARGO_MANIFEST_DIR"), filename);
     debug!("config file: {}", n);
     let f = File::open(&n).unwrap();
     let mut c:Config = serde_json::from_reader(f).unwrap();
