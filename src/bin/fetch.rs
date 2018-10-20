@@ -6,6 +6,6 @@ extern crate badlog;
 
 fn main() {
     badlog::minimal(Some("INFO"));
-    let n = 7;
-    show_bgs::fetch::fetch(n);
+    show_bgs::fetch::fetch(7);
+    show_bgs::fetch_fact::fetch_fact(32);
 }
