@@ -1,30 +1,23 @@
-extern crate reqwest;
+// (c) 2018 Joost Yervante Damad <joost@damad.be>
+
 extern crate show_bgs;
 extern crate badlog;
-#[macro_use]
-extern crate log;
-extern crate chrono;
-extern crate serde_json;
-#[macro_use]
-extern crate tera;
-
-use std::fs::File;
-use std::io::Write;
-use show_bgs::data::*;
+extern crate clap;
 
 fn main() {
+    use clap::{Arg, App};
+    let m = App::new("webpage")
+        .version(env!("CARGO_PKG_VERSION"))
+        .author("Joost Yervante Damad <joost@damad.be>")
+        .about("generate webpage")
+        .arg(Arg::with_name("FILE")
+            .required(true)
+            .index(1)
+            .help("filename of the systems.json file"))
+        .get_matches();
+
+    let filename = m.value_of("FILE").unwrap();
     badlog::minimal(Some("INFO"));
-    info!("Generating webpage.");
-    let datadir = format!("{}/data", env!("CARGO_MANIFEST_DIR"));
-    let n = format!("{}/report.json", datadir);
-    let f = File::open(&n).unwrap();
-    let systems:Systems = serde_json::from_reader(&f).unwrap();
-
-    let templates_fn = format!("{}/../template/*.tera", datadir);
-    let templates = compile_templates!(&templates_fn);
-
-    let page = templates.render("index.tera", &systems).unwrap();
-    let n = format!("{}/../out/index.html", datadir);
-    let mut f = File::create(&n).unwrap();
-    f.write_all(page.as_bytes()).unwrap();
+    let config = show_bgs::read_config(filename);
+    show_bgs::webpage::webpage(&config);
 }

@@ -4,10 +4,9 @@ extern crate show_bgs;
 extern crate badlog;
 extern crate clap;
 
-use clap::{Arg, App};
-
 fn main() {
-    let m = App::new("fetch")
+    use clap::{Arg, App};
+    let m = App::new("calculate")
         .version(env!("CARGO_PKG_VERSION"))
         .author("Joost Yervante Damad <joost@damad.be>")
         .about("calculate")
