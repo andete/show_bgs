@@ -12,6 +12,7 @@ use std::time::Duration;
 use std::collections::BTreeSet;
 use std::fs::File;
 
+
 fn main() {
     badlog::minimal(Some("INFO"));
     info!("Fetching Minor Faction data for last 32 days");
@@ -36,7 +37,7 @@ fn main() {
         serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
 
         // then fetch ebgs data
-        let url = format!("{}factions?name={}&timemin={}&timemax={}", show_bgs::EBGSV4_URL, faction, then, now);
+        let url = format!("{}factions?name={}&timemin={}&timemax={}", show_bgs::ebgsv4::URL, faction, then, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
         let json:show_bgs::ebgsv4::EBGSFactionsPageV4 = serde_json::from_str(&res).unwrap();
         let n = format!("{}/factions/{}.json", datadir, faction);

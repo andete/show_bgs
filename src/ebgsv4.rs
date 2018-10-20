@@ -3,6 +3,8 @@ use data::*;
 
 use std::collections::BTreeSet;
 
+pub const URL:&'static str = "https://elitebgs.kodeblox.com/api/ebgs/v4/";
+
 #[derive(Debug, Deserialize)]
 pub struct EBGSPageV4<T> {
     pub docs: Vec<T>,

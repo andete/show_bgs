@@ -44,7 +44,7 @@ impl State {
             State::Expansion => 6,
             State::War => 21,
             State::CivilWar => 21,
-            State::Election => 5,
+            State::Election => 4,
             State::Boom => 28,
             State::Bust => 28,
             State::CivilUnrest => 7,
