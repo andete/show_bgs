@@ -35,6 +35,26 @@ pub enum State {
     Retreat,
 }
 
+impl From<ebgsv4::State> for State {
+    fn from(s:ebgsv4::State) -> State {
+        match s {
+            ebgsv4::State::None => State::None,
+            ebgsv4::State::Expansion => State::Expansion,
+            ebgsv4::State::War => State::War,
+            ebgsv4::State::CivilWar => State::CivilWar,
+            ebgsv4::State::Election => State::Election,
+            ebgsv4::State::Boom => State::Boom,
+            ebgsv4::State::Bust => State::Bust,
+            ebgsv4::State::CivilUnrest => State::CivilUnrest,
+            ebgsv4::State::Famine => State::Famine,
+            ebgsv4::State::Outbreak => State::Outbreak,
+            ebgsv4::State::Lockdown => State::Lockdown,
+            ebgsv4::State::Investment => State::Investment,
+            ebgsv4::State::Retreat => State::Retreat,
+        }
+    }
+}
+
 impl State {
 
     /// maximum length in days
@@ -130,28 +150,6 @@ impl State {
     }
 }
 
-// for systems
-#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
-pub enum Government {
-    #[serde(rename = "$government_corporate;")]
-    Corporate,
-    #[serde(rename = "$government_cooperative;")]
-    Cooperative,
-    #[serde(rename = "$government_patronage;")]
-    Patronage,
-    #[serde(rename = "$government_democracy;")]
-    Democracy,
-    #[serde(rename = "$government_dictatorship;")]
-    Dictatorship,
-    #[serde(rename = "$government_anarchy;")]
-    Anarchy,
-    #[serde(rename = "$government_communism;")]
-    Communism,
-    #[serde(rename = "$government_confederacy;")]
-    Confederacy,
-    // TODO: add more as needed
-}
-
 // for factions
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
@@ -232,8 +230,8 @@ pub struct System {
 #[derive(Debug,Deserialize, Serialize, Clone)]
 pub struct Faction {
     pub name:String,
-    pub government:GovernmentFaction,
-    pub allegiance:Allegiance,
+    pub government:ebgsv4::Government,
+    pub allegiance:ebgsv4::Allegiance,
     pub evolution:Vec<FactionData>,
     pub evolution10:Vec<FactionData>,
     pub global:Option<FactionGlobalState>,
@@ -246,8 +244,8 @@ pub struct Faction {
 #[derive(Debug,Deserialize, Serialize, Clone)]
 pub struct FactionGlobalState {
     pub name:String,
-    pub government:GovernmentFaction,
-    pub allegiance:Allegiance,
+    pub government:ebgsv4::Government,
+    pub allegiance:ebgsv4::Allegiance,
     pub state_date:DateTime<Utc>,
     pub state_day:Option<u8>,
     pub state_max_length:u8,
@@ -286,8 +284,8 @@ pub struct FactionState {
     pub state_pending_danger:bool,
 }
 
-impl From<ebgsv4::Systems> for System {
-    fn from(s:ebgsv4::Systems) -> System {
+impl From<ebgsv4::System> for System {
+    fn from(s:ebgsv4::System) -> System {
         System {
             eddb_id:s.eddb_id,
             name:s.name.clone(),
@@ -300,8 +298,8 @@ impl From<ebgsv4::Systems> for System {
     }
 }
 
-impl<'a> From<&'a ebgsv4::Factions> for Faction {
-    fn from(s:&'a ebgsv4::Factions) -> Faction {
+impl<'a> From<&'a ebgsv4::Faction> for Faction {
+    fn from(s:&'a ebgsv4::Faction) -> Faction {
         Faction {
             name:s.name.clone(),
             government:s.government,
@@ -317,11 +315,14 @@ impl<'a> From<&'a ebgsv4::Factions> for Faction {
     }
 }
 
-impl<'a> From<&'a ebgsv4::Factions> for FactionGlobalState {
-    fn from(s:&'a ebgsv4::Factions) -> FactionGlobalState {
+impl<'a> From<&'a ebgsv4::Faction> for FactionGlobalState {
+    fn from(s:&'a ebgsv4::Faction) -> FactionGlobalState {
         let (state, system) = s.faction_state();
+        let state:State = state.into();
         let (pending_state, pending_system) = s.faction_pending_state();
+        let pending_state:Option<State> = pending_state.map(|x| x.into());
         let (recovery_state, recovery_system) = s.faction_recovering_state();
+        let recovery_state:Option<State> = recovery_state.map(|x| x.into());
         FactionGlobalState {
             name:s.name.clone(),
             government:s.government,
@@ -342,16 +343,17 @@ impl<'a> From<&'a ebgsv4::Factions> for FactionGlobalState {
 
 impl From <ebgsv4::FactionHistory> for FactionData {
     fn from(h:ebgsv4::FactionHistory) -> FactionData {
+        let state:State = h.state.into();
         FactionData {
             date:h.updated_at,
             label_date:format!("{}", h.updated_at.format("%d/%m")),
             influence:h.influence,
-            state:h.state,
+            state:state,
             state_day:0,
-            state_max_length:h.state.max_length(),
+            state_max_length:state.max_length(),
             pending_states:h.pending_states.into_iter().map(|s| s.into()).collect(),
             recovering_states:h.recovering_states.into_iter().map(|s| s.into()).collect(),
-            state_danger:h.state.danger(),
+            state_danger:state.danger(),
             influence_danger:false,
         }
     }
@@ -366,14 +368,15 @@ impl From <ebgsv4::EBGSState> for FactionState {
         } else {
             "&harr;"
         }.into();
+        let state:State = s.state.into();
         FactionState {
-            state:s.state,
+            state:state,
             trend:s.trend,
             trend_display:d,
             state_day:0,
-            state_recovery_length:s.state.recovery(),
-            state_pending_length:s.state.pending(),
-            state_pending_danger:s.state.pending_danger(),
+            state_recovery_length:state.recovery(),
+            state_pending_length:state.pending(),
+            state_pending_danger:state.pending_danger(),
         }
     }
 }

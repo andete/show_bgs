@@ -1,7 +1,11 @@
+// (c) 2018 Joost Yervante Damad <joost@damad.be>
+
 use chrono::{Date, DateTime, Utc};
-use data::*;
+use data::{Security, Economy};
+use serde::de::{self, Deserialize, Deserializer};
 
 use std::collections::BTreeSet;
+
 
 pub const URL:&'static str = "https://elitebgs.kodeblox.com/api/ebgs/v4/";
 
@@ -14,13 +18,13 @@ pub struct EBGSPage<T> {
     pub limit: i64,
 }
 
-pub type FactionsPage = EBGSPage<Factions>;
-pub type SystemsPage = EBGSPage<Systems>;
+pub type FactionsPage = EBGSPage<Faction>;
+pub type SystemsPage = EBGSPage<System>;
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Factions {
+pub struct Faction {
     pub eddb_id: i64,
-    pub government: GovernmentFaction,
+    pub government: Government,
     pub name: String,
     pub _id: String,
     pub name_lower: String,
@@ -31,7 +35,7 @@ pub struct Factions {
     pub history: Vec<FactionHistory>,
 }
 
-impl Factions {
+impl Faction {
     pub fn bgs_day(&self, system: &str) -> Date<Utc> {
         let mut dates = BTreeSet::new();
         for h in &self.history {
@@ -159,7 +163,7 @@ pub struct FactionHistory {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Systems {
+pub struct System {
     pub eddb_id: i64,
     pub name_lower: String,
     pub allegiance: Allegiance,
@@ -179,7 +183,7 @@ pub struct Systems {
     pub history: Vec<SystemHistory>,
 }
 
-impl Systems {
+impl System {
     pub fn bgs_day(&self) -> Option<Date<Utc>> {
         use std::iter;
         iter::once(self.updated_at).chain(
@@ -205,4 +209,96 @@ pub struct SystemHistory {
     pub updated_by: String,
     pub allegiance: Allegiance,
     pub factions: Vec<SystemPresence>,
+}
+
+// `State` of a `Faction`
+#[derive(Debug, Serialize, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum State {
+    None,
+    Expansion,
+    War,
+    CivilWar,
+    Election,
+    Boom,
+    Bust,
+    CivilUnrest,
+    Famine,
+    Outbreak,
+    Lockdown,
+    Investment,
+    Retreat,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone, Copy)]
+#[serde(rename_all = "lowercase")]
+pub enum Government {
+    Anarchy,
+    Corporate,
+    Patronage,
+    Communism,
+    Confederacy,
+    Cooperative,
+    Democracy,
+    Dictatorship,
+    Feudal,
+    Imperial,
+    PrisonColony,
+    Theocracy,
+    Workshop,
+    None,
+}
+
+/// `Allegiance` of a `Faction`
+#[derive(Debug, Deserialize, Serialize, Clone, Copy)]
+#[serde(rename_all = "lowercase")]
+pub enum Allegiance {
+    Independent,
+    Federation,
+    Alliance,
+    Empire,
+}
+
+// custom deserializer needed for state to deal with civil unrest vs civilunrest
+impl<'de> Deserialize<'de> for State {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+        where
+            D: Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?.to_lowercase();
+        let state = match s.as_str() {
+            "expansion" => State::Expansion,
+            "war" => State::War,
+            "civil unrest" | "civilunrest" => State::CivilUnrest,
+            "civil war" | "civilwar" => State::CivilWar,
+            "election" => State::Election,
+            "boom" => State::Boom,
+            "bust" => State::Bust,
+            "famine" => State::Famine,
+            "lockdown" => State::Lockdown,
+            "investment" => State::Investment,
+            "retreat" => State::Retreat,
+            "outbreak" => State::Outbreak,
+            "none" => State::None,
+            other => { return Err(de::Error::custom(format!("Invalid state '{}'", other))); },
+        };
+        Ok(state)
+    }
+}
+
+impl State {
+
+    /// is this a state that only gets active in a single system
+    pub fn is_single_system_state(&self) -> bool {
+        match *self {
+            State::Boom => false,
+            State::Bust => false,
+            State::CivilUnrest => false,
+            State::Outbreak => false,
+            State::Famine => false,
+            State::Lockdown => false,
+            State::None => false,
+            State::Retreat => false,
+            _ => true,
+        }
+    }
 }

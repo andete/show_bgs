@@ -2,7 +2,7 @@
 
 use chrono::{DateTime, Utc};
 
-use extdata::ebgsv4::EBGSPage;
+use extdata::ebgsv4::{Allegiance, State, EBGSPage};
 
 pub const URL: &'static str = "https://elitebgs.kodeblox.com/api/eddb/v3/";
 
@@ -24,51 +24,24 @@ pub struct Faction {
     pub is_player_faction: bool,
 }
 
-
-#[derive(Debug, Deserialize, Serialize, Clone, Copy)]
-#[serde(rename_all = "lowercase")]
+// for systems
+#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 pub enum Government {
-    Anarchy,
+    #[serde(rename = "$government_corporate;")]
     Corporate,
-    Patronage,
-    Communism,
-    Confederacy,
+    #[serde(rename = "$government_cooperative;")]
     Cooperative,
+    #[serde(rename = "$government_patronage;")]
+    Patronage,
+    #[serde(rename = "$government_democracy;")]
     Democracy,
+    #[serde(rename = "$government_dictatorship;")]
     Dictatorship,
-    Feudal,
-    Imperial,
-    PrisonColony,
-    Theocracy,
-    Workshop,
-    None,
-}
-
-/// `Allegiance` of a `Faction`
-#[derive(Debug, Deserialize, Serialize, Clone, Copy)]
-#[serde(rename_all = "lowercase")]
-pub enum Allegiance {
-    Independent,
-    Federation,
-    Alliance,
-    Empire,
-}
-
-/// `State` of a `Faction`
-#[derive(Debug, Deserialize, Serialize, Clone, Copy, PartialEq, Eq, Hash)]
-#[serde(rename_all = "lowercase")]
-pub enum State {
-    None,
-    Expansion,
-    War,
-    CivilWar,
-    Election,
-    Boom,
-    Bust,
-    CivilUnrest,
-    Famine,
-    Outbreak,
-    Lockdown,
-    Investment,
-    Retreat,
+    #[serde(rename = "$government_anarchy;")]
+    Anarchy,
+    #[serde(rename = "$government_communism;")]
+    Communism,
+    #[serde(rename = "$government_confederacy;")]
+    Confederacy,
+    // TODO: add more as needed
 }
