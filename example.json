@@ -1,0 +1,6 @@
+{
+    "short_name": "test",
+    "report_name": "Test Report",
+    "main_systems":[ "Lave"],
+    "other_systems": [ "Sol"]
+}

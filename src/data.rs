@@ -151,7 +151,7 @@ impl State {
 }
 
 // for factions
-#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
+#[derive(Debug,Deserialize, Serialize, Clone, Copy, PartialEq)]
 #[serde(rename_all = "lowercase")]
 pub enum Government {
     Anarchy,
@@ -168,6 +168,7 @@ pub enum Government {
     Theocracy,
     Workshop,
     None,
+    Engineer,
 }
 
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]

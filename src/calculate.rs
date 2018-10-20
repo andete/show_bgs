@@ -53,6 +53,9 @@ pub fn calculate(config:&Config) {
         let n = format!("{}/factions/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
         let mut factionv4:ebgsv4::Faction = serde_json::from_reader(&f).unwrap();
+        if factionv4.government == Government::Engineer {
+            continue
+        }
         let n = format!("{}/factions/eddb/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
         let faction_eddb:eddbv3::Faction = serde_json::from_reader(&f).unwrap();
