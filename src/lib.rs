@@ -39,4 +39,5 @@ pub mod eddbv3;
 pub mod data;
 pub mod fetch;
 pub mod fetch_fact;
+pub mod calculate;
 
