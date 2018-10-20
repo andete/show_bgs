@@ -44,8 +44,7 @@ pub fn read_config(filename: &str) -> Config {
 
 pub mod calculate;
 pub mod data;
-pub mod ebgsv4;
-pub mod eddbv3;
+pub mod extdata;
 pub mod fetch;
 pub mod fetch_fact;
 pub mod webpage;

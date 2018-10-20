@@ -1,7 +1,7 @@
 use chrono::{DateTime,Utc};
 use data::*;
 
-use ebgsv4::EBGSPageV4;
+use extdata::ebgsv4::EBGSPageV4;
 
 pub const URL:&'static str = "https://elitebgs.kodeblox.com/api/eddb/v3/";
 

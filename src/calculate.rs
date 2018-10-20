@@ -6,8 +6,8 @@ use serde_json;
 use std::collections::{BTreeSet,HashMap};
 use std::fs::File;
 
-use ebgsv4;
-use eddbv3;
+use extdata::ebgsv4;
+use extdata::eddbv3;
 use data::*;
 use Config;
 

@@ -10,8 +10,8 @@ use std::time::Duration;
 use std::collections::BTreeSet;
 use std::fs::File;
 
-use eddbv3;
-use ebgsv4;
+use extdata::eddbv3;
+use extdata::ebgsv4;
 use Config;
 
 pub fn fetch_fact(config:&Config, n_days:i64) {

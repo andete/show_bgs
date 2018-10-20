@@ -5,7 +5,7 @@ use reqwest;
 use std::collections::BTreeSet;
 use std::fs::{create_dir_all, File};
 
-use ebgsv4;
+use extdata::ebgsv4;
 use serde_json;
 use Config;
 
@@ -33,6 +33,7 @@ pub fn fetch(config: &Config, n:i32) {
         // fetch data
         let url = format!("{}systems?name={}&timemax={}", ebgsv4::URL, system, now);
         let ebgs_system_data = client.get(&url).send().unwrap().text().unwrap();
+        info!("data: {}", ebgs_system_data);
         let json:ebgsv4::EBGSSystemsPageV4 = serde_json::from_str(&ebgs_system_data).unwrap();
         let system_data = &json.docs[0];
         let update_date = system_data.updated_at.date();
