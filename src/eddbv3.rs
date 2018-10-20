@@ -3,6 +3,8 @@ use data::*;
 
 use ebgsv4::EBGSPageV4;
 
+pub const URL:&'static str = "https://elitebgs.kodeblox.com/api/eddb/v3/";
+
 pub type FactionPage = EBGSPageV4<Faction>;
 
 #[derive(Debug,Deserialize, Serialize, Clone)]

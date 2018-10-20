@@ -9,8 +9,6 @@ extern crate reqwest;
 
 use std::fs::File;
 
-pub const EDDBV3_URL:&'static str = "https://elitebgs.kodeblox.com/api/eddb/v3/";
-
 #[derive(Debug,Deserialize)]
 pub struct Config {
     pub report_name:String,
@@ -40,4 +38,5 @@ pub mod ebgsv4;
 pub mod eddbv3;
 pub mod data;
 pub mod fetch;
+pub mod fetch_fact;
 
