@@ -198,6 +198,7 @@ pub enum Economy {
 
 #[derive(Debug,Deserialize, Serialize)]
 pub struct Systems {
+    pub report_name: String,
     pub systems: Vec<System>,
     pub dates: Vec<String>,
     pub dates10: Vec<String>,

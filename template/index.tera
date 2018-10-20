@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>The Order of Mobius - BGS - {{bgs_day}}</title>
+    <title>{{report_name}} - BGS - {{bgs_day}}</title>
     <meta name="viewport" content="width=device-width">
 <meta charset="utf-8">
 <!-- Bootstrap -->
@@ -43,7 +43,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
-    <a class="navbar-brand" href=".">The Order of Mobius - BGS - {{bgs_day}}</a>
+    <a class="navbar-brand" href=".">{{report_name}} - BGS - {{bgs_day}}</a>
 
     <button class="navbar-toggler"
             type="button"

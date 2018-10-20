@@ -184,6 +184,7 @@ pub fn calculate(config:&Config) {
     let dates10 = dates.as_slice();
     let dates10 = dates10.windows(10).last().unwrap().to_vec();
     let systems = Systems {
+        report_name:config.report_name.clone(),
         systems: s2,
         dates:dates2,
         dates10:dates10,
