@@ -286,8 +286,8 @@ pub struct FactionState {
     pub state_pending_danger:bool,
 }
 
-impl From<ebgsv4::EBGSSystemsV4> for System {
-    fn from(s:ebgsv4::EBGSSystemsV4) -> System {
+impl From<ebgsv4::Systems> for System {
+    fn from(s:ebgsv4::Systems) -> System {
         System {
             eddb_id:s.eddb_id,
             name:s.name.clone(),
@@ -300,8 +300,8 @@ impl From<ebgsv4::EBGSSystemsV4> for System {
     }
 }
 
-impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
-    fn from(s:&'a ebgsv4::EBGSFactionsV4) -> Faction {
+impl<'a> From<&'a ebgsv4::Factions> for Faction {
+    fn from(s:&'a ebgsv4::Factions) -> Faction {
         Faction {
             name:s.name.clone(),
             government:s.government,
@@ -317,8 +317,8 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for Faction {
     }
 }
 
-impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for FactionGlobalState {
-    fn from(s:&'a ebgsv4::EBGSFactionsV4) -> FactionGlobalState {
+impl<'a> From<&'a ebgsv4::Factions> for FactionGlobalState {
+    fn from(s:&'a ebgsv4::Factions) -> FactionGlobalState {
         let (state, system) = s.faction_state();
         let (pending_state, pending_system) = s.faction_pending_state();
         let (recovery_state, recovery_system) = s.faction_recovering_state();
@@ -340,8 +340,8 @@ impl<'a> From<&'a ebgsv4::EBGSFactionsV4> for FactionGlobalState {
     }
 }
 
-impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
-    fn from(h:ebgsv4::EBGSFactionHistoryV4) -> FactionData {
+impl From <ebgsv4::FactionHistory> for FactionData {
+    fn from(h:ebgsv4::FactionHistory) -> FactionData {
         FactionData {
             date:h.updated_at,
             label_date:format!("{}", h.updated_at.format("%d/%m")),
@@ -357,8 +357,8 @@ impl From <ebgsv4::EBGSFactionHistoryV4> for FactionData {
     }
 }
 
-impl From <ebgsv4::EBGSStateV4> for FactionState {
-    fn from(s:ebgsv4::EBGSStateV4) -> FactionState {
+impl From <ebgsv4::EBGSState> for FactionState {
+    fn from(s:ebgsv4::EBGSState) -> FactionState {
         let d = if s.trend == 1 {
             "&uarr;"
         } else if s.trend == -1 {

@@ -6,7 +6,7 @@ use std::collections::BTreeSet;
 pub const URL:&'static str = "https://elitebgs.kodeblox.com/api/ebgs/v4/";
 
 #[derive(Debug, Deserialize)]
-pub struct EBGSPageV4<T> {
+pub struct EBGSPage<T> {
     pub docs: Vec<T>,
     pub page: i64,
     pub pages: i64,
@@ -14,11 +14,11 @@ pub struct EBGSPageV4<T> {
     pub limit: i64,
 }
 
-pub type EBGSFactionsPageV4 = EBGSPageV4<EBGSFactionsV4>;
-pub type EBGSSystemsPageV4 = EBGSPageV4<EBGSSystemsV4>;
+pub type FactionsPage = EBGSPage<Factions>;
+pub type SystemsPage = EBGSPage<Systems>;
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct EBGSFactionsV4 {
+pub struct Factions {
     pub eddb_id: i64,
     pub government: GovernmentFaction,
     pub name: String,
@@ -26,12 +26,12 @@ pub struct EBGSFactionsV4 {
     pub name_lower: String,
     //pub is_player_faction:bool,
     pub updated_at: DateTime<Utc>,
-    pub faction_presence: Vec<EBGSFactionPresenceV4>,
+    pub faction_presence: Vec<FactionPresence>,
     pub allegiance: Allegiance,
-    pub history: Vec<EBGSFactionHistoryV4>,
+    pub history: Vec<FactionHistory>,
 }
 
-impl EBGSFactionsV4 {
+impl Factions {
     pub fn bgs_day(&self, system: &str) -> Date<Utc> {
         let mut dates = BTreeSet::new();
         for h in &self.history {
@@ -130,36 +130,36 @@ impl EBGSFactionsV4 {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct EBGSFactionPresenceV4 {
+pub struct FactionPresence {
     pub system_name: String,
     pub state: State,
-    pub pending_states: Vec<EBGSStateV4>,
-    pub recovering_states: Vec<EBGSStateV4>,
+    pub pending_states: Vec<EBGSState>,
+    pub recovering_states: Vec<EBGSState>,
     pub influence: f64,
     pub system_name_lower: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct EBGSStateV4 {
+pub struct EBGSState {
     pub state: State,
     pub trend: i64,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct EBGSFactionHistoryV4 {
+pub struct FactionHistory {
     pub system: String,
     pub state: State,
     pub updated_at: DateTime<Utc>,
     pub system_lower: String,
     pub updated_by: String,
-    pub pending_states: Vec<EBGSStateV4>,
-    pub recovering_states: Vec<EBGSStateV4>,
+    pub pending_states: Vec<EBGSState>,
+    pub recovering_states: Vec<EBGSState>,
     pub _id: String,
     pub influence: f64,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct EBGSSystemsV4 {
+pub struct Systems {
     pub eddb_id: i64,
     pub name_lower: String,
     pub allegiance: Allegiance,
@@ -175,11 +175,11 @@ pub struct EBGSSystemsV4 {
     pub primary_economy: Economy,
     pub name: String,
     pub government: Government,
-    pub factions: Vec<EBGSSystemPresenceV4>,
-    pub history: Vec<EBGSSystemHistoryV4>,
+    pub factions: Vec<SystemPresence>,
+    pub history: Vec<SystemHistory>,
 }
 
-impl EBGSSystemsV4 {
+impl Systems {
     pub fn bgs_day(&self) -> Option<Date<Utc>> {
         use std::iter;
         iter::once(self.updated_at).chain(
@@ -189,13 +189,13 @@ impl EBGSSystemsV4 {
 
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct EBGSSystemPresenceV4 {
+pub struct SystemPresence {
     pub name: String,
     pub name_lower: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct EBGSSystemHistoryV4 {
+pub struct SystemHistory {
     pub controlling_minor_faction: String,
     pub security: Security,
     pub updated_at: DateTime<Utc>,
@@ -204,5 +204,5 @@ pub struct EBGSSystemHistoryV4 {
     pub population: i64,
     pub updated_by: String,
     pub allegiance: Allegiance,
-    pub factions: Vec<EBGSSystemPresenceV4>,
+    pub factions: Vec<SystemPresence>,
 }

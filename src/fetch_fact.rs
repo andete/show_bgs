@@ -40,7 +40,7 @@ pub fn fetch_fact(config:&Config, n_days:i64) {
         // then fetch ebgs data
         let url = format!("{}factions?name={}&timemin={}&timemax={}", ebgsv4::URL, faction, then, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
-        let json:ebgsv4::EBGSFactionsPageV4 = serde_json::from_str(&res).unwrap();
+        let json:ebgsv4::FactionsPage = serde_json::from_str(&res).unwrap();
         let n = format!("{}/factions/{}.json", datadir, faction);
         let mut f = File::create(&n).unwrap();
         serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();

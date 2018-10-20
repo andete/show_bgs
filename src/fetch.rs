@@ -34,7 +34,7 @@ pub fn fetch(config: &Config, n:i32) {
         let url = format!("{}systems?name={}&timemax={}", ebgsv4::URL, system, now);
         let ebgs_system_data = client.get(&url).send().unwrap().text().unwrap();
         info!("data: {}", ebgs_system_data);
-        let json:ebgsv4::EBGSSystemsPageV4 = serde_json::from_str(&ebgs_system_data).unwrap();
+        let json:ebgsv4::SystemsPage = serde_json::from_str(&ebgs_system_data).unwrap();
         let system_data = &json.docs[0];
         let update_date = system_data.updated_at.date();
 

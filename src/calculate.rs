@@ -24,7 +24,7 @@ pub fn calculate(config:&Config) {
         info!("Looking at {}...", system_name);
         let n = format!("{}/systems/{}.json", datadir, system_name);
         let f = File::open(&n).unwrap();
-        let s:ebgsv4::EBGSSystemsV4 = serde_json::from_reader(&f).unwrap();
+        let s:ebgsv4::Systems = serde_json::from_reader(&f).unwrap();
         if let Some(d) = s.bgs_day() {
             dates.insert(d);
             system_dates.push((system_name, d));
@@ -52,7 +52,7 @@ pub fn calculate(config:&Config) {
         info!("Looking at {}...", minor_faction_name);
         let n = format!("{}/factions/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
-        let mut factionv4:ebgsv4::EBGSFactionsV4 = serde_json::from_reader(&f).unwrap();
+        let mut factionv4:ebgsv4::Factions = serde_json::from_reader(&f).unwrap();
         let n = format!("{}/factions/eddb/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
         let faction_eddb:eddbv3::Faction = serde_json::from_reader(&f).unwrap();
