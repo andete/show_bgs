@@ -153,7 +153,7 @@ impl State {
 // for factions
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 #[serde(rename_all = "lowercase")]
-pub enum GovernmentFaction {
+pub enum Government {
     Anarchy,
     Corporate,
     Patronage,
@@ -171,42 +171,30 @@ pub enum GovernmentFaction {
 }
 
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
+#[serde(rename_all = "lowercase")]
 pub enum Security {
-    #[serde(rename = "$system_security_medium;")]
     Medium,
-    #[serde(rename = "$system_security_low;")]
     Low,
-    #[serde(rename = "$system_security_high;")]
     High,
-    #[serde(rename = "$system_security_anarchy;")]
     Anarchy,
-    #[serde(rename = "$galaxy_map_info_state_anarchy;")]
     Anarchy2,
-    #[serde(rename = "$system_security_lawless;")]
     Lawless,
 }
     
 #[derive(Debug,Deserialize, Serialize, Clone, Copy)]
+#[serde(rename_all = "lowercase")]
 pub enum Economy {
-    #[serde(rename = "$economy_industrial;")]
     Industrial,
-    #[serde(rename = "$economy_extraction;")]
     Extraction,
-    #[serde(rename = "$economy_colony;")]
     Colony,
-    #[serde(rename = "$economy_agri;")]
     Agriculture,
-    #[serde(rename = "$economy_tourism;")]
     Tourism,
-    #[serde(rename = "$economy_hightech;")]
     HighTech,
-    #[serde(rename = "$economy_terraforming;")]
     Terraforming,
-    #[serde(rename = "$economy_refinery;")]
     Refinery,
-    #[serde(rename = "$economy_military;")]
     Military,
 }
+
 #[derive(Debug,Deserialize, Serialize)]
 pub struct Systems {
     pub systems: Vec<System>,
@@ -230,7 +218,7 @@ pub struct System {
 #[derive(Debug,Deserialize, Serialize, Clone)]
 pub struct Faction {
     pub name:String,
-    pub government:ebgsv4::Government,
+    pub government:Government,
     pub allegiance:ebgsv4::Allegiance,
     pub evolution:Vec<FactionData>,
     pub evolution10:Vec<FactionData>,
@@ -244,7 +232,7 @@ pub struct Faction {
 #[derive(Debug,Deserialize, Serialize, Clone)]
 pub struct FactionGlobalState {
     pub name:String,
-    pub government:ebgsv4::Government,
+    pub government:Government,
     pub allegiance:ebgsv4::Allegiance,
     pub state_date:DateTime<Utc>,
     pub state_day:Option<u8>,

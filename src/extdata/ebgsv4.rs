@@ -1,7 +1,6 @@
 // (c) 2018 Joost Yervante Damad <joost@damad.be>
 
 use chrono::{Date, DateTime, Utc};
-use data::{Security, Economy};
 use serde::de::{self, Deserialize, Deserializer};
 
 use std::collections::BTreeSet;
@@ -24,7 +23,7 @@ pub type SystemsPage = EBGSPage<System>;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Faction {
     pub eddb_id: i64,
-    pub government: Government,
+    pub government: ::data::Government,
     pub name: String,
     pub _id: String,
     pub name_lower: String,
@@ -229,23 +228,25 @@ pub enum State {
     Retreat,
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone, Copy)]
-#[serde(rename_all = "lowercase")]
+#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
 pub enum Government {
-    Anarchy,
+    #[serde(rename = "$government_corporate;")]
     Corporate,
-    Patronage,
-    Communism,
-    Confederacy,
+    #[serde(rename = "$government_cooperative;")]
     Cooperative,
+    #[serde(rename = "$government_patronage;")]
+    Patronage,
+    #[serde(rename = "$government_democracy;")]
     Democracy,
+    #[serde(rename = "$government_dictatorship;")]
     Dictatorship,
-    Feudal,
-    Imperial,
-    PrisonColony,
-    Theocracy,
-    Workshop,
-    None,
+    #[serde(rename = "$government_anarchy;")]
+    Anarchy,
+    #[serde(rename = "$government_communism;")]
+    Communism,
+    #[serde(rename = "$government_confederacy;")]
+    Confederacy,
+    // TODO: add more as needed
 }
 
 /// `Allegiance` of a `Faction`
@@ -301,4 +302,42 @@ impl State {
             _ => true,
         }
     }
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone, Copy)]
+pub enum Security {
+    #[serde(rename = "$system_security_medium;")]
+    Medium,
+    #[serde(rename = "$system_security_low;")]
+    Low,
+    #[serde(rename = "$system_security_high;")]
+    High,
+    #[serde(rename = "$system_security_anarchy;")]
+    Anarchy,
+    #[serde(rename = "$galaxy_map_info_state_anarchy;")]
+    Anarchy2,
+    #[serde(rename = "$system_security_lawless;")]
+    Lawless,
+}
+
+#[derive(Debug,Deserialize, Serialize, Clone, Copy)]
+pub enum Economy {
+    #[serde(rename = "$economy_industrial;")]
+    Industrial,
+    #[serde(rename = "$economy_extraction;")]
+    Extraction,
+    #[serde(rename = "$economy_colony;")]
+    Colony,
+    #[serde(rename = "$economy_agri;")]
+    Agriculture,
+    #[serde(rename = "$economy_tourism;")]
+    Tourism,
+    #[serde(rename = "$economy_hightech;")]
+    HighTech,
+    #[serde(rename = "$economy_terraforming;")]
+    Terraforming,
+    #[serde(rename = "$economy_refinery;")]
+    Refinery,
+    #[serde(rename = "$economy_military;")]
+    Military,
 }

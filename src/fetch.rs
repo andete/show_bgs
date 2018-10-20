@@ -33,12 +33,14 @@ pub fn fetch(config: &Config, n:i32) {
         // fetch data
         let url = format!("{}systems?name={}&timemax={}", ebgsv4::URL, system, now);
         let ebgs_system_data = client.get(&url).send().unwrap().text().unwrap();
-        info!("data: {}", ebgs_system_data);
+        //info!("data: {}", ebgs_system_data);
         let json:ebgsv4::SystemsPage = serde_json::from_str(&ebgs_system_data).unwrap();
         let system_data = &json.docs[0];
         let update_date = system_data.updated_at.date();
 
         // store to file
+
+        create_dir_all(format!("{}/systems", datadir)).unwrap();
         let n = format!("{}/systems/{}.json", datadir, system);
         let mut f = File::create(&n).unwrap();
         serde_json::to_writer_pretty(&f, &system_data).unwrap();

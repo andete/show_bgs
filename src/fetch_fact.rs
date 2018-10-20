@@ -8,7 +8,7 @@ use chrono::Utc;
 use std::time::Duration;
 
 use std::collections::BTreeSet;
-use std::fs::File;
+use std::fs::{create_dir_all, File};
 
 use extdata::eddbv3;
 use extdata::ebgsv4;
@@ -33,6 +33,7 @@ pub fn fetch_fact(config:&Config, n_days:i64) {
         let url = format!("{}factions?name={}", eddbv3::URL, faction);
         let res = client.get(&url).send().unwrap().text().unwrap();
         let json:eddbv3::FactionPage = serde_json::from_str(&res).unwrap();
+        create_dir_all(format!("{}/factions/eddb", datadir)).unwrap();
         let n = format!("{}/factions/eddb/{}.json", datadir, faction);
         let mut f = File::create(&n).unwrap();
         serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();

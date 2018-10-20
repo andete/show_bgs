@@ -15,7 +15,7 @@ pub struct Faction {
     pub name: String,
     pub updated_at: DateTime<Utc>,
     pub government_id: u8,
-    pub government: Government,
+    pub government: ::data::Government,
     pub allegiance_id: u8,
     pub allegiance: Allegiance,
     pub state_id: u8,
