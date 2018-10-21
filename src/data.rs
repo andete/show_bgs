@@ -262,8 +262,9 @@ pub struct FactionDynamic {
     pub state: State,
 }
 
-impl From<eddbv3::Faction> for Faction {
-    fn from(f: eddbv3::Faction) -> Faction {
+impl Faction {
+    pub fn from(f: eddbv3::Faction, f2:ebgsv4::Faction) -> Faction {
+        // BUSY
         Faction {
             ebgs_eddbv3_id: f._id,
             name: f.name,

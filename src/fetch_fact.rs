@@ -34,23 +34,27 @@ pub fn fetch_fact(config:&Config, n_days:i64) {
         let url = format!("{}factions?name={}", eddbv3::URL, faction_name);
         let res = client.get(&url).send().unwrap().text().unwrap();
         let mut faction_page:eddbv3::FactionPage = serde_json::from_str(&res).unwrap();
-        let faction = faction_page.docs.remove(0);
+        let eddb_faction = faction_page.docs.remove(0);
         create_dir_all(format!("{}/factions/eddbv3", datadir)).unwrap();
         let n = format!("{}/factions/eddbv3/{}.json", datadir, faction_name);
         let mut f = File::create(&n).unwrap();
-        serde_json::to_writer_pretty(&f, &faction).unwrap();
-        let faction:data::Faction = faction.into();
-        let n = format!("{}/factions/{}.json", datadir, faction_name);
-        let mut f = File::create(&n).unwrap();
-        serde_json::to_writer_pretty(&f, &faction).unwrap();
+        serde_json::to_writer_pretty(&f, &eddb_faction).unwrap();
+
 
         // then fetch ebgs data
         let url = format!("{}factions?name={}&timemin={}&timemax={}", ebgsv4::URL, faction_name, then, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
-        let json:ebgsv4::FactionsPage = serde_json::from_str(&res).unwrap();
+        let mut faction_page:ebgsv4::FactionsPage = serde_json::from_str(&res).unwrap();
+        let ebgs_faction = faction_page.docs.remove(0);
         create_dir_all(format!("{}/factions/ebgsv4", datadir)).unwrap();
         let n = format!("{}/factions/ebgsv4/{}.json", datadir, faction_name);
         let mut f = File::create(&n).unwrap();
-        serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
+        serde_json::to_writer_pretty(&f, &ebgs_faction).unwrap();
+
+        // combine to our data
+        let faction:data::Faction = data::Faction::from(eddb_faction, ebgs_faction);
+        let n = format!("{}/factions/{}.json", datadir, faction_name);
+        let mut f = File::create(&n).unwrap();
+        serde_json::to_writer_pretty(&f, &faction).unwrap();
     }
 }
