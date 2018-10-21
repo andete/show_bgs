@@ -11,7 +11,7 @@ use extdata::eddbv3;
 use data::*;
 use Config;
 
-pub fn calculate(config:&Config) {
+pub fn calculate(config:&Config, yesterday:bool) {
     info!("Calculating data");
     let mut system_warnings = HashMap::new();
     let system_names = config.systems();
@@ -22,7 +22,7 @@ pub fn calculate(config:&Config) {
     let mut system_dates = Vec::new();
     for system_name in &system_names {
         info!("Looking at {}...", system_name);
-        let n = format!("{}/systems/{}.json", datadir, system_name);
+        let n = format!("{}/systems/ebgsv4/{}.json", datadir, system_name);
         let f = File::open(&n).unwrap();
         let s:ebgsv4::System = serde_json::from_reader(&f).unwrap();
         if let Some(d) = s.bgs_day() {
@@ -35,7 +35,11 @@ pub fn calculate(config:&Config) {
     // info!("systems: {:?}", systems);
 
     info!("dates: {:?}", dates);
-    let bgs_day = dates.iter().max().unwrap().clone(); // make "pred" optional
+    let bgs_day = if !yesterday {
+        dates.iter().max().unwrap().clone()
+    } else {
+        dates.iter().max().unwrap().pred()
+    };
     info!("Current BGS day: {}", bgs_day);
     for &(system,date) in &system_dates {
         if bgs_day != date {
@@ -50,13 +54,13 @@ pub fn calculate(config:&Config) {
     let minor_faction_names:BTreeSet<String> = serde_json::from_reader(&f).unwrap();
     for minor_faction_name in minor_faction_names {
         info!("Looking at {}...", minor_faction_name);
-        let n = format!("{}/factions/{}.json", datadir, minor_faction_name);
+        let n = format!("{}/factions/ebgsv4/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
         let mut factionv4:ebgsv4::Faction = serde_json::from_reader(&f).unwrap();
         if factionv4.government == Government::Engineer {
             continue
         }
-        let n = format!("{}/factions/eddb/{}.json", datadir, minor_faction_name);
+        let n = format!("{}/factions/eddbv3/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
         let faction_eddb:eddbv3::Faction = serde_json::from_reader(&f).unwrap();
         let fgs:FactionGlobalState = (&factionv4).into();

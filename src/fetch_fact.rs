@@ -33,8 +33,8 @@ pub fn fetch_fact(config:&Config, n_days:i64) {
         let url = format!("{}factions?name={}", eddbv3::URL, faction);
         let res = client.get(&url).send().unwrap().text().unwrap();
         let json:eddbv3::FactionPage = serde_json::from_str(&res).unwrap();
-        create_dir_all(format!("{}/factions/eddb", datadir)).unwrap();
-        let n = format!("{}/factions/eddb/{}.json", datadir, faction);
+        create_dir_all(format!("{}/factions/eddbv3", datadir)).unwrap();
+        let n = format!("{}/factions/eddbv3/{}.json", datadir, faction);
         let mut f = File::create(&n).unwrap();
         serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
 
@@ -42,7 +42,8 @@ pub fn fetch_fact(config:&Config, n_days:i64) {
         let url = format!("{}factions?name={}&timemin={}&timemax={}", ebgsv4::URL, faction, then, now);
         let res = client.get(&url).send().unwrap().text().unwrap();
         let json:ebgsv4::FactionsPage = serde_json::from_str(&res).unwrap();
-        let n = format!("{}/factions/{}.json", datadir, faction);
+        create_dir_all(format!("{}/factions/ebgsv4", datadir)).unwrap();
+        let n = format!("{}/factions/ebgsv4/{}.json", datadir, faction);
         let mut f = File::create(&n).unwrap();
         serde_json::to_writer_pretty(&f, &json.docs[0]).unwrap();
     }

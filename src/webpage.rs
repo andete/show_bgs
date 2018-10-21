@@ -1,6 +1,5 @@
 // (c) 2018 Joost Yervante Damad <joost@damad.be>
 
-
 use serde_json;
 use std::fs::{create_dir_all, File, read_dir, copy};
 use std::path::PathBuf;

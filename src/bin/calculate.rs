@@ -10,6 +10,11 @@ fn main() {
         .version(env!("CARGO_PKG_VERSION"))
         .author("Joost Yervante Damad <joost@damad.be>")
         .about("calculate")
+        .arg(Arg::with_name("yesterday")
+            .short("y")
+            .long("yesterday")
+            .help("calculate for BGS day starting yesterday")
+        )
         .arg(Arg::with_name("FILE")
             .required(true)
             .index(1)
@@ -17,7 +22,8 @@ fn main() {
         .get_matches();
 
     let filename = m.value_of("FILE").unwrap();
+    let yesterday = m.is_present("yesterday");
     badlog::minimal(Some("INFO"));
     let config = show_bgs::read_config(filename);
-    show_bgs::calculate::calculate(&config);
+    show_bgs::calculate::calculate(&config, yesterday);
 }

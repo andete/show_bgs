@@ -1,3 +1,5 @@
+// (c) 2018 Joost Yervante Damad <joost@damad.be>
+
 use chrono::{Date,DateTime,Utc};
 use extdata::ebgsv4;
 use extdata::eddbv3;

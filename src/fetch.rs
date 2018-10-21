@@ -40,8 +40,8 @@ pub fn fetch(config: &Config, n:i32) {
 
         // store to file
 
-        create_dir_all(format!("{}/systems", datadir)).unwrap();
-        let n = format!("{}/systems/{}.json", datadir, system);
+        create_dir_all(format!("{}/systems/ebgsv4", datadir)).unwrap();
+        let n = format!("{}/systems/ebgsv4/{}.json", datadir, system);
         let mut f = File::create(&n).unwrap();
         serde_json::to_writer_pretty(&f, &system_data).unwrap();
         // collect dates
