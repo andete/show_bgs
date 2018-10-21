@@ -1,9 +1,7 @@
 // (c) 2018 Joost Yervante Damad <joost@damad.be>
 
-use chrono::{Date, DateTime, Utc};
+use chrono::{DateTime, Utc};
 use serde::de::{self, Deserialize, Deserializer};
-
-use std::collections::BTreeSet;
 
 use data;
 
@@ -33,104 +31,6 @@ pub struct Faction {
     pub faction_presence: Vec<FactionPresence>,
     pub allegiance: data::Allegiance,
     pub history: Vec<FactionHistory>,
-}
-
-impl Faction {
-    pub fn bgs_day(&self, system: &str) -> Date<Utc> {
-        let mut dates = BTreeSet::new();
-        for h in &self.history {
-            if &h.system == system {
-                dates.insert(h.updated_at.date());
-            }
-        }
-        dates.iter().max().unwrap().clone()
-    }
-
-    pub fn systems(&self) -> Vec<String> {
-        self.faction_presence.iter().map(|x| x.system_name.clone()).collect()
-    }
-
-    pub fn last_state_in_system(&self, system: &str) -> State {
-        let mut state = State::None;
-        let mut date = None;
-        for h in &self.history {
-            if &h.system == system {
-                if Some(h.updated_at) != date {
-                    state = h.state;
-                    date = Some(h.updated_at);
-                }
-            }
-        }
-        state
-    }
-
-    pub fn last_pending_state_in_system(&self, system: &str) -> Option<State> {
-        let mut state = None;
-        let mut date = None;
-        for h in &self.history {
-            if &h.system == system {
-                if Some(h.updated_at) != date {
-                    state = h.pending_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
-                    date = Some(h.updated_at);
-                }
-            }
-        }
-        state
-    }
-
-    pub fn last_recovering_state_in_system(&self, system: &str) -> Option<State> {
-        let mut state = None;
-        let mut date = None;
-        for h in &self.history {
-            if &h.system == system {
-                if Some(h.updated_at) != date {
-                    state = h.recovering_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
-                    date = Some(h.updated_at);
-                }
-            }
-        }
-        state
-    }
-
-    // TODO: this doesn't work correctly if some data is dated
-    pub fn faction_state(&self) -> (State, Option<String>) {
-        let mut p_state = State::None;
-        for system in self.systems() {
-            let state = self.last_state_in_system(&system);
-            if state.is_single_system_state() {
-                info!("XXX {} {} {:?}", self.name, system, state);
-                return (state, Some(system));
-            }
-            p_state = state;
-        }
-        (p_state, None)
-    }
-
-    // TODO: this doesn't work correctly if some data is dated
-    pub fn faction_pending_state(&self) -> (Option<State>, Option<String>) {
-        for system in self.systems() {
-            if let Some(state) = self.last_pending_state_in_system(&system) {
-                info!("XXX {} {} {:?}", self.name, system, state);
-                if state.is_single_system_state() {
-                    return (Some(state), Some(system))
-                }
-            }
-        }
-        (None, None)
-    }
-
-    // TODO: this doesn't work correctly if some data is dated
-    pub fn faction_recovering_state(&self) -> (Option<State>, Option<String>) {
-        for system in self.systems() {
-            if let Some(state) = self.last_recovering_state_in_system(&system) {
-                info!("XXX {} {} {:?}", self.name, system, state);
-                if state.is_single_system_state() {
-                    return (Some(state), Some(system))
-                }
-            }
-        }
-        (None, None)
-    }
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -182,15 +82,6 @@ pub struct System {
     pub factions: Vec<SystemPresence>,
     pub history: Vec<SystemHistory>,
 }
-
-impl System {
-    pub fn bgs_day(&self) -> Option<Date<Utc>> {
-        use std::iter;
-        iter::once(self.updated_at).chain(
-            self.history.iter().map(|x| x.updated_at)).map(|x| x.date()).max()
-    }
-}
-
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct SystemPresence {
@@ -287,24 +178,6 @@ impl<'de> Deserialize<'de> for State {
             other => { return Err(de::Error::custom(format!("Invalid state '{}'", other))); },
         };
         Ok(state)
-    }
-}
-
-impl State {
-
-    /// is this a state that only gets active in a single system
-    pub fn is_single_system_state(&self) -> bool {
-        match *self {
-            State::Boom => false,
-            State::Bust => false,
-            State::CivilUnrest => false,
-            State::Outbreak => false,
-            State::Famine => false,
-            State::Lockdown => false,
-            State::None => false,
-            State::Retreat => false,
-            _ => true,
-        }
     }
 }
 
