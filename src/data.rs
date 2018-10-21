@@ -37,7 +37,7 @@ pub enum Government {
 }
 
 impl From<ebgsv4::Government> for Government {
-    fn from(g:ebgsv4::Government) -> Government {
+    fn from(g: ebgsv4::Government) -> Government {
         match g {
             ebgsv4::Government::Anarchy => Government::Anarchy,
             ebgsv4::Government::Corporate => Government::Corporate,
@@ -203,7 +203,7 @@ pub enum Security {
 }
 
 impl From<ebgsv4::Security> for Security {
-    fn from(s:ebgsv4::Security) -> Security {
+    fn from(s: ebgsv4::Security) -> Security {
         match s {
             ebgsv4::Security::Anarchy => Security::Anarchy,
             ebgsv4::Security::Medium => Security::Medium,
@@ -230,7 +230,7 @@ pub enum Economy {
 }
 
 impl From<ebgsv4::Economy> for Economy {
-    fn from(e:ebgsv4::Economy) -> Economy {
+    fn from(e: ebgsv4::Economy) -> Economy {
         match e {
             ebgsv4::Economy::Agriculture => Economy::Agriculture,
             ebgsv4::Economy::Extraction => Economy::Extraction,
@@ -241,34 +241,40 @@ impl From<ebgsv4::Economy> for Economy {
             ebgsv4::Economy::Terraforming => Economy::Terraforming,
             ebgsv4::Economy::Refinery => Economy::Refinery,
             ebgsv4::Economy::Military => Economy::Military,
-
         }
     }
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Faction {
-    pub ebgs_id: String,
+    pub ebgs_eddbv3_id: String,
     pub name: String,
-    pub eddbv3_updated_at: DateTime<Utc>,
     pub government: Government,
     pub allegiance: Allegiance,
-    pub state: State,
     pub home_system_id: Option<i64>,
     pub is_player_faction: bool,
+    pub dynamic:FactionDynamic,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct FactionDynamic {
+    pub eddbv3_updated_at: DateTime<Utc>,
+    pub state: State,
 }
 
 impl From<eddbv3::Faction> for Faction {
     fn from(f: eddbv3::Faction) -> Faction {
         Faction {
-            ebgs_id: f._id,
+            ebgs_eddbv3_id: f._id,
             name: f.name,
-            eddbv3_updated_at: f.updated_at,
             government: f.government,
             allegiance: f.allegiance,
-            state: f.state.into(),
             home_system_id: f.home_system_id,
             is_player_faction: f.is_player_faction,
+            dynamic:FactionDynamic {
+                eddbv3_updated_at: f.updated_at,
+                state: f.state.into(),
+            }
         }
     }
 }
@@ -278,19 +284,43 @@ pub struct System {
     pub eddb_id: i64,
     pub ebgs_id: String,
     pub name: String,
-    pub allegiance: Allegiance,
-    pub population: i64,
+    pub primary_economy: Economy,
     pub x: f64,
     pub y: f64,
     pub z: f64,
-    pub updated_at: DateTime<Utc>,
-    pub state: State,
     pub security: Security,
+    // actually dynamic, but by all practical means static now
+    pub population: i64,
+    // actually dynamic, but by all practical means static now
+    pub dynamic: SystemDynamic,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct SystemDynamic {
+    pub updated_at: DateTime<Utc>,
     pub controlling_minor_faction: String,
-    pub primary_economy: Economy,
+    pub state: State,
+    // function of controlling minor faction
+    pub allegiance: Allegiance,
+    // function of controlling minor faction
     pub government: Government,
-    //pub factions: Vec<SystemPresence>,
-    //pub history: Vec<SystemHistory>,
+    // function of controlling minor faction
+    factions: Vec<String>,
+    pub history: Vec<SystemHistory>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct SystemHistory {
+    pub updated_at: DateTime<Utc>,
+    // pub updated_by: String, // typically EDDN, we don't care at this point
+    pub controlling_minor_faction: String,
+    pub state: State,
+    // function of controlling minor faction
+    pub government: Government,
+    // function of controlling minor faction
+    pub allegiance: Allegiance,
+    // function of controlling minor faction
+    pub factions: Vec<String>,
 }
 
 impl From<ebgsv4::System> for System {
@@ -299,17 +329,34 @@ impl From<ebgsv4::System> for System {
             eddb_id: s.eddb_id,
             ebgs_id: s._id,
             name: s.name,
-            allegiance: s.allegiance,
             population: s.population,
             x: s.x,
             y: s.y,
             z: s.z,
-            updated_at: s.updated_at,
-            state: s.state.into(),
             security: s.security.into(),
+            primary_economy: s.primary_economy.into(),
+            dynamic: SystemDynamic {
+                updated_at: s.updated_at,
+                controlling_minor_faction: s.controlling_minor_faction,
+                state: s.state.into(),
+                allegiance: s.allegiance,
+                government: s.government.into(),
+                factions: s.factions.iter().map(|x| x.name.clone()).collect(),
+                history: s.history.into_iter().map(|x| x.into()).collect(),
+            },
+        }
+    }
+}
+
+impl From<ebgsv4::SystemHistory> for SystemHistory {
+    fn from(s: ebgsv4::SystemHistory) -> SystemHistory {
+        SystemHistory {
+            updated_at: s.updated_at,
             controlling_minor_faction: s.controlling_minor_faction,
-            primary_economy:s.primary_economy.into(),
-            government:s.government.into(),
+            state: s.state.into(),
+            government: s.government.into(),
+            allegiance: s.allegiance,
+            factions: s.factions.iter().map(|x| x.name.clone()).collect(),
         }
     }
 }
