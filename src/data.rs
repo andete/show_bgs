@@ -376,7 +376,7 @@ impl Faction {
     }
 
     // TODO: this doesn't work correctly if some data is dated
-    pub fn faction_pending_state(&self) -> (Option<State>, Option<String>) {
+    pub fn faction_pending_single_system_state(&self) -> (Option<State>, Option<String>) {
         for system in self.systems() {
             if let Some(state) = self.last_pending_single_system_state_in_system(&system) {
                 info!("XXX {} {} {:?}", self.name, system, state);
@@ -389,10 +389,10 @@ impl Faction {
     }
 
     // TODO: this doesn't work correctly if some data is dated
-    pub fn faction_recovering_state(&self) -> (Option<State>, Option<String>) {
+    pub fn faction_recovering_single_system_state(&self) -> (Option<State>, Option<String>) {
         for system in self.systems() {
             if let Some(state) = self.last_recovering_single_system_state_in_system(&system) {
-                info!("XXX {} {} {:?}", self.name, system, state);
+                info!("YYY {} {} {:?}", self.name, system, state);
                 if state.is_single_system_state() {
                     return (Some(state), Some(system));
                 }

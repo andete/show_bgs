@@ -119,10 +119,8 @@ impl<'a> From<&'a data::Faction> for FactionGlobalState {
     fn from(s:&'a data::Faction) -> FactionGlobalState {
         let (state, system) = s.faction_state();
         let state:State = state.into();
-        let (pending_state, pending_system) = s.faction_pending_state();
-        let pending_state:Option<State> = pending_state.map(|x| x.into());
-        let (recovery_state, recovery_system) = s.faction_recovering_state();
-        let recovery_state:Option<State> = recovery_state.map(|x| x.into());
+        let (pending_state, pending_system) = s.faction_pending_single_system_state();
+        let (recovery_state, recovery_system) = s.faction_recovering_single_system_state();
         FactionGlobalState {
             name:s.name.clone(),
             government:s.government,
