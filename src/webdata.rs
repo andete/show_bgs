@@ -1,9 +1,8 @@
 // (c) 2018 Joost Yervante Damad <joost@damad.be>
 
 use chrono::{Date,DateTime,Utc};
-use extdata::ebgsv4;
-use extdata::eddbv3;
 use data::{Allegiance, Government, State};
+use data;
 
 use std::collections::{BTreeMap,HashMap,HashSet};
 
@@ -39,7 +38,6 @@ pub struct Faction {
     pub evolution10:Vec<FactionData>,
     pub global:Option<FactionGlobalState>,
     pub color:String,
-    pub eddb:Option<eddbv3::Faction>,
     pub at_home:bool,
     pub controlling:bool,
 }
@@ -81,14 +79,14 @@ pub struct FactionState {
     pub state:State,
     pub state_recovery_length:u8,
     pub state_pending_length:u8,
-    pub trend:i64,
+    pub trend:data::Trend,
     pub trend_display:String,
     pub state_day:u8,
     pub state_pending_danger:bool,
 }
 
-impl From<ebgsv4::System> for System {
-    fn from(s:ebgsv4::System) -> System {
+impl From<data::System> for System {
+    fn from(s:data::System) -> System {
         System {
             eddb_id:s.eddb_id,
             name:s.name.clone(),
@@ -96,13 +94,13 @@ impl From<ebgsv4::System> for System {
             factions:HashMap::new(),
             factions_by_inf:vec![],
             warnings:vec![],
-            controlling:s.controlling_minor_faction,
+            controlling:s.dynamic.controlling_minor_faction,
         }
     }
 }
 
-impl<'a> From<&'a ebgsv4::Faction> for Faction {
-    fn from(s:&'a ebgsv4::Faction) -> Faction {
+impl<'a> From<&'a data::Faction> for Faction {
+    fn from(s:&'a data::Faction) -> Faction {
         Faction {
             name:s.name.clone(),
             government:s.government,
@@ -111,15 +109,14 @@ impl<'a> From<&'a ebgsv4::Faction> for Faction {
             evolution10:vec![],
             color:"".into(),
             global:None,
-            eddb:None,
             at_home:false,
             controlling:false,
         }
     }
 }
 
-impl<'a> From<&'a ebgsv4::Faction> for FactionGlobalState {
-    fn from(s:&'a ebgsv4::Faction) -> FactionGlobalState {
+impl<'a> From<&'a data::Faction> for FactionGlobalState {
+    fn from(s:&'a data::Faction) -> FactionGlobalState {
         let (state, system) = s.faction_state();
         let state:State = state.into();
         let (pending_state, pending_system) = s.faction_pending_state();
@@ -132,7 +129,7 @@ impl<'a> From<&'a ebgsv4::Faction> for FactionGlobalState {
             allegiance:s.allegiance,
             state:state,
             state_system:system,
-            state_date:s.updated_at,
+            state_date:s.dynamic.eddbv3_updated_at,
             state_day:None,
             state_max_length:state.max_length(),
             state_danger:state.danger(),
@@ -144,32 +141,30 @@ impl<'a> From<&'a ebgsv4::Faction> for FactionGlobalState {
     }
 }
 
-impl From <ebgsv4::FactionHistory> for FactionData {
-    fn from(h:ebgsv4::FactionHistory) -> FactionData {
-        let state:State = h.state.into();
+impl From <data::FactionHistory> for FactionData {
+    fn from(h:data::FactionHistory) -> FactionData {
+        let state:State = h.presence.state.into();
         FactionData {
             date:h.updated_at,
             label_date:format!("{}", h.updated_at.format("%d/%m")),
-            influence:h.influence,
+            influence:h.presence.influence,
             state:state,
             state_day:0,
             state_max_length:state.max_length(),
-            pending_states:h.pending_states.into_iter().map(|s| s.into()).collect(),
-            recovering_states:h.recovering_states.into_iter().map(|s| s.into()).collect(),
+            pending_states:h.presence.pending_states.into_iter().map(|s| s.into()).collect(),
+            recovering_states:h.presence.recovering_states.into_iter().map(|s| s.into()).collect(),
             state_danger:state.danger(),
             influence_danger:false,
         }
     }
 }
 
-impl From <ebgsv4::EBGSState> for FactionState {
-    fn from(s:ebgsv4::EBGSState) -> FactionState {
-        let d = if s.trend == 1 {
-            "&uarr;"
-        } else if s.trend == -1 {
-            "&darr;"
-        } else {
-            "&harr;"
+impl From <data::StateTrend> for FactionState {
+    fn from(s:data::StateTrend) -> FactionState {
+        let d = match s.trend {
+            data::Trend::Up => "&uarr;",
+            data::Trend::Down => "&darr;",
+            data::Trend::Level => "&harr;",
         }.into();
         let state:State = s.state.into();
         FactionState {

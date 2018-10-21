@@ -1,6 +1,8 @@
 // (c) 2018 Joost Yervante Damad <joost@damad.be>
 
-use chrono::{DateTime, Utc};
+use std::collections::BTreeSet;
+
+use chrono::{DateTime, Utc, Date};
 
 use extdata::ebgsv4;
 use extdata::eddbv3;
@@ -284,6 +286,102 @@ impl Faction {
             },
         }
     }
+
+    pub fn latest_day(&self, system_name: &str) -> Date<Utc> {
+        let mut dates = BTreeSet::new();
+        for h in &self.dynamic.history {
+            if &h.presence.system_name == system_name {
+                dates.insert(h.updated_at.date());
+            }
+        }
+        dates.iter().max().unwrap().clone()
+    }
+
+    // TODO: this doesn't work correctly if some data is dated
+    pub fn faction_state(&self) -> (State, Option<String>) {
+        let mut p_state = State::None;
+        for system in self.systems() {
+            let state = self.last_state_in_system(&system);
+            if state.is_single_system_state() {
+                info!("XXX {} {} {:?}", self.name, system, state);
+                return (state, Some(system));
+            }
+            p_state = state;
+        }
+        (p_state, None)
+    }
+
+    pub fn systems(&self) -> Vec<String> {
+        self.dynamic.presence.iter().map(|x| x.system_name.clone()).collect()
+    }
+
+    pub fn last_state_in_system(&self, system_name: &str) -> State {
+        let mut state = State::None;
+        let mut date = None;
+        for h in &self.dynamic.history {
+            if &h.presence.system_name == system_name {
+                if Some(h.updated_at) != date {
+                    state = h.presence.state;
+                    date = Some(h.updated_at);
+                }
+            }
+        }
+        state
+    }
+
+    pub fn last_pending_state_in_system(&self, system_name: &str) -> Option<State> {
+        let mut state = None;
+        let mut date = None;
+        for h in &self.dynamic.history {
+            if &h.presence.system_name == system_name {
+                if Some(h.updated_at) != date {
+                    state = h.presence.pending_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
+                    date = Some(h.updated_at);
+                }
+            }
+        }
+        state
+    }
+
+    pub fn last_recovering_state_in_system(&self, system_name: &str) -> Option<State> {
+        let mut state = None;
+        let mut date = None;
+        for h in &self.dynamic.history {
+            if &h.presence.system_name == system_name {
+                if Some(h.updated_at) != date {
+                    state = h.presence.recovering_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
+                    date = Some(h.updated_at);
+                }
+            }
+        }
+        state
+    }
+
+    // TODO: this doesn't work correctly if some data is dated
+    pub fn faction_pending_state(&self) -> (Option<State>, Option<String>) {
+        for system in self.systems() {
+            if let Some(state) = self.last_pending_state_in_system(&system) {
+                info!("XXX {} {} {:?}", self.name, system, state);
+                if state.is_single_system_state() {
+                    return (Some(state), Some(system))
+                }
+            }
+        }
+        (None, None)
+    }
+
+    // TODO: this doesn't work correctly if some data is dated
+    pub fn faction_recovering_state(&self) -> (Option<State>, Option<String>) {
+        for system in self.systems() {
+            if let Some(state) = self.last_recovering_state_in_system(&system) {
+                info!("XXX {} {} {:?}", self.name, system, state);
+                if state.is_single_system_state() {
+                    return (Some(state), Some(system))
+                }
+            }
+        }
+        (None, None)
+    }
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -325,7 +423,7 @@ pub struct StateTrend {
     pub trend: Trend,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "lowercase")]
 pub enum Trend {
     Up,
@@ -387,6 +485,14 @@ pub struct System {
     pub population: i64,
     // actually dynamic, but by all practical means static now
     pub dynamic: SystemDynamic,
+}
+
+impl System {
+    pub fn latest_day(&self) -> Option<Date<Utc>> {
+        use std::iter;
+        iter::once(self.dynamic.updated_at).chain(
+            self.dynamic.history.iter().map(|x| x.updated_at)).map(|x| x.date()).max()
+    }
 }
 
 #[derive(Debug, Deserialize, Serialize)]

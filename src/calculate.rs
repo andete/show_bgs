@@ -6,8 +6,7 @@ use serde_json;
 use std::collections::{BTreeSet,HashMap};
 use std::fs::File;
 
-use extdata::ebgsv4;
-use extdata::eddbv3;
+use data;
 use webdata::*;
 use data::Government;
 use Config;
@@ -23,10 +22,10 @@ pub fn calculate(config:&Config, yesterday:bool) {
     let mut system_dates = Vec::new();
     for system_name in &system_names {
         info!("Looking at {}...", system_name);
-        let n = format!("{}/systems/ebgsv4/{}.json", datadir, system_name);
+        let n = format!("{}/systems/{}.json", datadir, system_name);
         let f = File::open(&n).unwrap();
-        let s:ebgsv4::System = serde_json::from_reader(&f).unwrap();
-        if let Some(d) = s.bgs_day() {
+        let s:data::System = serde_json::from_reader(&f).unwrap();
+        if let Some(d) = s.latest_day() {
             dates.insert(d);
             system_dates.push((system_name, d));
         }
@@ -55,35 +54,31 @@ pub fn calculate(config:&Config, yesterday:bool) {
     let minor_faction_names:BTreeSet<String> = serde_json::from_reader(&f).unwrap();
     for minor_faction_name in minor_faction_names {
         info!("Looking at {}...", minor_faction_name);
-        let n = format!("{}/factions/ebgsv4/{}.json", datadir, minor_faction_name);
+        let n = format!("{}/factions/{}.json", datadir, minor_faction_name);
         let f = File::open(&n).unwrap();
-        let mut factionv4:ebgsv4::Faction = serde_json::from_reader(&f).unwrap();
-        if factionv4.government == Government::Engineer {
+        let data_faction:data::Faction = serde_json::from_reader(&f).unwrap();
+        if data_faction.government == Government::Engineer {
             continue
         }
-        let n = format!("{}/factions/eddbv3/{}.json", datadir, minor_faction_name);
-        let f = File::open(&n).unwrap();
-        let faction_eddb:eddbv3::Faction = serde_json::from_reader(&f).unwrap();
-        let fgs:FactionGlobalState = (&factionv4).into();
+        let fgs:FactionGlobalState = (&data_faction).into();
         global_factions.insert(minor_faction_name.clone(), fgs);
-        for system in factionv4.systems() {
+        for system in data_faction.systems() {
             if !system_names.contains(&system) {
-                continue;
+                continue
             }
-            if factionv4.bgs_day(&system) != bgs_day {
-                warn!("Faction {} is not up to date in {}: {} {}", minor_faction_name, system, bgs_day, factionv4.bgs_day(&system));
+            if data_faction.latest_day(&system) != bgs_day {
+                warn!("Faction {} is not up to date in {}: {} {}", minor_faction_name, system, bgs_day, data_faction.latest_day(&system));
                 let v = system_warnings.entry(system.clone()).or_insert(vec![]);
                 v.push(format!("Faction {} is not up to date in {}", minor_faction_name, system));
             }
         }
-        let faction_template:Faction = (&factionv4).into();
-        for history in factionv4.history {
+        let faction_template:Faction = (&data_faction).into();
+        for history in data_faction.dynamic.history {
             let mut at_home = false;
             // could be that the system is not in our system list...
-            if let Some(system) = systems.get_mut(&history.system) {
+            if let Some(system) = systems.get_mut(&history.presence.system_name) {
                 let faction = system.factions.entry(faction_template.name.clone()).or_insert(faction_template.clone());
-                faction.eddb = Some(faction_eddb.clone());
-                if let Some(home_id) = faction_eddb.home_system_id {
+                if let Some(home_id) = data_faction.home_system_id {
                     if system.eddb_id == home_id {
                         faction.at_home = true;
                         at_home = true;
@@ -92,7 +87,7 @@ pub fn calculate(config:&Config, yesterday:bool) {
                 if system.controlling.to_lowercase() == faction_template.name.to_lowercase() {
                     faction.controlling = true;
                 }
-                let inf = history.influence*100.0;
+                let inf = history.presence.influence*100.0;
                 let mut data:FactionData = history.into();
                 if !at_home && inf < 2.5 {
                     data.influence_danger = true;
