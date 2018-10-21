@@ -245,7 +245,7 @@ impl From<ebgsv4::Economy> for Economy {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Faction {
     pub ebgs_eddbv3_id: String,
     pub name: String,
@@ -253,29 +253,122 @@ pub struct Faction {
     pub allegiance: Allegiance,
     pub home_system_id: Option<i64>,
     pub is_player_faction: bool,
-    pub dynamic:FactionDynamic,
+    pub dynamic: FactionDynamic,
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct FactionDynamic {
     pub eddbv3_updated_at: DateTime<Utc>,
+    pub ebgsv4_updated_at: DateTime<Utc>,
     pub state: State,
+    pub presence: Vec<FactionPresence>,
+    pub history: Vec<FactionHistory>,
 }
 
 impl Faction {
-    pub fn from(f: eddbv3::Faction, f2:ebgsv4::Faction) -> Faction {
+    pub fn from(eddb: eddbv3::Faction, ebgs: ebgsv4::Faction) -> Faction {
         // BUSY
         Faction {
-            ebgs_eddbv3_id: f._id,
-            name: f.name,
-            government: f.government,
-            allegiance: f.allegiance,
-            home_system_id: f.home_system_id,
-            is_player_faction: f.is_player_faction,
-            dynamic:FactionDynamic {
-                eddbv3_updated_at: f.updated_at,
-                state: f.state.into(),
-            }
+            ebgs_eddbv3_id: eddb._id,
+            name: eddb.name,
+            government: eddb.government,
+            allegiance: eddb.allegiance,
+            home_system_id: eddb.home_system_id,
+            is_player_faction: eddb.is_player_faction,
+            dynamic: FactionDynamic {
+                eddbv3_updated_at: eddb.updated_at,
+                ebgsv4_updated_at: ebgs.updated_at,
+                state: eddb.state.into(),
+                presence: ebgs.faction_presence.into_iter().map(|x| x.into()).collect(),
+                history: ebgs.history.into_iter().map(|h| h.into()).collect(),
+            },
+        }
+    }
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct FactionPresence {
+    pub system_name: String,
+    pub state: State,
+    pub pending_states: Vec<StateTrend>,
+    pub recovering_states: Vec<StateTrend>,
+    pub influence: f64,
+}
+
+impl From<ebgsv4::FactionPresence> for FactionPresence {
+    fn from(p: ebgsv4::FactionPresence) -> FactionPresence {
+        FactionPresence {
+            system_name: p.system_name,
+            state: p.state.into(),
+            pending_states: p.pending_states.into_iter().map(|x| x.into()).collect(),
+            recovering_states: p.recovering_states.into_iter().map(|x| x.into()).collect(),
+            influence: p.influence,
+        }
+    }
+}
+
+impl From<ebgsv4::FactionHistory> for FactionPresence {
+    fn from(h: ebgsv4::FactionHistory) -> FactionPresence {
+        FactionPresence {
+            system_name: h.system,
+            state: h.state.into(),
+            pending_states: h.pending_states.into_iter().map(|x| x.into()).collect(),
+            recovering_states: h.recovering_states.into_iter().map(|x| x.into()).collect(),
+            influence: h.influence,
+        }
+    }
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct StateTrend {
+    pub state: State,
+    pub trend: Trend,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Trend {
+    Up,
+    Level,
+    Down,
+}
+
+impl Trend {
+    fn from_i64(i: i64) -> Trend {
+        match i {
+            -1 => Trend::Down,
+            1 => Trend::Up,
+            0 => Trend::Level,
+            _ => unreachable!(),
+        }
+    }
+}
+
+impl From<ebgsv4::EBGSState> for StateTrend {
+    fn from(s: ebgsv4::EBGSState) -> StateTrend {
+        StateTrend {
+            state: s.state.into(),
+            trend: Trend::from_i64(s.trend),
+        }
+    }
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct FactionHistory {
+    pub updated_at: DateTime<Utc>,
+    pub updated_by: String,
+    pub ebgs_id: String,
+    pub presence: FactionPresence,
+}
+
+
+impl From<ebgsv4::FactionHistory> for FactionHistory {
+    fn from(h: ebgsv4::FactionHistory) -> FactionHistory {
+        FactionHistory {
+            updated_at: h.updated_at.clone(),
+            updated_by: h.updated_by.clone(),
+            ebgs_id: h._id.clone(),
+            presence: h.into(),
         }
     }
 }
