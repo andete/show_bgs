@@ -2,7 +2,8 @@
 
 use chrono::{DateTime, Utc};
 
-use extdata::ebgsv4::{Allegiance, State, EBGSPage};
+use extdata::ebgsv4::{State, EBGSPage};
+use data::Allegiance;
 use data::Government;
 
 pub const URL: &'static str = "https://elitebgs.kodeblox.com/api/eddb/v3/";

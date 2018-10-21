@@ -47,5 +47,6 @@ pub mod data;
 pub mod extdata;
 pub mod fetch;
 pub mod fetch_fact;
+pub mod webdata;
 pub mod webpage;
 

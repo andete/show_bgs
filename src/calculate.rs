@@ -8,7 +8,8 @@ use std::fs::File;
 
 use extdata::ebgsv4;
 use extdata::eddbv3;
-use data::*;
+use webdata::*;
+use data::Government;
 use Config;
 
 pub fn calculate(config:&Config, yesterday:bool) {

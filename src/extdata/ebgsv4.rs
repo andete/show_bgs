@@ -5,6 +5,7 @@ use serde::de::{self, Deserialize, Deserializer};
 
 use std::collections::BTreeSet;
 
+use data;
 
 pub const URL:&'static str = "https://elitebgs.kodeblox.com/api/ebgs/v4/";
 
@@ -23,14 +24,14 @@ pub type SystemsPage = EBGSPage<System>;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Faction {
     pub eddb_id: i64,
-    pub government: ::data::Government,
+    pub government: data::Government,
     pub name: String,
     pub _id: String,
     pub name_lower: String,
     //pub is_player_faction:bool,
     pub updated_at: DateTime<Utc>,
     pub faction_presence: Vec<FactionPresence>,
-    pub allegiance: Allegiance,
+    pub allegiance: data::Allegiance,
     pub history: Vec<FactionHistory>,
 }
 
@@ -165,7 +166,7 @@ pub struct FactionHistory {
 pub struct System {
     pub eddb_id: i64,
     pub name_lower: String,
-    pub allegiance: Allegiance,
+    pub allegiance: data::Allegiance,
     pub _id: String,
     pub population: i64,
     pub x: f64,
@@ -206,7 +207,7 @@ pub struct SystemHistory {
     pub government: Government,
     pub population: i64,
     pub updated_by: String,
-    pub allegiance: Allegiance,
+    pub allegiance: data::Allegiance,
     pub factions: Vec<SystemPresence>,
 }
 
@@ -248,17 +249,18 @@ pub enum Government {
     Confederacy,
     #[serde(rename = "$government_feudal;")]
     Feudal,
-    // TODO: add more as needed
-}
-
-/// `Allegiance` of a `Faction`
-#[derive(Debug, Deserialize, Serialize, Clone, Copy)]
-#[serde(rename_all = "lowercase")]
-pub enum Allegiance {
-    Independent,
-    Federation,
-    Alliance,
-    Empire,
+    #[serde(rename = "$government_imperial;")]
+    Imperial,
+    #[serde(rename = "$government_prison_colony;")]
+    PrisonColony,
+    #[serde(rename = "$government_theocracy;")]
+    Theocracy,
+    #[serde(rename = "$government_workshop;")]
+    Workshop,
+    #[serde(rename = "$government_none;")]
+    None,
+    #[serde(rename = "$government_engineer;")]
+    Engineer,
 }
 
 // custom deserializer needed for state to deal with civil unrest vs civilunrest

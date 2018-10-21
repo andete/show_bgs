@@ -4,7 +4,7 @@ use serde_json;
 use std::fs::{create_dir_all, File, read_dir, copy};
 use std::path::PathBuf;
 use std::io::Write;
-use data::*;
+use webdata::*;
 use Config;
 
 pub fn webpage(config:&Config) {
