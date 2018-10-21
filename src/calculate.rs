@@ -70,14 +70,14 @@ pub fn calculate(config: &Config, yesterday: bool) {
         let fgs: FactionGlobalState = (&data_faction).into();
         global_factions.insert(minor_faction_name.clone(), fgs);
 
-        for system in data_faction.systems() {
-            if !wanted_system_names.contains(&system) {
+        for system_name in data_faction.systems() {
+            if !wanted_system_names.contains(&system_name) {
                 continue
             }
-            if data_faction.latest_day(&system) != bgs_day {
-                warn!("Faction {} is not up to date in {}: {} {}", minor_faction_name, system, bgs_day, data_faction.latest_day(&system));
-                let v = system_warnings.entry(system.clone()).or_insert(vec![]);
-                v.push(format!("Faction {} is not up to date in {}", minor_faction_name, system));
+            if data_faction.latest_day(&system_name) != bgs_day {
+                warn!("Faction {} is not up to date in {}: {} {}", minor_faction_name, system_name, bgs_day, data_faction.latest_day(&system_name));
+                let v = system_warnings.entry(system_name.clone()).or_insert(vec![]);
+                v.push(format!("Faction {} is not up to date in {}", minor_faction_name, system_name));
             }
         }
         let faction_template: Faction = (&data_faction).into();

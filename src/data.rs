@@ -315,26 +315,39 @@ impl Faction {
         self.dynamic.presence.iter().map(|x| x.system_name.clone()).collect()
     }
 
+    /// last known state of a faction in a particular system the faction has a presence in
     pub fn last_state_in_system(&self, system_name: &str) -> State {
         let mut state = State::None;
         let mut date = None;
+        // walk through the faction history, look at entries for the system we're interested in
+        // take the newest entry state
         for h in &self.dynamic.history {
             if &h.presence.system_name == system_name {
-                if Some(h.updated_at) != date {
-                    state = h.presence.state;
+                if let Some(d) = date {
+                    if h.updated_at > d {
+                        state = h.presence.state;
+                        date = Some(h.updated_at);
+                    }
+                } else {
                     date = Some(h.updated_at);
+                    state = h.presence.state;
                 }
             }
         }
         state
     }
 
-    pub fn last_pending_state_in_system(&self, system_name: &str) -> Option<State> {
+    pub fn last_pending_single_system_state_in_system(&self, system_name: &str) -> Option<State> {
         let mut state = None;
         let mut date = None;
         for h in &self.dynamic.history {
             if &h.presence.system_name == system_name {
-                if Some(h.updated_at) != date {
+                if let Some(d) = date {
+                    if h.updated_at > d {
+                        state = h.presence.pending_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
+                        date = Some(h.updated_at);
+                    }
+                } else {
                     state = h.presence.pending_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
                     date = Some(h.updated_at);
                 }
@@ -343,12 +356,17 @@ impl Faction {
         state
     }
 
-    pub fn last_recovering_state_in_system(&self, system_name: &str) -> Option<State> {
+    pub fn last_recovering_single_system_state_in_system(&self, system_name: &str) -> Option<State> {
         let mut state = None;
         let mut date = None;
         for h in &self.dynamic.history {
             if &h.presence.system_name == system_name {
-                if Some(h.updated_at) != date {
+                if let Some(d) = date {
+                    if h.updated_at > d {
+                        state = h.presence.recovering_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
+                        date = Some(h.updated_at);
+                    }
+                } else {
                     state = h.presence.recovering_states.iter().filter(|x| x.state.is_single_system_state()).next().map(|x| x.state);
                     date = Some(h.updated_at);
                 }
@@ -360,10 +378,10 @@ impl Faction {
     // TODO: this doesn't work correctly if some data is dated
     pub fn faction_pending_state(&self) -> (Option<State>, Option<String>) {
         for system in self.systems() {
-            if let Some(state) = self.last_pending_state_in_system(&system) {
+            if let Some(state) = self.last_pending_single_system_state_in_system(&system) {
                 info!("XXX {} {} {:?}", self.name, system, state);
                 if state.is_single_system_state() {
-                    return (Some(state), Some(system))
+                    return (Some(state), Some(system));
                 }
             }
         }
@@ -373,10 +391,10 @@ impl Faction {
     // TODO: this doesn't work correctly if some data is dated
     pub fn faction_recovering_state(&self) -> (Option<State>, Option<String>) {
         for system in self.systems() {
-            if let Some(state) = self.last_recovering_state_in_system(&system) {
+            if let Some(state) = self.last_recovering_single_system_state_in_system(&system) {
                 info!("XXX {} {} {:?}", self.name, system, state);
                 if state.is_single_system_state() {
-                    return (Some(state), Some(system))
+                    return (Some(state), Some(system));
                 }
             }
         }
