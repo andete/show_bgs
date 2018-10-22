@@ -40,6 +40,7 @@ pub struct Faction {
     pub color:String,
     pub at_home:bool,
     pub controlling:bool,
+    pub is_player_faction:bool,
 }
 
 #[derive(Debug,Deserialize, Serialize, Clone)]
@@ -57,6 +58,7 @@ pub struct FactionGlobalState {
     pub pending_state_system:Option<String>,
     pub recovery_state:Option<State>,
     pub recovery_state_system:Option<String>,
+    pub is_player_faction:bool,
 }
 
 // faction data (for in a specific system)
@@ -111,6 +113,7 @@ impl<'a> From<&'a data::Faction> for Faction {
             global:None,
             at_home:false,
             controlling:false,
+            is_player_faction:s.is_player_faction,
         }
     }
 }
@@ -135,6 +138,7 @@ impl<'a> From<&'a data::Faction> for FactionGlobalState {
             pending_state_system:pending_system,
             recovery_state:recovery_state,
             recovery_state_system:recovery_system,
+            is_player_faction:s.is_player_faction,
         }
     }
 }

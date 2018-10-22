@@ -147,7 +147,7 @@ borderColor: '{{ faction.color }}',
 
       {% for faction in system.factions_by_inf %}
       <h4>{{ faction.name }}
-        {% if faction.eddb.is_player_faction %}
+        {% if faction.is_player_faction %}
         <i class="fa fa-street-view" aria-hidden="true" title="Player Faction"></i>
         {% endif %}
         {% if faction.at_home %}
